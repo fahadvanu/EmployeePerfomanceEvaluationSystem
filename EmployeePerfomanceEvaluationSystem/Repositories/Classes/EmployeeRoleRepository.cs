@@ -1,7 +1,6 @@
 ﻿using EmployeePerfomanceEvaluationSystem.DataContext;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
-using FluentValidation.Validators;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

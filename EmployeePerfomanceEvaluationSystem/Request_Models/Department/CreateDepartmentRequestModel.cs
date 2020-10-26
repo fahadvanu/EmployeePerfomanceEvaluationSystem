@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeePerfomanceEvaluationSystem.Models
+namespace EmployeePerfomanceEvaluationSystem.Request_Models.Department
 {
-    public class Department
+    public class CreateDepartmentRequestModel
     {
-        public int Id { get; set; }
+        [Required(ErrorMessage = "Departmentname cannot be empty or null")]
         public string DepartmentName { get; set; }
     }
 }

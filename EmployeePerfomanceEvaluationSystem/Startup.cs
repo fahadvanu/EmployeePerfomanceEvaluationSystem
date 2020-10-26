@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using EmployeePerfomanceEvaluationSystem.DataContext;
 using EmployeePerfomanceEvaluationSystem.Extensions;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +34,8 @@ namespace EmployeePerfomanceEvaluationSystem
                 cfg.UseMySQL(Configuration["Database:ConnectionString"]);
             });
             services.AddControllers();
+            services.AddAPIBehaviourConfiguration();
+            services.AddAutoMapperService();
             services.AddRepositories();
 
         }

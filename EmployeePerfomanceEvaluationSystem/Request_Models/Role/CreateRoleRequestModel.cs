@@ -8,7 +8,7 @@ namespace EmployeePerfomanceEvaluationSystem.Request_Models.Role
 {
     public class CreateRoleRequestModel
     {
-        [Required]
+        [Required(ErrorMessage = "Rolename cannot be empty or null")]
         public string RoleName { get; set; }
     }
 }

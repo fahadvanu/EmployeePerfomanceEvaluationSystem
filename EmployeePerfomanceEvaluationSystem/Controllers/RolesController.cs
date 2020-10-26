@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Role;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
+using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -17,12 +20,15 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
     {
         private IEmployeeRoleRespository _employeeRoleRespository;
         private ILogger<RolesController> _logger;
+        private IMapper _mapper;
 
         public RolesController(IEmployeeRoleRespository employeeRoleRespository,
-                               ILogger<RolesController> logger)
+                               ILogger<RolesController> logger,
+                               IMapper mapper)
         {
             _employeeRoleRespository = employeeRoleRespository;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpPost("get_roles")]
@@ -31,12 +37,12 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             try
             {
                 var roles = await _employeeRoleRespository.GetRoles();
-                return Ok(new ResponseMessage() { StatusCode = StatusCodes.Status200OK, Data = roles });
+                return Ok(new ApiResponseOKResult() { Data = roles });
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex, "Failed to fetch all roles");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to fetch all roles");
+                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to fetch all roles" });
             }
         }
 
@@ -47,15 +53,15 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 var roleExists = await _employeeRoleRespository.RoleExists(roleCreateRequestModel.RoleName);
                 if (roleExists)
-                    return BadRequest($"Role {roleCreateRequestModel.RoleName} already exists");
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Role {roleCreateRequestModel.RoleName} already exists" });
 
-                await _employeeRoleRespository.AddRole(new Models.EmployeeRole() { RoleName = roleCreateRequestModel.RoleName });
-                return Ok(new ResponseMessage() { StatusCode = StatusCodes.Status200OK, Data = null });
+                await _employeeRoleRespository.AddRole(_mapper.Map<EmployeeRole>(roleCreateRequestModel));
+                return Ok(new ApiResponseOKResult() { Data = roleCreateRequestModel });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to create new role");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to create new role");
+                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to create new role" });
             }
         }
 
@@ -66,15 +72,15 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 var role = await _employeeRoleRespository.GetRole(roleId);
                 if(null == role)
-                    return BadRequest("Role does not exists");
+                    return NotFound(new ApiResponseNotFound() { ErrorMessage = "Role does not exists" });
 
                 await _employeeRoleRespository.DeleteRole(roleId);     
-                return Ok(new ResponseMessage() { StatusCode = StatusCodes.Status200OK, Data = null });
+                return Ok(new ApiResponseOKResult() { Data = null });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to delete role");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to delete role");
+                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to delete role" });
             }
         }
 
@@ -85,15 +91,15 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 var roleExists = await _employeeRoleRespository.RoleExists(updateRoleRequestModel.RoleName);
                 if (roleExists)
-                    return BadRequest($"Role {updateRoleRequestModel.RoleName} already exists");
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Role {updateRoleRequestModel.RoleName} already exists" });
 
                 await _employeeRoleRespository.UpdateRole(roleId, updateRoleRequestModel.RoleName);
-                return Ok(new ResponseMessage() { StatusCode = StatusCodes.Status200OK, Data = null });
+                return Ok(new ApiResponseOKResult() { Data = updateRoleRequestModel });
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to update role");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update role");
+                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to update role" });
             }
         }
     }
