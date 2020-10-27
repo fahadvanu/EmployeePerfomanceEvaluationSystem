@@ -51,12 +51,15 @@ namespace EmployeePerfomanceEvaluationSystem
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
