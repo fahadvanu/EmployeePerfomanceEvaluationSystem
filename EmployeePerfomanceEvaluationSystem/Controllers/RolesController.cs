@@ -55,8 +55,8 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 if (roleExists)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Role {roleCreateRequestModel.RoleName} already exists" });
 
-                await _employeeRoleRespository.AddRole(_mapper.Map<EmployeeRole>(roleCreateRequestModel));
-                return Ok(new ApiResponseOKResult() { Data = roleCreateRequestModel });
+                var newRole = await _employeeRoleRespository.AddRole(_mapper.Map<EmployeeRole>(roleCreateRequestModel));
+                return Ok(new ApiResponseOKResult() { Data = newRole });
             }
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                     return NotFound(new ApiResponseNotFound() { ErrorMessage = "Role does not exists" });
 
                 await _employeeRoleRespository.DeleteRole(roleId);     
-                return Ok(new ApiResponseOKResult() { Data = null });
+                return Ok(new ApiResponseOKResult() { Data = roleId });
             }
             catch (Exception ex)
             {

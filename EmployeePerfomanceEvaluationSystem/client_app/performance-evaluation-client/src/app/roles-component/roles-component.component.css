@@ -1,0 +1,19 @@
+.title_role_management{
+    text-align:center;
+}
+
+.pager-div {
+    display: flex;
+    justify-content: center;
+}
+
+.role_table_controls{
+    text-align:center;
+}
+
+.role_search_control {
+    float: right;
+    padding: 0;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}

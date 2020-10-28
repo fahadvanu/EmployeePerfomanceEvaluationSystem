@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\api-responses\api-response.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\pipes\pagination-client.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\services\roles\role-service.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -20,6 +28,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\api-responses\api-response.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\pipes\pagination-client.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\roles\role-service.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
   </ItemGroup>
 
 

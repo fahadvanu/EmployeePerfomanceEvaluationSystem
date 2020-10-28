@@ -18,10 +18,11 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
             _context = context;
         }
 
-        public async Task AddRole(EmployeeRole role)
+        public async Task<EmployeeRole> AddRole(EmployeeRole role)
         {
             _context.Roles.Add(role);
             await _context.SaveChangesAsync();
+            return role;
         }
 
         public async Task DeleteRole(int roleId)
