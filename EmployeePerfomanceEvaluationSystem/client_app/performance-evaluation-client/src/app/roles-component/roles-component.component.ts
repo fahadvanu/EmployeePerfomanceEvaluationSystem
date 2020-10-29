@@ -3,6 +3,7 @@ import { RoleService } from '../shared/services/roles/role-service';
 import { ApiResponse } from '../shared/models/api-responses/api-response';
 import { Role } from '../shared/models/roles/role';
 import { NgForm } from '@angular/forms';
+import { SpinnerService } from '../shared/services/spinner/spinner-service';
 
 @Component({
   templateUrl: './roles-component.component.html',
@@ -16,8 +17,10 @@ export class RolesComponentComponent implements OnInit {
     itemsPerPage: number = 5;
     roleModel: Role;
     searchTerm: string;
+    loading: boolean = false;
 
-    constructor(private roleService: RoleService) { }
+    constructor(private roleService: RoleService,
+                private spinnerService: SpinnerService) { }
    
     ngOnInit(): void {
       this.resetVariables();
@@ -31,6 +34,9 @@ export class RolesComponentComponent implements OnInit {
 
     private getRolesFromDatabase() {
 
+            this.loading = true;
+            this.spinnerService.updateMessage('Loading Roles.....');
+            this.spinnerService.busy();
             this.roleService.getRoles()
                 .subscribe((response: ApiResponse) => {
 
@@ -38,9 +44,12 @@ export class RolesComponentComponent implements OnInit {
                         this.roles = Role.FormRolesModelArray(response);
                         this.rolesToDisplay = this.roles.slice();
                     }
-
+                    this.loading = false;
+                    this.spinnerService.idle();
                 },
                 error => {
+                    this.loading = false;
+                    this.spinnerService.idle();
                     console.log('Exception occured while fetching roles from Database');
                 });
     }
@@ -63,6 +72,8 @@ export class RolesComponentComponent implements OnInit {
 
     private updateRole(roleForm: NgForm) {
 
+        this.spinnerService.updateMessage('Updating Role.....');
+        this.spinnerService.busy();
         this.roleService.updateRole(this.roleModel)
             .subscribe((response: ApiResponse) => {
 
@@ -75,14 +86,18 @@ export class RolesComponentComponent implements OnInit {
                 this.resetAfterDbOperation();
   
                 this.rolesToDisplay = this.roles.slice();
+                this.spinnerService.idle();
             },
             error => {
+               this.spinnerService.idle();
                console.log('Exception occured while updating roles from Database');
             });
     }
 
     private addRole(roleForm: NgForm) {
 
+        this.spinnerService.updateMessage('Adding Role.....');
+        this.spinnerService.busy();
         this.roleService.addRole(this.roleModel)
             .subscribe((response: ApiResponse) => {
 
@@ -91,9 +106,10 @@ export class RolesComponentComponent implements OnInit {
                 this.rolesToDisplay =  this.roles.slice();
                 this.resetAfterDbOperation();
                 roleForm.resetForm();
-
+                this.spinnerService.idle();
             },
             error => {
+                this.spinnerService.idle();
                 console.log('Exception occured while adding roles to Database');
             });
     }
@@ -102,8 +118,11 @@ export class RolesComponentComponent implements OnInit {
         this.roleModel = new Role(role.roleId, role.roleName);
     }
 
-    resetRoleSelection() {
+    resetRoleSelection(roleForm: NgForm) {
         this.resetVariables();
+        roleForm.resetForm();
+        this.rolesToDisplay = this.roles.slice();
+        this.currentPage = 1;
     }
 
     private resetAfterDbOperation() {
@@ -113,15 +132,18 @@ export class RolesComponentComponent implements OnInit {
 
     deleteRole(role: Role) {
 
+        this.spinnerService.updateMessage('Deleting Role.....');
+        this.spinnerService.busy();
         this.roleService.deleteRole(role)
             .subscribe((response: ApiResponse) => {
 
                 this.roles = this.roles.filter(r => r.roleId != role.roleId);
                 this.rolesToDisplay = this.roles.slice();
                 this.resetAfterDbOperation();
-
+                this.spinnerService.idle();
          },
          error => {
+             this.spinnerService.idle();
              console.log('Exception occured while deleting roles from Database');
          });
     }

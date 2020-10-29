@@ -7,8 +7,11 @@
   <ItemGroup>
     <None Remove="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\api-responses\api-response.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\departments\department.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\pipes\pagination-client.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\services\departments\departments-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\roles\role-service.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\services\spinner\spinner-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
   </ItemGroup>
 
@@ -33,8 +36,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\api-responses\api-response.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\departments\department.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\pipes\pagination-client.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\departments\departments-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\roles\role-service.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\spinner\spinner-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
   </ItemGroup>
 

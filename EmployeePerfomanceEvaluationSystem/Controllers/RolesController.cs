@@ -36,6 +36,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
+                System.Threading.Thread.Sleep(1000);
                 var roles = await _employeeRoleRespository.GetRoles();
                 return Ok(new ApiResponseOKResult() { Data = roles });
             }
@@ -51,6 +52,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
+                System.Threading.Thread.Sleep(1000);
                 var roleExists = await _employeeRoleRespository.RoleExists(roleCreateRequestModel.RoleName);
                 if (roleExists)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Role {roleCreateRequestModel.RoleName} already exists" });
@@ -70,6 +72,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
+                System.Threading.Thread.Sleep(1000);
                 var role = await _employeeRoleRespository.GetRole(roleId);
                 if(null == role)
                     return NotFound(new ApiResponseNotFound() { ErrorMessage = "Role does not exists" });
@@ -89,6 +92,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
+                System.Threading.Thread.Sleep(1000);
                 var roleExists = await _employeeRoleRespository.RoleExists(updateRoleRequestModel.RoleName);
                 if (roleExists)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Role {updateRoleRequestModel.RoleName} already exists" });

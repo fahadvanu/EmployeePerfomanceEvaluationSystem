@@ -36,6 +36,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
+                System.Threading.Thread.Sleep(1000);
                 var departments = await _departmentRepository.GetDepartments();
                 return Ok(new ApiResponseOKResult() { Data = departments });
             }
@@ -51,12 +52,13 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
+                System.Threading.Thread.Sleep(1000);
                 var departmentExists = await _departmentRepository.DepartmentExists(departmentCreateRequestModel.DepartmentName);
                 if (departmentExists)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Role {departmentCreateRequestModel.DepartmentName} already exists" });
 
-                await _departmentRepository.AddDepartment(_mapper.Map<Department>(departmentCreateRequestModel));
-                return Ok(new ApiResponseOKResult() { Data = departmentCreateRequestModel });
+                var newDepartment = await _departmentRepository.AddDepartment(_mapper.Map<Department>(departmentCreateRequestModel));
+                return Ok(new ApiResponseOKResult() { Data = newDepartment });
             }
             catch (Exception ex)
             {
@@ -70,6 +72,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
+                System.Threading.Thread.Sleep(1000);
                 var department = await _departmentRepository.GetDepartment(departmentId);
                 if (null == department)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = "Department does not exists" });
@@ -85,10 +88,11 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("update_department/{departmentId}")]
-        public async Task<IActionResult> UpdateRole(int departmentId, [FromBody] UpdateDepartmentRequestModel updateDepartmentRequestModel)
+        public async Task<IActionResult> UpdateDepartment(int departmentId, [FromBody] UpdateDepartmentRequestModel updateDepartmentRequestModel)
         {
             try
             {
+                System.Threading.Thread.Sleep(1000);
                 var departmentExists = await _departmentRepository.DepartmentExists(updateDepartmentRequestModel.DepartmentName);
                 if (departmentExists)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Department {updateDepartmentRequestModel.DepartmentName} already exists" });

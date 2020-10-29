@@ -9,7 +9,7 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
     public interface IDepartmentRepository
     {
         Task<List<Department>> GetDepartments();
-        Task AddDepartment(Department department);
+        Task<Department> AddDepartment(Department department);
         Task UpdateDepartment(int departmentId, string departmentName);
         Task DeleteDepartment(int departmentId);
         Task<Department> GetDepartment(int departmentId);

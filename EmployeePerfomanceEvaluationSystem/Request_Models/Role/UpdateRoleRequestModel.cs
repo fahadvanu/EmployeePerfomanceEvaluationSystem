@@ -9,6 +9,7 @@ namespace EmployeePerfomanceEvaluationSystem.Request_Models.Role
     public class UpdateRoleRequestModel
     {
         [Required(ErrorMessage = "Rolename cannot be empty or null")]
+        [MaxLength(50, ErrorMessage = "Rolename name cannot exceeds 50 characters")]
         public string RoleName { get; set; }
     }
 }

@@ -18,10 +18,11 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
             _context = context;
         }
 
-        public async Task AddDepartment(Department department)
+        public async Task<Department> AddDepartment(Department department)
         {
             _context.Departments.Add(department);
             await _context.SaveChangesAsync();
+            return department;
         }
 
         public async Task DeleteDepartment(int departmentId)

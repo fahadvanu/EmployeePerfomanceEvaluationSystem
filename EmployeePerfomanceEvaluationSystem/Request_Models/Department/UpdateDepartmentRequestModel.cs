@@ -11,6 +11,7 @@ namespace EmployeePerfomanceEvaluationSystem.Request_Models.Department
     {
 
         [Required(ErrorMessage = "Departmentname cannot be empty or null")]
+        [MaxLength(50, ErrorMessage = "Department name cannot exceeds 50 characters")]
         public string DepartmentName { get; set; }
     }
 }

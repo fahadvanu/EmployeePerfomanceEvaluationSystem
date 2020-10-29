@@ -1,5 +1,5 @@
-.title_role_management{
-    text-align:center;
+.title_department_management {
+    text-align: center;
 }
 
 .pager-div {
@@ -7,18 +7,18 @@
     justify-content: center;
 }
 
-.role_table_controls{
-    text-align:center;
+.department_table_controls {
+    text-align: center;
 }
 
-.role_search_control {
+.department_search_control {
     float: right;
     padding: 0;
     margin-top: 20px;
 }
 
-.table_container_row{
-    clear:both;
+.table_container_row {
+    clear: both;
 }
 
 .table_container_column {
@@ -26,6 +26,6 @@
     max-height: 400px
 }
 
-.rolesTable {
+.departments_table {
     margin-top: 20px !important;
 }
