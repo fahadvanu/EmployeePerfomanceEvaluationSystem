@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef  } from '@angular/core';
 import { RoleService } from '../shared/services/roles/role-service';
 import { ApiResponse } from '../shared/models/api-responses/api-response';
 import { Role } from '../shared/models/roles/role';
 import { NgForm } from '@angular/forms';
 import { SpinnerService } from '../shared/services/spinner/spinner-service';
+import { ToastrNotificationService } from '../shared/services/toastr/toastr-service';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { ConfirmModalComponent } from '../confirm-modal-component/confirm-modal-component';
 
 @Component({
   templateUrl: './roles-component.component.html',
@@ -18,9 +21,13 @@ export class RolesComponentComponent implements OnInit {
     roleModel: Role;
     searchTerm: string;
     loading: boolean = false;
+    modalRef: BsModalRef;
 
     constructor(private roleService: RoleService,
-                private spinnerService: SpinnerService) { }
+                private spinnerService: SpinnerService,
+                private toastrNotificationService: ToastrNotificationService,
+                private cdRef: ChangeDetectorRef,
+                private modalService: BsModalService) { }
    
     ngOnInit(): void {
       this.resetVariables();
@@ -87,6 +94,7 @@ export class RolesComponentComponent implements OnInit {
   
                 this.rolesToDisplay = this.roles.slice();
                 this.spinnerService.idle();
+                this.toastrNotificationService.success('Role updated successfully');
             },
             error => {
                this.spinnerService.idle();
@@ -107,10 +115,11 @@ export class RolesComponentComponent implements OnInit {
                 this.resetAfterDbOperation();
                 roleForm.resetForm();
                 this.spinnerService.idle();
+                this.toastrNotificationService.success('Role added successfully');
             },
             error => {
                 this.spinnerService.idle();
-                console.log('Exception occured while adding roles to Database');
+                console.log(`Exception occured while adding roles to Database`, error);
             });
     }
 
@@ -122,41 +131,65 @@ export class RolesComponentComponent implements OnInit {
         this.resetVariables();
         roleForm.resetForm();
         this.rolesToDisplay = this.roles.slice();
-        this.currentPage = 1;
+        setTimeout(() => {
+            this.currentPage = 1;
+        });   
+        this.cdRef.detectChanges();
     }
 
     private resetAfterDbOperation() {
         this.resetVariables();
-        this.currentPage = 1;
+        setTimeout(() => {
+            this.currentPage = 1;
+        });      
+        this.cdRef.detectChanges();
     }
 
     deleteRole(role: Role) {
 
-        this.spinnerService.updateMessage('Deleting Role.....');
-        this.spinnerService.busy();
-        this.roleService.deleteRole(role)
-            .subscribe((response: ApiResponse) => {
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: 'Are you sure you want to delete this record?',
+                callback: (result) => {
+                    if (result) {
 
-                this.roles = this.roles.filter(r => r.roleId != role.roleId);
-                this.rolesToDisplay = this.roles.slice();
-                this.resetAfterDbOperation();
-                this.spinnerService.idle();
-         },
-         error => {
-             this.spinnerService.idle();
-             console.log('Exception occured while deleting roles from Database');
-         });
+                        this.spinnerService.updateMessage('Deleting Role.....');
+                        this.spinnerService.busy();
+                        this.roleService.deleteRole(role)
+                            .subscribe((response: ApiResponse) => {
+
+                                this.roles = this.roles.filter(r => r.roleId != role.roleId);
+                                this.rolesToDisplay = this.roles.slice();
+                                this.resetAfterDbOperation();
+                                this.spinnerService.idle();
+                                this.toastrNotificationService.success('Role deleted successfully');
+
+                            },
+                            error => {
+                                    this.spinnerService.idle();
+                                    console.log('Exception occured while deleting roles from Database');
+                            });
+                    }
+                }
+            }
+        });       
     }
 
     searchRole() {
         if (this.searchTerm != '') {
             this.rolesToDisplay = this.roles.filter(r => r.roleName.toLocaleLowerCase()
                 .indexOf(this.searchTerm.toLocaleLowerCase()) != -1);
-            this.currentPage = 1;
+            setTimeout(() => {
+                this.currentPage = 1;
+            }, 0);   
+            this.cdRef.detectChanges();   
         }
         else {
             this.rolesToDisplay = this.roles.slice();
-            this.currentPage = 1;
+            setTimeout(() => {
+                this.currentPage = 1;
+            }, 0);   
+            this.cdRef.detectChanges();
         }
     }
 }

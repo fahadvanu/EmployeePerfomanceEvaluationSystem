@@ -1,0 +1,14 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title pull-left">Confirm!!!!!</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="decline()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body text-center">
+    <p>{{promptMessage}}</p>
+    <button type="button" class="btn btn-danger mr-3 confirm_buttons" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-primary confirm_buttons" (click)="decline()">No</button>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="decline()">Close</button>
+</div>

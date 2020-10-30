@@ -48,7 +48,7 @@ namespace EmployeePerfomanceEvaluationSystem.Extensions
                                      Error = modelError.Value.Errors.FirstOrDefault().ErrorMessage
                                   }).ToList();
 
-            return new BadRequestObjectResult(new ApiResponseBadRequestResult() { Errors = modelStateErrors, ErrorMessage = "Invalid Data" });
+            return new BadRequestObjectResult(new ApiResponseBadRequestResult() { Errors = modelStateErrors, ErrorMessage = "Bad request. Please check the data entered." });
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using EmployeePerfomanceEvaluationSystem.Models;
@@ -43,7 +44,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             catch(Exception ex)
             {
                 _logger.LogError(ex, "Failed to fetch all roles");
-                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to fetch all roles" });
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch all roles" });
             }
         }
 
@@ -63,7 +64,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to create new role");
-                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to create new role" });
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to create new role" });
             }
         }
 
@@ -83,7 +84,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to delete role");
-                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to delete role" });
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to delete role" });
             }
         }
 
@@ -103,7 +104,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to update role");
-                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to update role" });
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to update role" });
             }
         }
     }

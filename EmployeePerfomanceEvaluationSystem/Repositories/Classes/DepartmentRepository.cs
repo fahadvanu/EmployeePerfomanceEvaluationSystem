@@ -50,7 +50,7 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
         public async Task<List<Department>> GetDepartments()
         {
-            return await _context.Departments.ToListAsync();
+            return await _context.Departments.OrderBy(x => x.DepartmentName).ToListAsync();
         }
 
         public async Task UpdateDepartment(int departmentId, string departmentName)

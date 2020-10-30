@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DepartmentService } from '../shared/services/departments/departments-service';
 import { ApiResponse } from '../shared/models/api-responses/api-response';
 import { Department } from '../shared/models/departments/department';
 import { NgForm } from '@angular/forms';
 import { SpinnerService } from '../shared/services/spinner/spinner-service';
+import { ToastrNotificationService } from '../shared/services/toastr/toastr-service';
+import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { ConfirmModalComponent } from '../confirm-modal-component/confirm-modal-component';
 
 @Component({
   selector: 'app-departments-component',
@@ -19,9 +22,13 @@ export class DepartmentsComponentComponent implements OnInit {
     departmentModel: Department;
     searchTerm: string;
     loading: boolean = false;
+    modalRef: BsModalRef;
 
     constructor(private departmentService: DepartmentService,
-                private spinnerService: SpinnerService) { }
+                private spinnerService: SpinnerService,
+                private toastrNotificationService: ToastrNotificationService,
+                private cdRef: ChangeDetectorRef,
+                private modalService: BsModalService) { }
 
     ngOnInit(): void {
         this.resetVariables();
@@ -87,6 +94,7 @@ export class DepartmentsComponentComponent implements OnInit {
                 this.resetAfterDbOperation();
                 this.departmentsToDisplay = this.departments.slice();
                 this.spinnerService.idle();
+                this.toastrNotificationService.success('Department updated successfully');
             },
             error => {
                 this.spinnerService.idle();
@@ -107,7 +115,7 @@ export class DepartmentsComponentComponent implements OnInit {
                 this.resetAfterDbOperation();
                 departmentForm.resetForm();
                 this.spinnerService.idle();
-
+                this.toastrNotificationService.success('Department added successfully');
             },
             error => {
                 this.spinnerService.idle();
@@ -123,41 +131,64 @@ export class DepartmentsComponentComponent implements OnInit {
         this.resetVariables();
         departmentForm.resetForm();
         this.departmentsToDisplay = this.departments.slice();
-        this.currentPage = 1;
+        setTimeout(() => {
+            this.currentPage = 1;
+        });
+        this.cdRef.detectChanges();
     }
 
     private resetAfterDbOperation() {
         this.resetVariables();
-        this.currentPage = 1;
+        setTimeout(() => {
+            this.currentPage = 1;
+        });
+        this.cdRef.detectChanges();
     }
 
     deleteDepartment(department: Department) {
 
-        this.spinnerService.updateMessage('Deleting Department.....');
-        this.spinnerService.busy();
-        this.departmentService.deleteDepartment(department)
-            .subscribe((response: ApiResponse) => {
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: 'Are you sure you want to delete this record?',
+                callback: (result) => {
+                    if (result) {
 
-                this.departments = this.departments.filter(r => r.departmentId != department.departmentId);
-                this.departmentsToDisplay = this.departments.slice();
-                this.resetAfterDbOperation();
-                this.spinnerService.idle();
-            },
-            error => {
-                this.spinnerService.idle();
-                console.log('Exception occured while deleting departments from Database');
-            });
+                        this.spinnerService.updateMessage('Deleting Department.....');
+                        this.spinnerService.busy();
+                        this.departmentService.deleteDepartment(department)
+                            .subscribe((response: ApiResponse) => {
+
+                                this.departments = this.departments.filter(r => r.departmentId != department.departmentId);
+                                this.departmentsToDisplay = this.departments.slice();
+                                this.resetAfterDbOperation();
+                                this.spinnerService.idle();
+                                this.toastrNotificationService.success('Department deleted successfully');
+                            },
+                            error => {
+                                this.spinnerService.idle();
+                                console.log('Exception occured while deleting departments from Database');
+                            });
+                    }
+                }
+            }
+        });
     }
 
     searchDepartment() {
         if (this.searchTerm != '' && this.searchTerm != null && this.searchTerm != undefined) {
             this.departmentsToDisplay = this.departments.filter(r => r.departmentName.toLocaleLowerCase()
                                             .indexOf(this.searchTerm.toLocaleLowerCase()) != -1);
-            this.currentPage = 1;
+            setTimeout(() => {
+                this.currentPage = 1;
+            });
+            this.cdRef.detectChanges();
         }
         else {
             this.departmentsToDisplay = this.departments.slice();
-            this.currentPage = 1;
+            setTimeout(() => {
+                this.currentPage = 1;
+            });
+            this.cdRef.detectChanges();
         }
     }
 

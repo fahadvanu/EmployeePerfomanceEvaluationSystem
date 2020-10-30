@@ -37,7 +37,7 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
         public async Task<List<EmployeeRole>> GetRoles()
         {
-            return await _context.Roles.ToListAsync();
+            return await _context.Roles.OrderBy(x => x.RoleName).ToListAsync();
         }
 
         public async Task UpdateRole(int roleId, string roleName)

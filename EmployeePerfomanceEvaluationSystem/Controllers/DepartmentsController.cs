@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using EmployeePerfomanceEvaluationSystem.Models;
@@ -43,7 +44,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to fetch all departments");
-                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to fetch all departments" });
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch all departments" });
             }
         }
 
@@ -63,7 +64,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to create new department");
-                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to create new department" });
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to create new department" });
             }
         }
 
@@ -83,7 +84,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to delete department");
-                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to delete department" });
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to delete department" });
             }
         }
 
@@ -103,7 +104,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to update department");
-                return new ObjectResult(new ApiResponseFailure() { ErrorMessage = "Failed to update department" });
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to update department" });
             }
         }
     }
