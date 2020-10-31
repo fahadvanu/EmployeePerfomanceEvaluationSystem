@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\UserIdentityDb\20201031113412_usertable.cs" />
+    <Compile Remove="Migrations\UserIdentityDb\20201031113412_usertable.Designer.cs" />
+    <Compile Remove="Migrations\UserIdentityDb\20201031115201_usertable-updates-new.cs" />
+    <Compile Remove="Migrations\UserIdentityDb\20201031115201_usertable-updates-new.Designer.cs" />
+    <Compile Remove="Migrations\UserIdentityDb\20201031115417_usertable-updates-new.cs" />
+    <Compile Remove="Migrations\UserIdentityDb\20201031115417_usertable-updates-new.Designer.cs" />
+    <Compile Remove="Migrations\UserIdentityDb\20201031115748_usertable-updates-new1.cs" />
+    <Compile Remove="Migrations\UserIdentityDb\20201031115748_usertable-updates-new1.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="client_app\performance-evaluation-client\src\app\confirm-modal-component\confirm-modal-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\interceptors\error-interceptor.ts" />
@@ -26,6 +37,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
