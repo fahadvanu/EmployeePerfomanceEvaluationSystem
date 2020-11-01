@@ -1,0 +1,19 @@
+﻿.title_user_registration {
+    text-align: center;
+}
+
+.form-control{
+    width: 80%;
+}
+
+.registration-controls{
+    margin: 0 auto;
+}
+
+.registration_buttons{
+    width: 120px;
+}
+
+.help-block {
+    color: #DD0031;
+}

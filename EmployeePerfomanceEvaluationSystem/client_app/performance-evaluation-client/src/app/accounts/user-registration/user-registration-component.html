@@ -1,0 +1,144 @@
+﻿
+<div class="row">
+    <div class="col-md-7 offset-3">
+
+        <div class="title_user_registration">
+            <h3> New User Registration </h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 mt-3 registration-controls">
+                <form [formGroup]="registrationFormGroup" novalidate>
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+
+                        <input type="text" class="form-control"
+                               name="firstName" placeholder="First Name"
+                               formControlName="firstName">
+
+                        <p class="help-block" *ngIf="registrationFormGroup.get('firstName').hasError('required')
+                                                    && registrationFormGroup.get('firstName').touched">* First Name is required</p>
+
+                        <p class="help-block" *ngIf="registrationFormGroup.get('firstName').hasError('maxlength')
+                                                    && registrationFormGroup.get('firstName').touched">* First Name cannot exceeds 50 characters</p>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+
+                        <input type="text" class="form-control"
+                               name="lastName" placeholder="Last Name"
+                               formControlName="lastName">
+
+                        <p class="help-block" *ngIf="registrationFormGroup.get('lastName').hasError('required')
+                                                    && registrationFormGroup.get('lastName').touched">* Last Name is required</p>
+
+                        <p class="help-block" *ngIf="registrationFormGroup.get('lastName').hasError('maxlength')
+                                                    && registrationFormGroup.get('lastName').touched">* Last Name cannot exceeds 50 characters</p>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control"
+                               name="email" placeholder="Email"
+                               formControlName="email">
+
+                        <p class="help-block" *ngIf="registrationFormGroup.get('email').hasError('required')
+                                                    && registrationFormGroup.get('email').touched">* Email is required</p>
+
+                        <p class="help-block" *ngIf="registrationFormGroup.get('email').hasError('pattern')
+                                                    && registrationFormGroup.get('email').touched">* Please enter valid email</p>
+
+                    </div>
+
+                    <div formGroupName="passwordGroup">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control"
+                                   name="password" placeholder="Password"
+                                   formControlName="password">
+
+                            <p class="help-block" *ngIf="registrationFormGroup.get('passwordGroup.password').hasError('required')
+                                                    && registrationFormGroup.get('passwordGroup.password').touched">* Password is required</p>
+
+                            <p class="help-block" *ngIf="registrationFormGroup.get('passwordGroup.password').hasError('invalidPassword')
+                                                    && registrationFormGroup.get('passwordGroup.password').touched">* Password must be atleast 8 - 12 charcters long, and should contain One digit, One Upper case and One Lower case character.</p>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" class="form-control"
+                                   name="confirmPassword" placeholder="Confirm Password"
+                                   formControlName="confirmPassword">
+
+                            <p class="help-block" *ngIf="registrationFormGroup.get('passwordGroup').hasError('invalidPassword')
+                                                    && registrationFormGroup.get('passwordGroup.password').touched">* Password Mismatch</p>
+
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="number" class="form-control"
+                               name="contactNumber" placeholder="Contact Number"
+                               formControlName="contactNumber">
+
+                        <p class="help-block" *ngIf="registrationFormGroup.get('contactNumber').hasError('required')
+                                                    && registrationFormGroup.get('contactNumber').touched">* Contact Number is required</p>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" class="form-control" formControlName="gender">
+                            <option value="" disabled>Choose...</option>
+                            <option value="M"> Male </option>
+                            <option value="F"> Female </option>
+                        </select>
+                        <p class="help-block" *ngIf="registrationFormGroup.get('gender').hasError('required')
+                                                    && registrationFormGroup.get('gender').touched">* Please select Gender</p>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select id="role" class="form-control" formControlName="role">
+                            <option value="" disabled>Choose...</option>
+                            <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
+                        </select>
+                        <p class="help-block" *ngIf="registrationFormGroup.get('role').hasError('required')
+                                                    && registrationFormGroup.get('role').touched">* Please select Role</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" class="form-control" formControlName="department">
+                            <option value="" disabled>Choose...</option>
+                            <option *ngFor="let department of departments" [value]="department.departmentId">{{ department.departmentName }}</option>
+                        </select>
+                        <p class="help-block" *ngIf="registrationFormGroup.get('department').hasError('required')
+                                                    && registrationFormGroup.get('department').touched">* Please select Department</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary registration_buttons" 
+                            [disabled]="!registrationFormGroup.valid"
+                            (click)="registerUser()">
+                        Submit
+                    </button>
+
+                    <button type="submit" class="btn btn-dark ml-3 registration_buttons"
+                            (click)="navigateLogin()">
+                        Back
+                    </button>
+
+                </form>
+            </div>
+       
+        </div>
+     
+    </div>
+</div>

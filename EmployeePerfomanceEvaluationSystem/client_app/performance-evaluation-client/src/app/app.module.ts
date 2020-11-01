@@ -16,6 +16,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RolesComponentComponent } from './roles-component/roles-component.component';
 import { DepartmentsComponentComponent } from './departments-component/departments-component.component';
 import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
+import { AccountsModule } from './accounts/accounts-module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
           positionClass: 'toast-bottom-right',        
         }),
         SharedModule,
+        AccountsModule,
         AppRoutingModule
       
   ],

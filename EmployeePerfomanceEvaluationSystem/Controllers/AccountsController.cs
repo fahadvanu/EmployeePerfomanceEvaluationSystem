@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging;
 namespace EmployeePerfomanceEvaluationSystem.Controllers
 {
     [Route("api/accounts")]
-    [ApiController]
+
     public class AccountsController : ControllerBase
     {
         private UserManager<User> _userManager;
@@ -34,7 +34,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser([FromBody] RegistrationRequestModel registrationRequestModel)
+        public async Task<IActionResult> RegisterUser([FromBody]RegistrationRequestModel registrationRequestModel)
         {
             try
             {
