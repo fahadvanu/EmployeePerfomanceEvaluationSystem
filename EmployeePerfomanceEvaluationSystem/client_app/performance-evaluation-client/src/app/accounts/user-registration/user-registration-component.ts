@@ -12,6 +12,7 @@ import { SpinnerService } from '../../shared/services/spinner/spinner-service';
 import { ToastrNotificationService } from '../../shared/services/toastr/toastr-service';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { ConfirmModalComponent } from '../../confirm-modal-component/confirm-modal-component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -31,7 +32,8 @@ export class UserRegistrationComponent  implements OnInit {
                 private accountService: AccountService,
                 private spinnerService: SpinnerService,
                 private toastrNotificationService: ToastrNotificationService,
-                private modalService: BsModalService) {
+                private modalService: BsModalService,
+                private router: Router) {
 
     }
 
@@ -149,6 +151,23 @@ export class UserRegistrationComponent  implements OnInit {
 
     navigateLogin() {
 
+        if (this.registrationFormGroup.dirty) {
+
+            this.modalRef = this.modalService.show(ConfirmModalComponent, {
+                initialState: {
+                    promptMessage: 'Discard changes and navigate back to Login page?',
+                    callback: (result) => {
+                        if (result) {
+
+                            this.router.navigate(['/login']);
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            this.router.navigate(['/login']);
+        }
     }
 
     patternValidator(): ValidatorFn {

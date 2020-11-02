@@ -13,7 +13,11 @@ namespace EmployeePerfomanceEvaluationSystem.MappingProfiles.Accounts
         public UserMappingProfile()
         {
             CreateMap<RegistrationRequestModel, EmployeePerfomanceEvaluationSystem.Models.User>();
+
             CreateMap<EmployeePerfomanceEvaluationSystem.Models.User, RegistrationResponseModel>();
+
+            CreateMap<EmployeePerfomanceEvaluationSystem.Models.User, LoginResponseModel>()
+                                 .ForMember(x => x.UserId, p => p.MapFrom(y => y.Id));
         }
     }
 }

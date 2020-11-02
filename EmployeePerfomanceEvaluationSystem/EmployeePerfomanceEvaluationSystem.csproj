@@ -18,11 +18,16 @@
   <ItemGroup>
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\accounts\user-login\user-login-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\user-registration\password-match-validation.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\user-registration\user-registration-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\confirm-modal-component\confirm-modal-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\home\home-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\constant\constants.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\interceptors\error-interceptor.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\jwt\jwt-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\accounts\user-login\login-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\accounts\user-registration\registration-request.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\api-responses\api-response.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\departments\department.ts" />
@@ -57,11 +62,16 @@
   <ItemGroup>
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\user-login\user-login-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\user-registration\password-match-validation.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\user-registration\user-registration-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\confirm-modal-component\confirm-modal-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\home\home-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\constant\constants.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\interceptors\error-interceptor.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\jwt\jwt-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\accounts\user-login\login-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\accounts\user-registration\registration-request.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\api-responses\api-response.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\departments\department.ts" />

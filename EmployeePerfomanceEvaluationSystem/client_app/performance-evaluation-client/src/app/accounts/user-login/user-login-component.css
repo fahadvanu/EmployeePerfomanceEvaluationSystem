@@ -1,0 +1,92 @@
+﻿.user_card {
+    height: 400px;
+    width: 500px;
+    margin-top: 50px;
+    margin-bottom: auto;
+    background: #F05837;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+}
+
+.form_container {
+ /*   margin-top: 100px;*/
+}
+
+
+.login_btn {
+    width: 100%;
+    background: white !important;
+    color: black !important;
+}
+
+.login_btn:hover {
+
+    background: #c0392b !important;
+    color: white !important;
+}
+
+
+.login_btn:focus {
+   box-shadow: none !important;
+   outline: 0px !important;
+}
+
+.login_container {
+    padding: 0 2rem;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.input-group-text {
+    background: #282726 !important;
+    color: white !important;
+    border: 0 !important;
+    border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.input_user,
+.input_pass
+{
+    height:42px;
+}
+
+.input-group {
+    height: 42px;
+}
+
+.input_user,
+.input_pass:focus {
+        box-shadow: none !important;
+        outline: 0px !important;
+}
+
+.login_form{
+    width: 350px;
+}
+
+a{
+    color: white;
+}
+
+a:hover {
+        color: #c0392b;
+        cursor: pointer;
+}
+
+.email_descriptor {
+    margin-bottom: 10px;
+    color: white !important;
+}
+
+.login_btn.disabled, .login_btn:disabled {
+    opacity: .65;
+    background: darkgray !important;
+    color: white !important;
+}

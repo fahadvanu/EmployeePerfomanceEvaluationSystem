@@ -7,16 +7,18 @@ import { FormsModule } from '@angular/forms';
 import { NgxBootstrapModule } from './ngx-bootstrap-module'
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule } from 'ngx-toastr';
-
+import { AppJWTModule } from './shared/jwt/jwt-module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared-module';
+import { AccountsModule } from './accounts/accounts-module';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RolesComponentComponent } from './roles-component/roles-component.component';
 import { DepartmentsComponentComponent } from './departments-component/departments-component.component';
+import { HomeComponent } from './home/home-component';
+
 import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
-import { AccountsModule } from './accounts/accounts-module';
 
 
 @NgModule({
@@ -24,13 +26,15 @@ import { AccountsModule } from './accounts/accounts-module';
         AppComponent,
         NavBarComponent,
         RolesComponentComponent,
-        DepartmentsComponentComponent
+        DepartmentsComponentComponent,
+        HomeComponent
   ],
   imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
         FormsModule,
+        AppJWTModule,
         NgxBootstrapModule,
         NgxSpinnerModule,
         ToastrModule.forRoot({
@@ -39,8 +43,7 @@ import { AccountsModule } from './accounts/accounts-module';
         }),
         SharedModule,
         AccountsModule,
-        AppRoutingModule
-      
+        AppRoutingModule     
   ],
     providers: [
         {

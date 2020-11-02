@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationPipePipe } from '../shared/pipes/pagination-client';
 
+
 @NgModule({
     declarations: [
         PaginationPipePipe
