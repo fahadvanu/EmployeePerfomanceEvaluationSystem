@@ -19,7 +19,7 @@ namespace EmployeePerfomanceEvaluationSystem.ModelConfiguration
             builder.HasKey(o => o.Id);
             builder.Ignore(x => x.LockoutEnabled);
             builder.Ignore(x => x.EmailConfirmed);
-            builder.Ignore(x => x.SecurityStamp);
+          //  builder.Ignore(x => x.SecurityStamp);
             builder.Ignore(x => x.ConcurrencyStamp);
             builder.Ignore(x => x.PhoneNumber);
             builder.Ignore(x => x.PhoneNumberConfirmed);

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using EmployeePerfomanceEvaluationSystem.Models;
+using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Repositories.Services;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Accounts;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
@@ -27,18 +29,21 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         private IMapper _mapper;
         private ILogger<AccountsController> _logger;
         private IConfiguration _configuration;
+        private IEmailService _emailService;
 
         public AccountsController(UserManager<User> userManager,
                                   SignInManager<User> signInManager,
                                   IMapper mapper,
                                   ILogger<AccountsController> logger,
-                                  IConfiguration configuration)
+                                  IConfiguration configuration,
+                                  IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _logger = logger;
             _configuration = configuration;
+            _emailService = emailService;
         }
 
         [HttpPost("register")]
@@ -72,10 +77,12 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
+                
                 var user = await _userManager.FindByNameAsync(loginRequestModel.UserName);
                 if (user == null)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Credentials. Please try again" });
 
+           
                 var result = await _signInManager.CheckPasswordSignInAsync(user, loginRequestModel.Password, false);
                 if(!result.Succeeded)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Credentials. Please try again" });
@@ -89,6 +96,54 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 _logger.LogError(ex, "Failed to register new user");
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to process login request" });
+            }
+        }
+
+        [HttpPost("reset_password_link")]
+        public async Task<IActionResult> GenerateResetPasswordLink([FromBody]ResetPasswordRequestModel resetPasswordRequestModel)
+        {
+            try
+            {
+
+                var user = await _userManager.FindByEmailAsync(resetPasswordRequestModel.Email);
+                if (user == null)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with email ${ resetPasswordRequestModel.Email } does not exists" });
+
+
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResetTemplate = System.IO.File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(),
+                                                                       "EmailTemplates",
+                                                                       "password_reset_email_template.html"));
+                var emailModel = new EmailModel();
+                emailModel.FormPasswordResetEmailModel(user, token, passwordResetTemplate, _configuration);
+                await _emailService.SendEmail(emailModel);
+                return Ok(new ApiResponseOKResult() { Data = token });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to generate password reset token");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to generate password reset token" });
+            }
+        }
+
+        [HttpPost("update_password")]
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordRequestModel updatePasswordRequestModel)
+        {
+            try
+            {
+                var user = await _userManager.FindByNameAsync(updatePasswordRequestModel.UserName);
+                if (user == null)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User ${ updatePasswordRequestModel.UserName } does not exists" });
+
+
+                var result = await _userManager.ResetPasswordAsync(user, updatePasswordRequestModel.Token,
+                                                                   updatePasswordRequestModel.Password);
+                return Ok(new ApiResponseOKResult() { Data = result.Succeeded });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to update password");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to update password. Reset Link may have expired." });
             }
         }
     }

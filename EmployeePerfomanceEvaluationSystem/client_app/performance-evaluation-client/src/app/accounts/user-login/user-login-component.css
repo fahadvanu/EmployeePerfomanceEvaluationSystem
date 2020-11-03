@@ -3,7 +3,7 @@
     width: 500px;
     margin-top: 50px;
     margin-bottom: auto;
-    background: #F05837;
+    background: linear-gradient(-37deg,#a2dd7a,#26c07c);
     position: relative;
     display: flex;
     justify-content: center;
@@ -22,14 +22,14 @@
 
 .login_btn {
     width: 100%;
-    background: white !important;
-    color: black !important;
+    background: #0a4764 !important;
+    color: white !important;
 }
 
 .login_btn:hover {
 
-    background: #c0392b !important;
-    color: white !important;
+    background: white !important;
+    color: #0a4764 !important;
 }
 
 
@@ -45,7 +45,7 @@
 }
 
 .input-group-text {
-    background: #282726 !important;
+    background: #0a4764 !important;
     color: white !important;
     border: 0 !important;
     border-radius: 0.25rem 0 0 0.25rem !important;

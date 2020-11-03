@@ -3,6 +3,7 @@ using EmployeePerfomanceEvaluationSystem.DataContext;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Classes;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
+using EmployeePerfomanceEvaluationSystem.Repositories.Services;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +37,8 @@ namespace EmployeePerfomanceEvaluationSystem.Extensions
         public static void ConfigureIdentity(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddIdentity<User, ApplicationRole>()
-                   .AddEntityFrameworkStores<UserIdentityDbContext>();
+                   .AddEntityFrameworkStores<UserIdentityDbContext>()
+                   .AddDefaultTokenProviders();
 
             serviceCollection.Configure<IdentityOptions>(options =>
             {
@@ -83,6 +85,20 @@ namespace EmployeePerfomanceEvaluationSystem.Extensions
                                   }).ToList();
 
             return new BadRequestObjectResult(new ApiResponseBadRequestResult() { Errors = modelStateErrors, ErrorMessage = "Bad request. Please check the data entered." });
+        }
+
+        public static void AddSMTPServerSettings(this IServiceCollection serviceCollection, IConfiguration Configuration)
+        {
+            var smtp_server_settings = Configuration
+                                            .GetSection("SmtpServerSettings")
+                                            .Get<SmtpServerSettings>();
+
+            serviceCollection.AddSingleton(smtp_server_settings);
+        }
+
+        public static void AddServices(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddScoped<IEmailService, EmailService>();
         }
     }
 }

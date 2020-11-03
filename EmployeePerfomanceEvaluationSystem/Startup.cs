@@ -33,11 +33,12 @@ namespace EmployeePerfomanceEvaluationSystem
         {
             services.AddContext(Configuration);
             services.ConfigureIdentity();
+            services.AddSMTPServerSettings(Configuration);
             services.AddControllers();
             services.AddAPIBehaviourConfiguration();
             services.AddAutoMapperService();
             services.AddRepositories();
-
+            services.AddServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

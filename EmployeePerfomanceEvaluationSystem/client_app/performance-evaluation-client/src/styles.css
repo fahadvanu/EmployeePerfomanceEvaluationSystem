@@ -7,7 +7,7 @@
 }
 
 .bg-dark {
-    background-color: #17AF87 !important;
+    background: linear-gradient(90deg,#25c07d,#96d437) !important;
 }
 
 .table-style th, .table-style td{
