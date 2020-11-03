@@ -49,6 +49,9 @@ namespace EmployeePerfomanceEvaluationSystem.Extensions
                 options.Password.RequireUppercase = true;
                 options.Password.RequireLowercase = true;
             });
+
+            serviceCollection.Configure<DataProtectionTokenProviderOptions>(options =>
+                            options.TokenLifespan = TimeSpan.FromDays(1));
         }
 
 

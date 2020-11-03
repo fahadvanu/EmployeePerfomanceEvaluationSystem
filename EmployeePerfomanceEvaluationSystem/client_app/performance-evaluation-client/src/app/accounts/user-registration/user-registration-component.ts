@@ -62,7 +62,7 @@ export class UserRegistrationComponent  implements OnInit {
 
             contactNumber: ['', [Validators.required, Validators.maxLength(10), Validators.pattern("^[0-9]*$")]],
 
-            gender: ['', [Validators.required]],
+            gender: ['M'],
 
             role: ['', [Validators.required]],
 
@@ -101,6 +101,7 @@ export class UserRegistrationComponent  implements OnInit {
     }
 
     registerUser() {
+
         if (this.registrationFormGroup.valid) {
            
             this.modalRef = this.modalService.show(ConfirmModalComponent, {

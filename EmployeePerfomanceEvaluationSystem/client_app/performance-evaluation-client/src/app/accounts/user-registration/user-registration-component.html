@@ -93,14 +93,22 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="gender">Gender</label>
-                        <select id="gender" class="form-control" formControlName="gender">
-                            <option value="" disabled>Choose...</option>
-                            <option value="M"> Male </option>
-                            <option value="F"> Female </option>
-                        </select>
-                        <p class="help-block" *ngIf="registrationFormGroup.get('gender').hasError('required')
-                                                    && registrationFormGroup.get('gender').touched">* Please select Gender</p>
+                        <div>
+                            <label for="gender">Gender</label>
+                        </div>
+
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary" [class.active]="registrationFormGroup.get('gender').value == 'M'">
+                                <input type="radio" formControlName="gender" 
+                                       id="option1" value="M"
+                                       [checked]="registrationFormGroup.get('gender').value == 'M'"> Male
+                            </label>
+                            <label class="btn btn-secondary" [class.active]="registrationFormGroup.get('gender').value == 'F'">
+                                <input type="radio" formControlName="gender" id="option2" 
+                                       value="F"
+                                       [checked]="registrationFormGroup.get('gender').value == 'F'"> Female
+                            </label>
+                        </div>
 
                     </div>
 
