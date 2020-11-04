@@ -10,6 +10,7 @@ const routes: Routes = [
     { path: 'roles', component: RolesComponentComponent },
     { path: 'departments', component: DepartmentsComponentComponent },
     { path: 'home', component: HomeComponent },
+    { path: 'need-help', loadChildren: () => import('./accounts/need-help/need-help-module').then(m => m.NeedHelpModule) },
     { path: '', redirectTo: 'login', pathMatch:'full' },
     { path: '*', redirectTo: '' }
 ];

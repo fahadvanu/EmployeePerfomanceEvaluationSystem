@@ -8,6 +8,8 @@ import { LoginRequestModel } from '../../models/accounts/user-login/login-reques
 import { Constant } from '../../constant/constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { decode } from 'punycode';
+import { PasswordResetRequestModel } from '../../models/accounts/need-help/password-reset/password-reset-request-model';
+import { UpdatePasswordRequestModel } from '../../models/accounts/need-help/update-password/update-password-request-model';
 
 @Injectable({
     providedIn: 'root'
@@ -56,6 +58,32 @@ export class AccountService {
                         })
                     );
 
+    }
+
+    passwordReset(passwordResetRequestModel: PasswordResetRequestModel ): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>('/api/accounts/reset_password_link', passwordResetRequestModel, httpOptions);
+    }
+
+    updatePassword(updatepasswordResetRequestModel: UpdatePasswordRequestModel): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>('/api/accounts/update_password', updatepasswordResetRequestModel, httpOptions);
     }
 
     private saveTokenToStorage(response: ApiResponse) {

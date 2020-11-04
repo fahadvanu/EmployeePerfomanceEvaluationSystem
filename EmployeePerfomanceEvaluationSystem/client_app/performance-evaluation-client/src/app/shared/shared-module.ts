@@ -2,11 +2,12 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationPipePipe } from '../shared/pipes/pagination-client';
-
+import { ControlsValueMatchValidator } from './directives/match-controls-directive';
 
 @NgModule({
     declarations: [
-        PaginationPipePipe
+        PaginationPipePipe,
+        ControlsValueMatchValidator
     ],
     imports: [
         CommonModule,
@@ -17,7 +18,8 @@ import { PaginationPipePipe } from '../shared/pipes/pagination-client';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        PaginationPipePipe
+        PaginationPipePipe,
+        ControlsValueMatchValidator
     ]
 })
 export class SharedModule {

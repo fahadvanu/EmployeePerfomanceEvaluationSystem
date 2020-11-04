@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using EmployeePerfomanceEvaluationSystem.Models;
@@ -15,6 +16,7 @@ using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.Accounts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -107,17 +109,20 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
 
                 var user = await _userManager.FindByEmailAsync(resetPasswordRequestModel.Email);
                 if (user == null)
-                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with email ${ resetPasswordRequestModel.Email } does not exists" });
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with email { resetPasswordRequestModel.Email } does not exists" });
 
 
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var passwordResetTemplate = System.IO.File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(),
                                                                        "EmailTemplates",
                                                                        "password_reset_email_template.html"));
+              
+                byte[] tokenGeneratedBytes = Encoding.UTF8.GetBytes(token);
+                var codeEncoded = WebEncoders.Base64UrlEncode(tokenGeneratedBytes);
                 var emailModel = new EmailModel();
-                emailModel.FormPasswordResetEmailModel(user, token, passwordResetTemplate, _configuration);
+                emailModel.FormPasswordResetEmailModel(user, codeEncoded, passwordResetTemplate, _configuration);
                 await _emailService.SendEmail(emailModel);
-                return Ok(new ApiResponseOKResult() { Data = token });
+                return Ok(new ApiResponseOKResult() { Data = codeEncoded });
             }
             catch (Exception ex)
             {
@@ -133,10 +138,11 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 var user = await _userManager.FindByNameAsync(updatePasswordRequestModel.UserName);
                 if (user == null)
-                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User ${ updatePasswordRequestModel.UserName } does not exists" });
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User { updatePasswordRequestModel.UserName } does not exists" });
 
-
-                var result = await _userManager.ResetPasswordAsync(user, updatePasswordRequestModel.Token,
+                var codeDecodedBytes = WebEncoders.Base64UrlDecode(updatePasswordRequestModel.Token);
+                var codeDecoded = Encoding.UTF8.GetString(codeDecodedBytes);
+                var result = await _userManager.ResetPasswordAsync(user, codeDecoded,
                                                                    updatePasswordRequestModel.Password);
                 return Ok(new ApiResponseOKResult() { Data = result.Succeeded });
             }

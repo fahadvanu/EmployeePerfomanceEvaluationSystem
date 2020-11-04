@@ -18,7 +18,7 @@ namespace EmployeePerfomanceEvaluationSystem.Helper
             contextDictionary.Add("auth.email.password_reset_token", token);
             contextDictionary.Add("auth.email.user_name", user.UserName);
             contextDictionary.Add("auth.email.first_name", user.FirstName);
-            contextDictionary.Add("auth.email.password_reset_url", string.Format("{0}/reset-password/{1}", 
+            contextDictionary.Add("auth.email.password_reset_url", string.Format("{0}/need-help/update-password?token={1}", 
                                                                                   configuration["host:server"], token));
             passwordResetTemplate = GenerateEmailBody(passwordResetTemplate, contextDictionary);
 
