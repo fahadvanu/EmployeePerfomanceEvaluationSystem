@@ -26,6 +26,7 @@
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\user-registration\password-match-validation.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\user-registration\user-registration-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\confirm-modal-component\confirm-modal-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\forbidden\forbidden-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\home\home-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\constant\constants.ts" />
@@ -100,6 +101,9 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\spinner\spinner-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\toastr\toastr-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\forbidden\forbidden-component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\unauthorized\unauthorized-component.ts" />
   </ItemGroup>
 

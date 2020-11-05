@@ -18,6 +18,7 @@ import { RolesComponentComponent } from './roles-component/roles-component.compo
 import { DepartmentsComponentComponent } from './departments-component/departments-component.component';
 import { HomeComponent } from './home/home-component';
 import { UnAuthorizedComponent } from './unauthorized/unauthorized-component';
+import { ForbiddenComponent } from './forbidden/forbidden-component';
 
 import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
 
@@ -29,7 +30,8 @@ import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
         RolesComponentComponent,
         DepartmentsComponentComponent,
         HomeComponent,
-        UnAuthorizedComponent
+        UnAuthorizedComponent,
+        ForbiddenComponent
   ],
   imports: [
         BrowserModule,

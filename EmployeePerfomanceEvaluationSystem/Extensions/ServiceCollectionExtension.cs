@@ -5,16 +5,19 @@ using EmployeePerfomanceEvaluationSystem.Repositories.Classes;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Repositories.Services;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace EmployeePerfomanceEvaluationSystem.Extensions
@@ -102,6 +105,32 @@ namespace EmployeePerfomanceEvaluationSystem.Extensions
         public static void AddServices(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IEmailService, EmailService>();
+            serviceCollection.AddScoped<IUserService, UserService>();
+        }
+
+        public static void AddJWTAuthentication(this IServiceCollection serviceCollection, IConfiguration Configuration)
+        {
+                            serviceCollection.AddAuthentication(x =>
+                            {
+                                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                            })
+                             .AddJwtBearer(options =>
+                             {
+                                 options.RequireHttpsMetadata = false;
+                                 options.SaveToken = true;
+                                 options.TokenValidationParameters = new TokenValidationParameters
+                                 {
+                                     ValidateIssuer = true,
+                                     ValidateAudience = false,
+                                     ValidateLifetime = true,
+                                     ValidateIssuerSigningKey = true,
+                                     ValidIssuer = Configuration["JWTTokenValidation:Issuer"],
+                                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                                                                Configuration["JWTTokenValidation:Key"])),
+                                     ClockSkew = TimeSpan.Zero
+                                 };
+                             });
         }
     }
 }

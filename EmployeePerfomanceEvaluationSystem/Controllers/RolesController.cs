@@ -9,6 +9,7 @@ using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Role;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -49,6 +50,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("add_role")]
+        [Authorize]
         public async Task<IActionResult> AddNewRole([FromBody]CreateRoleRequestModel roleCreateRequestModel)
         {
             try
@@ -69,6 +71,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpDelete("delete_role/{roleId}")]
+        [Authorize]
         public async Task<IActionResult> DeleteRole(int roleId)
         {
             try
@@ -89,6 +92,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("update_role/{roleId}")]
+        [Authorize]
         public async Task<IActionResult> UpdateRole(int roleId, [FromBody] UpdateRoleRequestModel updateRoleRequestModel)
         {
             try

@@ -2008,7 +2008,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _departments_component_departments_component_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./departments-component/departments-component.component */ "UC/9");
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./home/home-component */ "qq55");
 /* harmony import */ var _unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./unauthorized/unauthorized-component */ "cd6N");
-/* harmony import */ var _shared_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./shared/interceptors/error-interceptor */ "tlHB");
+/* harmony import */ var _forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./forbidden/forbidden-component */ "eDgl");
+/* harmony import */ var _shared_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./shared/interceptors/error-interceptor */ "tlHB");
+
 
 
 
@@ -2036,7 +2038,7 @@ AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule
 AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
         {
             provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HTTP_INTERCEPTORS"],
-            useClass: _shared_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_18__["HttpErrorInterceptor"],
+            useClass: _shared_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_19__["HttpErrorInterceptor"],
             multi: true
         }
     ], imports: [[
@@ -2060,7 +2062,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _roles_component_roles_component_component__WEBPACK_IMPORTED_MODULE_14__["RolesComponentComponent"],
         _departments_component_departments_component_component__WEBPACK_IMPORTED_MODULE_15__["DepartmentsComponentComponent"],
         _home_home_component__WEBPACK_IMPORTED_MODULE_16__["HomeComponent"],
-        _unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_17__["UnAuthorizedComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+        _unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_17__["UnAuthorizedComponent"],
+        _forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_18__["ForbiddenComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
@@ -2078,7 +2081,8 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _roles_component_roles_component_component__WEBPACK_IMPORTED_MODULE_14__["RolesComponentComponent"],
                     _departments_component_departments_component_component__WEBPACK_IMPORTED_MODULE_15__["DepartmentsComponentComponent"],
                     _home_home_component__WEBPACK_IMPORTED_MODULE_16__["HomeComponent"],
-                    _unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_17__["UnAuthorizedComponent"]
+                    _unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_17__["UnAuthorizedComponent"],
+                    _forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_18__["ForbiddenComponent"]
                 ],
                 imports: [
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -2099,7 +2103,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                 providers: [
                     {
                         provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HTTP_INTERCEPTORS"],
-                        useClass: _shared_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_18__["HttpErrorInterceptor"],
+                        useClass: _shared_interceptors_error_interceptor__WEBPACK_IMPORTED_MODULE_19__["HttpErrorInterceptor"],
                         multi: true
                     }
                 ],
@@ -2342,6 +2346,64 @@ UnAuthorizedComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
                 templateUrl: './unauthorized-component.html',
                 styleUrls: [
                     './unauthorized-component.css'
+                ]
+            }]
+    }], null, null); })();
+
+
+/***/ }),
+
+/***/ "eDgl":
+/*!**************************************************!*\
+  !*** ./src/app/forbidden/forbidden-component.ts ***!
+  \**************************************************/
+/*! exports provided: ForbiddenComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ForbiddenComponent", function() { return ForbiddenComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
+
+
+const _c0 = function () { return ["/login"]; };
+class ForbiddenComponent {
+}
+ForbiddenComponent.ɵfac = function ForbiddenComponent_Factory(t) { return new (t || ForbiddenComponent)(); };
+ForbiddenComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ForbiddenComponent, selectors: [["ng-component"]], decls: 13, vars: 2, consts: [[1, "container"], ["id", "center"], [2, "width", "250px", "text-align", "center"], [1, "fa", "fa-exclamation-triangle"], ["id", "btn-sign-up", 1, "btn", "btn-outline-danger", 3, "routerLink"]], template: function ForbiddenComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h1");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "403 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](5, "i", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "h1");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Access Denied");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, " Please login to your account ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "a", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Login ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](1, _c0));
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterLinkWithHref"]], styles: ["#center[_ngcontent-%COMP%] {\n    position: fixed !important;\n    top: 50%;\n    left: 45%;\n    margin-top: -50px;\n    margin-left: -50px;\n    width: 300px;\n    height: 200px;\n    color: #DD0031;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZm9yYmlkZGVuL2ZvcmJpZGRlbi1jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksMEJBQTBCO0lBQzFCLFFBQVE7SUFDUixTQUFTO0lBQ1QsaUJBQWlCO0lBQ2pCLGtCQUFrQjtJQUNsQixZQUFZO0lBQ1osYUFBYTtJQUNiLGNBQWM7QUFDbEIiLCJmaWxlIjoic3JjL2FwcC9mb3JiaWRkZW4vZm9yYmlkZGVuLWNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjY2VudGVyIHtcbiAgICBwb3NpdGlvbjogZml4ZWQgIWltcG9ydGFudDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA0NSU7XG4gICAgbWFyZ2luLXRvcDogLTUwcHg7XG4gICAgbWFyZ2luLWxlZnQ6IC01MHB4O1xuICAgIHdpZHRoOiAzMDBweDtcbiAgICBoZWlnaHQ6IDIwMHB4O1xuICAgIGNvbG9yOiAjREQwMDMxO1xufVxuIl19 */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ForbiddenComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                templateUrl: './forbidden-component.html',
+                styleUrls: [
+                    './forbidden-component.css'
                 ]
             }]
     }], null, null); })();
@@ -2744,14 +2806,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/toastr/toastr-service */ "jonD");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../services/spinner/spinner-service */ "3PAx");
+
+
 
 
 
 
 
 class HttpErrorInterceptor {
-    constructor(toastrNotificationService) {
+    constructor(toastrNotificationService, router, spinnerService) {
         this.toastrNotificationService = toastrNotificationService;
+        this.router = router;
+        this.spinnerService = spinnerService;
     }
     intercept(request, next) {
         return next.handle(request)
@@ -2759,23 +2827,35 @@ class HttpErrorInterceptor {
             var _a;
             let errorMessage = '';
             let errorObject = {};
-            if (error.status == 400) {
-                if (error.error.errors != null) {
-                    errorObject.modelStateValidationErros = error.error.errors;
+            if (error.status == 401 || error.status == 403) {
+                this.spinnerService.idle();
+                if (error.status == 401) {
+                    this.router.navigate(['/unauthorized']);
                 }
+                else {
+                    this.router.navigate(['/forbidden']);
+                }
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["of"])(null);
             }
-            errorMessage = (_a = error.error.errorMessage) !== null && _a !== void 0 ? _a : 'Exception occured while processing request';
-            errorObject.errorMessage = errorMessage;
-            this.toastrNotificationService.failed(errorMessage);
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["throwError"])(errorObject);
+            else {
+                if (error.status == 400) {
+                    if (error.error.errors != null) {
+                        errorObject.modelStateValidationErros = error.error.errors;
+                    }
+                }
+                errorMessage = (_a = error.error.errorMessage) !== null && _a !== void 0 ? _a : 'Exception occured while processing request';
+                errorObject.errorMessage = errorMessage;
+                this.toastrNotificationService.failed(errorMessage);
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["throwError"])(errorObject);
+            }
         }));
     }
 }
-HttpErrorInterceptor.ɵfac = function HttpErrorInterceptor_Factory(t) { return new (t || HttpErrorInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_3__["ToastrNotificationService"])); };
+HttpErrorInterceptor.ɵfac = function HttpErrorInterceptor_Factory(t) { return new (t || HttpErrorInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_3__["ToastrNotificationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_5__["SpinnerService"])); };
 HttpErrorInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({ token: HttpErrorInterceptor, factory: HttpErrorInterceptor.ɵfac });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵsetClassMetadata"](HttpErrorInterceptor, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"]
-    }], function () { return [{ type: _services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_3__["ToastrNotificationService"] }]; }, null); })();
+    }], function () { return [{ type: _services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_3__["ToastrNotificationService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }, { type: _services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_5__["SpinnerService"] }]; }, null); })();
 
 
 /***/ }),
@@ -2796,7 +2876,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _departments_component_departments_component_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./departments-component/departments-component.component */ "UC/9");
 /* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home/home-component */ "qq55");
 /* harmony import */ var _unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./unauthorized/unauthorized-component */ "cd6N");
-/* harmony import */ var _shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./shared/guards/check-user-authenticated-guard */ "Dste");
+/* harmony import */ var _forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./forbidden/forbidden-component */ "eDgl");
+/* harmony import */ var _shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/guards/check-user-authenticated-guard */ "Dste");
+
 
 
 
@@ -2807,11 +2889,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: 'roles', component: _roles_component_roles_component_component__WEBPACK_IMPORTED_MODULE_2__["RolesComponentComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuardService"]] },
-    { path: 'departments', component: _departments_component_departments_component_component__WEBPACK_IMPORTED_MODULE_3__["DepartmentsComponentComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuardService"]] },
-    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGuardService"]] },
+    { path: 'roles', component: _roles_component_roles_component_component__WEBPACK_IMPORTED_MODULE_2__["RolesComponentComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_7__["AuthGuardService"]] },
+    { path: 'departments', component: _departments_component_departments_component_component__WEBPACK_IMPORTED_MODULE_3__["DepartmentsComponentComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_7__["AuthGuardService"]] },
+    { path: 'home', component: _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_7__["AuthGuardService"]] },
     { path: 'need-help', loadChildren: () => __webpack_require__.e(/*! import() | accounts-need-help-need-help-module */ "accounts-need-help-need-help-module").then(__webpack_require__.bind(null, /*! ./accounts/need-help/need-help-module */ "27aI")).then(m => m.NeedHelpModule) },
     { path: 'unauthorized', component: _unauthorized_unauthorized_component__WEBPACK_IMPORTED_MODULE_5__["UnAuthorizedComponent"] },
+    { path: 'forbidden', component: _forbidden_forbidden_component__WEBPACK_IMPORTED_MODULE_6__["ForbiddenComponent"] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: '*', redirectTo: '' }
 ];

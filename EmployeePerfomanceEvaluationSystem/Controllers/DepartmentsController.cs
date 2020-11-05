@@ -9,6 +9,7 @@ using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Department;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -49,6 +50,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("add_department")]
+        [Authorize]
         public async Task<IActionResult> AddNewDepartment([FromBody] CreateDepartmentRequestModel departmentCreateRequestModel)
         {
             try
@@ -69,6 +71,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpDelete("delete_department/{departmentId}")]
+        [Authorize]
         public async Task<IActionResult> DeleteDepartment(int departmentId)
         {
             try
@@ -89,6 +92,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("update_department/{departmentId}")]
+        [Authorize]
         public async Task<IActionResult> UpdateDepartment(int departmentId, [FromBody] UpdateDepartmentRequestModel updateDepartmentRequestModel)
         {
             try

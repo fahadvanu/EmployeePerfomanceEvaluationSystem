@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using EmployeePerfomanceEvaluationSystem.DataContext;
 using EmployeePerfomanceEvaluationSystem.Extensions;
+using EmployeePerfomanceEvaluationSystem.Middlewares;
 using EmployeePerfomanceEvaluationSystem.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,7 @@ namespace EmployeePerfomanceEvaluationSystem
         {
             services.AddContext(Configuration);
             services.ConfigureIdentity();
+            services.AddJWTAuthentication(Configuration);
             services.AddSMTPServerSettings(Configuration);
             services.AddControllers();
             services.AddAPIBehaviourConfiguration();
@@ -55,6 +57,8 @@ namespace EmployeePerfomanceEvaluationSystem
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
+            //app.UseMiddleware<JWTTokenValidationMiddleware>();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

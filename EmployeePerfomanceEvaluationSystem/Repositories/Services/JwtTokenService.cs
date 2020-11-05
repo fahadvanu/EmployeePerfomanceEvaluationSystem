@@ -29,12 +29,12 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Services
                   };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWTTokenValidation:Key"]));
-            var signInCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var signInCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = signInCredentials,
                 Issuer = configuration["JWTTokenValidation:Issuer"]
             };
