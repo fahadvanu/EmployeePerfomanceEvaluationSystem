@@ -1,5 +1,10 @@
-﻿.login_controls_container{
-    margin-top:50px;
+﻿.login-container-row {
+    background: url("../../../assets/grey_back.4b9c86341b3055324704.png") round;
+}
+
+
+.login_controls_container {
+    margin-top: 50px;
 }
 
 .user_card {

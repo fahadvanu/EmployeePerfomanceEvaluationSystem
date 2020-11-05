@@ -30,6 +30,7 @@
     <None Remove="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\constant\constants.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\directives\match-controls-directive.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\guards\check-user-authenticated-guard.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\interceptors\error-interceptor.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\jwt\jwt-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\accounts\need-help\password-reset\password-reset-request-model.ts" />
@@ -45,6 +46,7 @@
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\spinner\spinner-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\toastr\toastr-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\unauthorized\unauthorized-component.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -82,6 +84,7 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\ngx-bootstrap-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\constant\constants.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\directives\match-controls-directive.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\guards\check-user-authenticated-guard.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\interceptors\error-interceptor.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\jwt\jwt-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\accounts\need-help\password-reset\password-reset-request-model.ts" />
@@ -97,6 +100,7 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\spinner\spinner-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\toastr\toastr-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\unauthorized\unauthorized-component.ts" />
   </ItemGroup>
 
   <ItemGroup>

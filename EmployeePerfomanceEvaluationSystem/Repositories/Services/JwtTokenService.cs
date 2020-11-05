@@ -22,7 +22,10 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Services
                         new Claim("FirstName", user.FirstName),
                         new Claim("LastName", user.LastName),
                         new Claim("UserName", user.UserName),
-                        new Claim("Email", user.Email)
+                        new Claim("Email", user.Email),
+                        new Claim("IsAdmin", user.IsAdmin.ToString()),
+                        new Claim("RoleId", user.RoleId.ToString()),
+                        new Claim("ReportingManagerId", user.ReportingManagerId.ToString())
                   };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWTTokenValidation:Key"]));

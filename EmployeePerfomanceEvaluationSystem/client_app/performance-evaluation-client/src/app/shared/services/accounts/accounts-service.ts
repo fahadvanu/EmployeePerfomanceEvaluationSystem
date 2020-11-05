@@ -103,13 +103,14 @@ export class AccountService {
     }
 
     getUserName() {
+
         let token = this.getTokenFromStorage();
         if (token != null) {
             const helper = new JwtHelperService();
             let decodedToken: any = helper.decodeToken(token);
             if (decodedToken != null) {
                 this.loggedIn.next(true);
-                return decodedToken.unique_name;
+                return decodedToken.UserName;
             }
         }
     }
@@ -125,5 +126,18 @@ export class AccountService {
         const expirationDate = helper.getTokenExpirationDate(token);
         const isExpired = helper.isTokenExpired(token);
         return !isExpired;
+    }
+
+    isAdminUser() {
+
+        let token = this.getTokenFromStorage();
+        if (token != null) {
+            const helper = new JwtHelperService();
+            let decodedToken: any = helper.decodeToken(token);
+            if (decodedToken != null) {
+                this.loggedIn.next(true);
+                return (decodedToken.IsAdmin == 'True');
+            }
+        }
     }
 }

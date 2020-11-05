@@ -17,6 +17,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { RolesComponentComponent } from './roles-component/roles-component.component';
 import { DepartmentsComponentComponent } from './departments-component/departments-component.component';
 import { HomeComponent } from './home/home-component';
+import { UnAuthorizedComponent } from './unauthorized/unauthorized-component';
 
 import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
 
@@ -27,7 +28,8 @@ import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
         NavBarComponent,
         RolesComponentComponent,
         DepartmentsComponentComponent,
-        HomeComponent
+        HomeComponent,
+        UnAuthorizedComponent
   ],
   imports: [
         BrowserModule,
