@@ -65,7 +65,7 @@ namespace EmployeePerfomanceEvaluationSystem.Middlewares
                 var userId = jwtToken.Claims.First(x => x.Type == "Id").Value;
 
                 // attach user to context on successful jwt validation
-                context.Items["User"] = await userService.GetUserById(userId);
+                //context.Items["User"] = await userService.GetUserById(userId);
             }
             catch(Exception ex)
             {

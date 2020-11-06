@@ -1,3 +1,105 @@
-﻿<div class="container">
-    <span>HOME COMPONENT</span>
+﻿<div class="container-fluid reset-controls-container" *ngIf="!isLoading && userModel">
+    
+    <div class="row justify-content-center align-items-center h-100">
+       
+        <div class="col-md-6">
+
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Below are your details
+                    </div>
+                    <div class="card-body">
+
+                        <form #homeForm="ngForm">
+
+                            <div class="form-group row control-row">
+                                <label class="label_controls col-form-label col-sm-4">First Name</label>
+                                <div class="input_controls col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                           name="firstName" [ngModel]="userModel.firstName">
+                                </div>
+                            </div>
+
+                            <div class="form-group row control-row">
+                                <label class="label_controls col-form-label col-sm-4">Last Name</label>
+                                <div class="input_controls col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                           name="lastName" [ngModel]="userModel.lastName">
+                                </div>
+                            </div>
+
+                            <div class="form-group row control-row">
+                                <label class="label_controls col-form-label col-sm-4">Email</label>
+                                <div class="input_controls col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                           name="email" [ngModel]="userModel.email">
+                                </div>
+                            </div>
+
+                            <div class="form-group row control-row">
+                                <label class="label_controls col-form-label col-sm-4">Contact Number</label>
+                                <div class="input_controls col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                           name="contactNumber" [ngModel]="userModel.contactNumber">
+                                </div>
+                            </div>
+
+                            <div class="form-group row control-row">
+                                <label class="label_controls col-form-label col-sm-4">Gender</label>
+                                <div class="input_controls col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                           name="gender" [ngModel]="userModel.gender_display">
+                                </div>
+                            </div>
+
+                            <div class="form-group row control-row">
+                                <label class="label_controls col-form-label col-sm-4">Department</label>
+                                <div class="input_controls col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                           name="departmentName" [ngModel]="userModel.departmentName">
+                                </div>
+                            </div>
+
+                            <div class="form-group row control-row">
+                                <label class="label_controls col-form-label col-sm-4">Role</label>
+                                <div class="input_controls col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                           name="role" [ngModel]="userModel.roleName">
+                                </div>
+                            </div>
+
+                            <div class="form-group row control-row">
+                                <label class="label_controls col-form-label col-sm-4">Reporting Manager</label>
+                                <div class="input_controls col-sm-8">
+                                    <input type="text" readonly class="form-control-plaintext"
+                                           name="reportinManager" [ngModel]="userModel.reportingManager">
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                    <div class="card-footer">
+                    
+                        <button type="button" class="btn btn-primary"
+                                (click)="navigateEditUserDetailsPage()">
+                            Edit Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+             </div>
+        
+        </div>
+    
+    </div>
+
 </div>
+
+

@@ -40,12 +40,14 @@
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\accounts\user-registration\registration-request.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\api-responses\api-response.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\departments\department.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\user-response-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\pipes\pagination-client.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\accounts\accounts-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\departments\departments-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\roles\role-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\spinner\spinner-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\toastr\toastr-service.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\services\user\user-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\unauthorized\unauthorized-component.ts" />
   </ItemGroup>
@@ -66,6 +68,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MySql.Data" Version="8.0.22" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
   </ItemGroup>
@@ -94,12 +97,14 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\accounts\user-registration\registration-request.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\api-responses\api-response.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\departments\department.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\user-response-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\pipes\pagination-client.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\accounts\accounts-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\departments\departments-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\roles\role-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\spinner\spinner-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\toastr\toastr-service.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\user\user-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\forbidden\forbidden-component.ts">
       <SubType>Code</SubType>

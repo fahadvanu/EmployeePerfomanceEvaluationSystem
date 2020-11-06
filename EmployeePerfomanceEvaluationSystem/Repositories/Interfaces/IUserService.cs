@@ -1,4 +1,5 @@
 ﻿using EmployeePerfomanceEvaluationSystem.Models;
+using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
 {
     public interface IUserService
     {
-        Task<User> GetUserById(string userId);
+        Task<UserResponseModel> GetUserById(int userId);
     }
 }
