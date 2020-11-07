@@ -11,6 +11,7 @@ import { AppJWTModule } from './shared/jwt/jwt-module';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared-module';
 import { AccountsModule } from './accounts/accounts-module';
+import { UserDetailsModule } from './user-details/user-details-module';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -47,6 +48,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
         }),
         SharedModule,
         AccountsModule,
+        UserDetailsModule,
         AppRoutingModule     
   ],
     providers: [

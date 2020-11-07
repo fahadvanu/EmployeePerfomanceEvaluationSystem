@@ -18,10 +18,14 @@
   <ItemGroup>
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\user-update-request-model.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\user-details\user-details-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\need-help\need-help-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\need-help\need-help-routing-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\need-help\password-reset-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\need-help\update-password\update-password-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\user-details\user-details-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\user-details\user-details-routing-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\user-login\user-login-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\user-registration\password-match-validation.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\user-registration\user-registration-component.ts" />
@@ -76,10 +80,14 @@
   <ItemGroup>
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\user-update-request-model.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\user-details\user-details-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\need-help\need-help-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\need-help\need-help-routing-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\need-help\password-reset\password-reset-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\need-help\update-password\update-password-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\user-details\user-details-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\user-details\user-details-routing-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\user-login\user-login-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\user-registration\password-match-validation.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\user-registration\user-registration-component.ts" />

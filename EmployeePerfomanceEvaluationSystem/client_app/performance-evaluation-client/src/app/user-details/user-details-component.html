@@ -1,0 +1,127 @@
+﻿<div class="container-fluid reset-controls-container">
+
+    <div class="row justify-content-center align-items-center h-100">
+
+        <div class="col-md-6">
+
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Edit User details
+                    </div>
+                    <div class="card-body">
+
+                        <form [formGroup]="userDetailFormGroup">
+
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+
+                                <input type="text" class="form-control"
+                                       name="firstName" placeholder="First Name"
+                                       formControlName="firstName">
+
+                                <p class="help-block" *ngIf="userDetailFormGroup.get('firstName').hasError('required')
+                                                    && userDetailFormGroup.get('firstName').touched">* First Name is required</p>
+
+                                <p class="help-block" *ngIf="userDetailFormGroup.get('firstName').hasError('maxlength')
+                                                    && userDetailFormGroup.get('firstName').touched">* First Name cannot exceeds 50 characters</p>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+
+                                <input type="text" class="form-control"
+                                       name="lastName" placeholder="Last Name"
+                                       formControlName="lastName">
+
+                                <p class="help-block" *ngIf="userDetailFormGroup.get('lastName').hasError('required')
+                                                    && userDetailFormGroup.get('lastName').touched">* Last Name is required</p>
+
+                                <p class="help-block" *ngIf="userDetailFormGroup.get('lastName').hasError('maxlength')
+                                                    && userDetailFormGroup.get('lastName').touched">* Last Name cannot exceeds 50 characters</p>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactNumber">Contact Number</label>
+                                <input type="number" class="form-control"
+                                       name="contactNumber" placeholder="Contact Number"
+                                       formControlName="contactNumber">
+
+                                <p class="help-block" *ngIf="userDetailFormGroup.get('contactNumber').hasError('required')
+                                                    && userDetailFormGroup.get('contactNumber').touched">* Contact Number is required</p>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div>
+                                    <label for="gender">Gender</label>
+                                </div>
+
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-secondary" [class.active]="userDetailFormGroup.get('gender').value == 'M'">
+                                        <input type="radio" formControlName="gender"
+                                               id="option1" value="M"
+                                               [checked]="userDetailFormGroup.get('gender').value == 'M'"> Male
+                                    </label>
+                                    <label class="btn btn-secondary" [class.active]="userDetailFormGroup.get('gender').value == 'F'">
+                                        <input type="radio" formControlName="gender" id="option2"
+                                               value="F"
+                                               [checked]="userDetailFormGroup.get('gender').value == 'F'"> Female
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <select id="role" class="form-control" formControlName="role">
+                                    <option value="" disabled>Choose...</option>
+                                    <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
+                                </select>
+                                <p class="help-block" *ngIf="userDetailFormGroup.get('role').hasError('required')
+                                                    && userDetailFormGroup.get('role').touched">* Please select Role</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="department">Department</label>
+                                <select id="department" class="form-control" formControlName="department">
+                                    <option value="" disabled>Choose...</option>
+                                    <option *ngFor="let department of departments" [value]="department.departmentId">{{ department.departmentName }}</option>
+                                </select>
+                                <p class="help-block" *ngIf="userDetailFormGroup.get('department').hasError('required')
+                                                    && userDetailFormGroup.get('department').touched">* Please select Department</p>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        <button type="submit" class="btn btn-primary registration_buttons"
+                                [disabled]="!userDetailFormGroup.valid"
+                                (click)="updateUserDetails()">
+                            Update
+                        </button>
+
+                        <button type="submit" class="btn btn-outline-dark ml-3 registration_buttons"
+                                (click)="navigateHome()">
+                            Back
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+

@@ -14,9 +14,6 @@ import { UserLoginComponent } from './user-login/user-login-component';
     imports: [
         SharedModule,
         AccountsRoutingModule
-    ],
-    exports: [
-        AccountsRoutingModule
     ]
 })
 export class AccountsModule {

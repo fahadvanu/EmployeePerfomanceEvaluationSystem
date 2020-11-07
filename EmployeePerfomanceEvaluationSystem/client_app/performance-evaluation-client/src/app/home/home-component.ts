@@ -47,6 +47,6 @@ export class HomeComponent implements OnInit {
     }
 
     navigateEditUserDetailsPage() {
-        this.router.navigate(['/user']);
+        this.router.navigate(['/user-details']);
     }
 }
