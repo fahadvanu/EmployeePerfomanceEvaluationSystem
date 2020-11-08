@@ -18,7 +18,10 @@
   <ItemGroup>
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\goals\goals-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\user-update-request-model.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\services\goals\goals-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\user-details\user-details-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\need-help\need-help-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\need-help\need-help-routing-module.ts" />
@@ -80,7 +83,10 @@
   <ItemGroup>
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\goals\goals-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\user-update-request-model.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\goals\goals-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\user-details\user-details-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\need-help\need-help-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\need-help\need-help-routing-module.ts" />

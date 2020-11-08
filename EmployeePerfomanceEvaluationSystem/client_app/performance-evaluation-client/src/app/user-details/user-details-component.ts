@@ -87,8 +87,8 @@ export class UserDetailsComponent implements OnInit {
             lastName: responses[0].data.lastName,
             contactNumber: responses[0].data.contactNumber,
             gender: responses[0].data.gender,
-            role: responses[0].data.roleId,
-            department: responses[0].data.departmentId,
+            role: (responses[0].data.roleId == 0) ? '' : responses[0].data.roleId,
+            department: (responses[0].data.departmentId == 0) ? '' : responses[0].data.departmentId,
         });
 
         console.log(this.userDetailFormGroup.value);

@@ -58,7 +58,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 System.Threading.Thread.Sleep(1000);
                 var departmentExists = await _departmentRepository.DepartmentExists(departmentCreateRequestModel.DepartmentName);
                 if (departmentExists)
-                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Role {departmentCreateRequestModel.DepartmentName} already exists" });
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Department {departmentCreateRequestModel.DepartmentName} already exists" });
 
                 var newDepartment = await _departmentRepository.AddDepartment(_mapper.Map<Department>(departmentCreateRequestModel));
                 return Ok(new ApiResponseOKResult() { Data = newDepartment });

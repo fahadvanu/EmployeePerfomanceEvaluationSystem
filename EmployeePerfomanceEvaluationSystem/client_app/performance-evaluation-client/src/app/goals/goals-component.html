@@ -1,0 +1,132 @@
+﻿
+<div class="row mt-3">
+    <div class="col-md-7 offset-2">
+
+        <div class="title_goal_management">
+            <h3> Goals Management </h3>
+        </div>
+
+        <div *ngIf="!loading">
+            <form #goalForm="ngForm" novalidate>
+
+                <div class="input-group col-md-5 goal_search_control">
+                    <input class="form-control" placeholder="search"
+                           value="search" name="search-input"
+                           [(ngModel)]="searchTerm">
+                    <span class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" (click)="searchGoals()">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+
+
+                <div class="row table_container_row">
+                    <div class="col-md-12 table_container_column">
+
+                        <table name="goalsTable" class="table table-bordered table-hover goals_table" *ngIf="goalsToDisplay.length > 0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Goal</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let goal of (goalsToDisplay | paginationPipe:currentPage:itemsPerPage)" class="table-style">
+                                    <th scope="row"> {{ goal.goalName }}</th>
+                                    <td class="goal_table_controls">
+                                        <button type="button" class="btn btn-default" (click)="editGoal(goal)">
+                                            <span class="fa fa-pencil-square-o fa-lg"></span>
+                                        </button>
+                                    </td>
+                                    <td class="goal_table_controls">
+                                        <button type="button" class="btn btn-default" (click)="deleteGoal(goal)">
+                                            <span class="fa fa-trash-o fa-lg"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table name="nogoalsTable" class="table table-bordered table-hover mt-5 goals_table" *ngIf="goalsToDisplay.length == 0">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Goal</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-style">
+
+                                    <td class="goal_table_controls" colspan="3">
+                                        No Records Found
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <div class="row" *ngIf="goalsToDisplay.length > 0">
+                    <div class="col-xs-12 col-12 pager-div">
+                        <pagination name="paginationControl" (pageChanged)="pageChanged($event)"
+                                    [totalItems]="goalsToDisplay.length"
+                                    [itemsPerPage]="itemsPerPage"
+                                    [maxSize]="itemsPerPage"
+                                    [(ngModel)]="currentPage">
+
+                        </pagination>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-12">
+
+                        <div class="form-group">
+                            <label for="goalName">Add/Update Goal</label>
+                            <textarea class="form-control"
+                                      name="goalName" placeholder="Enter Goal(max number of characters accepted are 500)"
+                                      [(ngModel)]="goalModel.goalName"
+                                      #goalName="ngModel"
+                                      required
+                                      maxlength="500"
+                                      rows="5"></textarea>
+                            <small id="roleHelp" class="form-text text-muted">Please enter new goal missing in database.</small>
+                        </div>
+                        <div *ngIf="goalName.invalid && (goalName.dirty || goalName.touched)"
+                             class="alert alert-danger">
+
+                            <div *ngIf="goalName.errors.required">
+                                Goal Name is required.
+                            </div>
+                            <div *ngIf="goalName.errors.maxlength">
+                                Goal Name cannot exceeds 500 characters.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary"
+                                (click)="addUpdateGoal(goalForm)"
+                                [disabled]="goalForm.invalid">
+                            Submit
+                        </button>
+
+                        <button type="button" class="btn btn-warning ml-3"
+                                (click)="resetGoalSelection(goalForm)"
+                                [disabled]="goalForm.invalid">
+                            Reset
+                        </button>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>

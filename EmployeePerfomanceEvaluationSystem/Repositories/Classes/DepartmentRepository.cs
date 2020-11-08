@@ -2,6 +2,7 @@
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1.IsisMtt.X509;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,13 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
     public class DepartmentRepository : IDepartmentRepository
     {
         private EmployeePerformaceDbContext _context;
+        private UserIdentityDbContext _userContext;
 
-        public DepartmentRepository(EmployeePerformaceDbContext context)
+        public DepartmentRepository(EmployeePerformaceDbContext context,
+                                    UserIdentityDbContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
         public async Task<Department> AddDepartment(Department department)
@@ -33,12 +37,23 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
                 _context.Remove(existingDepartment);
                 await _context.SaveChangesAsync();
             }
+
+            var departmentUsers = await _userContext.Users.Where(x => x.DepartmentId == departmentId).ToListAsync();
+            if (departmentUsers.Any())
+            {
+                foreach(var departmentUser in departmentUsers)
+                {
+                    departmentUser.DepartmentId = 0;
+                }
+
+                await _userContext.SaveChangesAsync();
+            }
         }
 
         public async Task<bool> DepartmentExists(string departmentName)
         {
-            var existingDepartment = await _context.Departments.SingleOrDefaultAsync(r => r.DepartmentName.ToLower() 
-                                                                                        == departmentName.ToLower());
+            var existingDepartment = await _context.Departments.SingleOrDefaultAsync(r => r.DepartmentName.Trim().ToLower() 
+                                                                                        == departmentName.Trim().ToLower());
             return existingDepartment != null;
         }
 

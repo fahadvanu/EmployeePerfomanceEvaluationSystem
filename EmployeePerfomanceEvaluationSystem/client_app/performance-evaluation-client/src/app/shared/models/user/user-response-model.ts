@@ -30,9 +30,9 @@ export class UserResponseModel {
         user.gender_display = (response.data.gender == 'M') ? 'Male' : 'Female';
         user.isAdmin = response.data.isAdmin;
         user.roleId = response.data.roleId;
-        user.roleName = response.data.roleName;
+        user.roleName = (response.data.roleName == "") ? 'N/A' : response.data.roleName;
         user.departmentId = response.data.departmentId;
-        user.departmentName = response.data.departmentName;
+        user.departmentName = (response.data.departmentName == "") ? 'N/A' : response.data.departmentName;
         user.reportingManagerId = response.data.reportingManagerId;
         user.reportingManager = (response.data.reportingManager == "") ? 'N/A'
                                                                          : response.data.reportingManager;

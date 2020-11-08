@@ -12,10 +12,13 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
     public class EmployeeRoleRepository : IEmployeeRoleRespository
     {
         private EmployeePerformaceDbContext _context;
+        private UserIdentityDbContext _userContext;
 
-        public EmployeeRoleRepository(EmployeePerformaceDbContext context)
+        public EmployeeRoleRepository(EmployeePerformaceDbContext context,
+                                      UserIdentityDbContext userContext)
         {
             _context = context;
+            _userContext = userContext;
         }
 
         public async Task<EmployeeRole> AddRole(EmployeeRole role)
@@ -32,6 +35,17 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
             {
                 _context.Remove(existingRole);
                 await _context.SaveChangesAsync();
+            }
+
+            var userBelongingToRole = await _userContext.Users.Where(x => x.RoleId == roleId).ToListAsync();
+            if (userBelongingToRole.Any())
+            {
+                foreach (var roleUser in userBelongingToRole)
+                {
+                    roleUser.RoleId = 0;
+                }
+
+                await _userContext.SaveChangesAsync();
             }
         }
 
@@ -58,7 +72,7 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
         public async Task<bool> RoleExists(string roleName)
         {
-            var existingRole = await _context.Roles.SingleOrDefaultAsync(r => r.RoleName.ToLower() == roleName.ToLower());
+            var existingRole = await _context.Roles.SingleOrDefaultAsync(r => r.RoleName.Trim().ToLower() == roleName.Trim().ToLower());
             return existingRole != null;
         }
     }

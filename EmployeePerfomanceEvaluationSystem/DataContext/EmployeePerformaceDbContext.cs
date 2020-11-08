@@ -18,6 +18,7 @@ namespace EmployeePerfomanceEvaluationSystem.DataContext
 
         public DbSet<EmployeeRole> Roles { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Goal> Goals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
