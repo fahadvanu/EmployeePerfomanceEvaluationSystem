@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared-module';
 import { AccountsModule } from './accounts/accounts-module';
 import { UserDetailsModule } from './user-details/user-details-module';
+import { ReportingManagerModule } from './reporting-manager/reporting-request-module';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -51,6 +52,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
         SharedModule,
         AccountsModule,
         UserDetailsModule,
+        ReportingManagerModule,
         AppRoutingModule     
   ],
     providers: [

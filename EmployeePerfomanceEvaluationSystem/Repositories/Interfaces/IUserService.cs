@@ -10,5 +10,8 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
     public interface IUserService
     {
         Task<UserResponseModel> GetUserById(int userId);
+        Task AddNewReportingManagerRequest(ReportingManagerRequest reportingManagerRequest);
+        Task<bool> CheckReportingManagerRequestExists(ReportingManagerRequest reportingManagerRequest);
+        Task<List<User>> GetRegisteredUsersExceptLoggedInUser(int userId);
     }
 }

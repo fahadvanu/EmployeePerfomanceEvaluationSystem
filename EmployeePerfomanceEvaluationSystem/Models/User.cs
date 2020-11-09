@@ -16,6 +16,7 @@ namespace EmployeePerfomanceEvaluationSystem.Models
         public int DepartmentId { get; set; }
         public int ReportingManagerId { get; set; }
         public bool IsAdmin { get; set; }
+        public ICollection<ReportingManagerRequest> ReportingManagerRequests { get; set; }
     }
 
     public class ApplicationRole : IdentityRole<int>

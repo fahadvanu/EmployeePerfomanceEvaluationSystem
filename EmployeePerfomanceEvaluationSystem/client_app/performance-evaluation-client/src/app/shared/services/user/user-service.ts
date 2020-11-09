@@ -5,6 +5,7 @@ import { Observable, forkJoin } from 'rxjs';
 import { RoleService } from '../roles/role-service';
 import { DepartmentService } from '../departments/departments-service';
 import { UserUpdateRequestModel } from '../../models/user/user-update-request-model';
+import { ReportingManagerRequest } from '../../models/user/reporting-manager-request-model';
 
 @Injectable({
     providedIn: 'root'
@@ -54,5 +55,34 @@ export class UserService {
         }
 
         return this.http.post<ApiResponse>('/api/user/update_user', userUpdateRequestModel, httpOptions);
+    }
+
+    getNewRortingManagerRequestScreenData(): Observable<[ApiResponse, ApiResponse]> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        var userDetailCall = this.http.post<ApiResponse>('/api/user/get_user', {}, httpOptions);
+        var usersCall = this.http.post<ApiResponse>('/api/user/get_registered_users_except_logged_in_user', {});
+
+        return forkJoin(userDetailCall, usersCall);
+    }
+
+    submitUserReportingManagerRequest(reportingManagerRequestModel: ReportingManagerRequest): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>('/api/user/reporting_manager_request', reportingManagerRequestModel, httpOptions);
     }
 }

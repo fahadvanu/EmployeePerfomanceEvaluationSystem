@@ -19,7 +19,12 @@
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\goals\goals-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\add-reporting-manager-requests\new-reporting-manager-request-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-routing-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\registered-users.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\reporting-manager-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\user-update-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\goals\goals-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\user-details\user-details-component.ts" />
@@ -84,7 +89,12 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\goals\goals-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\add-reporting-manager-requests\new-reporting-manager-request-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-routing-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\registered-users.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\reporting-manager-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\user-update-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\goals\goals-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\user-details\user-details-component.ts" />

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Accounts;
 using EmployeePerfomanceEvaluationSystem.Request_Models.User;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.Accounts;
+using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,10 @@ namespace EmployeePerfomanceEvaluationSystem.MappingProfiles.Accounts
 
             CreateMap<UserUpdateRequestModel, EmployeePerfomanceEvaluationSystem.Models.User>()
                                  .ForMember(x => x.Id, p => p.MapFrom(y => y.UserId));
+
+            CreateMap<ReportingManagerRequestModel, EmployeePerfomanceEvaluationSystem.Models.ReportingManagerRequest>();
+            CreateMap<User, RegisteredUsers>()
+                .ForMember(x => x.UserId, p => p.MapFrom(y => y.Id)); ;
         }
     }
 }

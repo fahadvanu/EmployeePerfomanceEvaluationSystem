@@ -10,6 +10,7 @@ using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.User;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
+using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -82,6 +83,59 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 _logger.LogError(ex, "Failed to update user details");
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to update user details" });
+            }
+        }
+
+        [HttpPost("reporting_manager_request")]
+        [Authorize]
+        public async Task<IActionResult> AddReportingManagerRequest([FromBody] ReportingManagerRequestModel reportingManagerRequestModel)
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+                if (userId != reportingManagerRequestModel.ReportedUserId)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Data posted is not for logged-in User." });
+
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {userId} does not exists" });
+
+                var requestModel = _mapper.Map<ReportingManagerRequest>(reportingManagerRequestModel);
+                var exists = await _userService.CheckReportingManagerRequestExists(requestModel);
+                if(exists)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Your request for reporting manager is already there in database" });
+
+                await _userService.AddNewReportingManagerRequest(requestModel);
+
+                return Ok(new ApiResponseOKResult() { StatusCode = StatusCodes.Status200OK, Data = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to submit new reporting manager request");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to submit new reporting manager request" });
+            }
+        }
+
+        [HttpPost("get_registered_users_except_logged_in_user")]
+        [Authorize]
+        public async Task<IActionResult> GetRegisteredUsersExceptLoginUsers()
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {userId} does not exists" });
+
+                var users = await _userService.GetRegisteredUsersExceptLoggedInUser(userId);
+                var responseModel = _mapper.Map<List<RegisteredUsers>>(users);
+
+                return Ok(new ApiResponseOKResult() { StatusCode = StatusCodes.Status200OK, Data = responseModel });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch registered users");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch registered users" });
             }
         }
     }
