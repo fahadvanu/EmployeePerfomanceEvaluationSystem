@@ -1,4 +1,5 @@
-﻿using EmployeePerfomanceEvaluationSystem.Models;
+﻿using EmployeePerfomanceEvaluationSystem.Extensions;
+using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +12,25 @@ using System.Threading.Tasks;
 namespace EmployeePerfomanceEvaluationSystem.CustomAttributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class AuthorizeAttribute : Attribute, IAuthorizationFilter
+    public class AdminAuthorizeAttribute : Attribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var user = (User)context.HttpContext.Items["User"];
-            if (user == null)
+            if (context.HttpContext.User == null)
             {
-                // not logged in
-                context.Result = new JsonResult(new ApiResponseFailure() { ErrorMessage = "Authorization Failure" }) 
+                context.Result = new JsonResult(new ApiResponseFailure() { ErrorMessage = "Authorization Failure", StatusCode = (int)StatusCodes.Status401Unauthorized }) 
                                         { StatusCode = StatusCodes.Status401Unauthorized };
             }
+            else
+            {
+                bool isAdminUser = context.HttpContext.User.IsAdmin();
+                if (!isAdminUser)
+                {
+                   context.Result = new JsonResult(new ApiResponseFailure() { ErrorMessage = "Not allowed to access page", StatusCode = (int)StatusCodes.Status403Forbidden })
+                                                        { StatusCode = StatusCodes.Status403Forbidden };
+                }
+            }          
+
         }
     }
 }

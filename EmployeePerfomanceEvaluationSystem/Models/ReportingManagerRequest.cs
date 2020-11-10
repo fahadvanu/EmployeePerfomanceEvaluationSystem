@@ -11,7 +11,7 @@ namespace EmployeePerfomanceEvaluationSystem.Models
         public int ReportingManagerRequestId { get; set; }
         public int ReportedUserId { get; set; }
         public User ReportedUser { get; set; }
-        public int CurrentReportingManagerId { get; set; }
+        public int? CurrentReportingManagerId { get; set; }
         public User CurrentReportingManager { get; set; }
         public int NewReportingManagerId { get; set; }
         public User NewReportingManager { get; set; }

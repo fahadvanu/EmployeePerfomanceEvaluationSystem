@@ -132,15 +132,18 @@ export class AddReportingManagerRequestComponent implements OnInit {
                                     this.toastrNotificationService.success('Request submitted successfully');
                                     this.router.navigate(['/home']);
                                 },
-                                error => {
-                                    this.spinnerService.idle();
-                                    console.log('Exception occured while submitting');
-                                });
+                                    error => {
+                                        this.spinnerService.idle();
+                                        console.log('Exception occured while submitting');
+                                    });
                         }
                     }
                 }
             });
 
+        }
+        else {
+            this.toastrNotificationService.warning('Please check the reporting manager selected');
         }
     }
 

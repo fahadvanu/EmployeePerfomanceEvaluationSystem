@@ -21,5 +21,19 @@ namespace EmployeePerfomanceEvaluationSystem.Extensions
 
             return userId;
         }
+
+        public static bool IsAdmin(this ClaimsPrincipal claimsPrincipal)
+        {
+            bool isAdmin = false;
+
+            var claim = claimsPrincipal.Claims?.FirstOrDefault(x => x.Type.Equals("IsAdmin",
+                                                                        StringComparison.OrdinalIgnoreCase))?.Value;
+            if (null != claim)
+            {
+                isAdmin = bool.Parse(claim);
+            }
+
+            return isAdmin;
+        }
     }
 }

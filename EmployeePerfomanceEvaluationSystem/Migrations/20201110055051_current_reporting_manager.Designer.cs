@@ -2,14 +2,16 @@
 using EmployeePerfomanceEvaluationSystem.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmployeePerfomanceEvaluationSystem.Migrations
 {
     [DbContext(typeof(EmployeePerformaceDbContext))]
-    partial class EmployeePerformaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201110055051_current_reporting_manager")]
+    partial class current_reporting_manager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,8 +108,6 @@ namespace EmployeePerfomanceEvaluationSystem.Migrations
 
                     b.HasIndex("CurrentReportingManagerId");
 
-                    b.HasIndex("NewReportingManagerId");
-
                     b.HasIndex("ReportedUserId");
 
                     b.ToTable("reporting_manager_requests");
@@ -181,12 +181,6 @@ namespace EmployeePerfomanceEvaluationSystem.Migrations
                     b.HasOne("EmployeePerfomanceEvaluationSystem.Models.User", "CurrentReportingManager")
                         .WithMany()
                         .HasForeignKey("CurrentReportingManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EmployeePerfomanceEvaluationSystem.Models.User", "NewReportingManager")
-                        .WithMany()
-                        .HasForeignKey("NewReportingManagerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

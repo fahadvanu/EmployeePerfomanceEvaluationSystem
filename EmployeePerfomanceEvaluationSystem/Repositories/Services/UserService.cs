@@ -3,6 +3,7 @@ using EmployeePerfomanceEvaluationSystem.DataContext;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Repositories.Mappers;
+using EmployeePerfomanceEvaluationSystem.Request_Models.User;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -72,6 +73,67 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Services
 
             var users = await _userContext.Users.Where(x => x.Id != userId).ToListAsync();
             return users;
+        }
+
+        public async Task<List<ReportingManagerResponseModel>> GetPendingReportingManagerRequests()
+        {
+
+            var pendingRequests = await _context.ReportingManagerRequests
+                                           .Where(x => x.RequestStatus == false)
+                                           .Include(y => y.NewReportingManager)
+                                           .Include(z => z.CurrentReportingManager)
+                                           .Select(y => new ReportingManagerResponseModel
+                                           {
+                                               ReportedUserId = y.ReportedUserId,
+                                               ReportedUserEmail = y.ReportedUser.Email,
+                                               CurrentReportingManagerId = y.CurrentReportingManagerId.Value,
+                                               CurrentReportingManagerEmail = (y.CurrentReportingManager == null) ? "N/A" : 
+                                                                               y.CurrentReportingManager.Email,
+                                               NewReportingManagerId = y.NewReportingManagerId,
+                                               NewReportingManagerEmail = (y.NewReportingManager == null) ? "N/A" :
+                                                                              y.NewReportingManager.Email,
+                                               Status = y.RequestStatus,
+                                               ReportingManagerRequestId = y.ReportingManagerRequestId
+                                           }).ToListAsync();
+
+            return pendingRequests;
+        }
+
+        public async Task ApprovePendingReportingManagerRequests(
+                                                            ApproveReportingManagerPendingRequest request)
+        {
+
+            var pendingRequest = await _context.ReportingManagerRequests
+                                               .Where(x => x.RequestStatus == false
+                                                        && x.ReportingManagerRequestId == request.ReportingManagerRequestId)
+                                               .SingleOrDefaultAsync();
+            if(null != pendingRequest)
+            {
+                
+                var user = await _userContext.Users.FirstOrDefaultAsync(x => x.Email == request.ReportedUserEmail);
+                if(null != user)
+                {
+                    user.ReportingManagerId = request.NewReportingManagerId;
+                    pendingRequest.RequestStatus = true;
+                    await _userContext.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
+                }
+            }
+        }
+
+        public async Task RejectPendingReportingManagerRequests(int requestId)
+        {
+
+            var pendingRequest = await _context.ReportingManagerRequests
+                                               .Where(x => x.RequestStatus == false
+                                                        && x.ReportingManagerRequestId == requestId)
+                                               .SingleOrDefaultAsync();
+            if (null != pendingRequest)
+            {
+
+                _context.ReportingManagerRequests.Remove(pendingRequest);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

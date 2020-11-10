@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using EmployeePerfomanceEvaluationSystem.CustomAttributes;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Role;
@@ -50,7 +51,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("add_role")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> AddNewRole([FromBody]CreateRoleRequestModel roleCreateRequestModel)
         {
             try
@@ -71,7 +72,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpDelete("delete_role/{roleId}")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> DeleteRole(int roleId)
         {
             try
@@ -92,7 +93,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("update_role/{roleId}")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> UpdateRole(int roleId, [FromBody] UpdateRoleRequestModel updateRoleRequestModel)
         {
             try

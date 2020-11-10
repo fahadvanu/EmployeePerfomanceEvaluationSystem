@@ -28,6 +28,7 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Mappers
                     RoleName = dataReader["role_name"].ToString(),
                     DepartmentId = int.Parse(dataReader["departmentId"].ToString()),
                     DepartmentName = dataReader["department_name"].ToString(),
+                    ReportingManagerId = int.Parse(dataReader["reportingManagerId"].ToString()),
                     ReportingManager = dataReader["manager"].ToString()
                 };
             };

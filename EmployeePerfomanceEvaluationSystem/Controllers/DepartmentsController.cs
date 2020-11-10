@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using EmployeePerfomanceEvaluationSystem.CustomAttributes;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Department;
@@ -50,7 +51,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("add_department")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> AddNewDepartment([FromBody] CreateDepartmentRequestModel departmentCreateRequestModel)
         {
             try
@@ -71,7 +72,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpDelete("delete_department/{departmentId}")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> DeleteDepartment(int departmentId)
         {
             try
@@ -92,7 +93,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("update_department/{departmentId}")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> UpdateDepartment(int departmentId, [FromBody] UpdateDepartmentRequestModel updateDepartmentRequestModel)
         {
             try

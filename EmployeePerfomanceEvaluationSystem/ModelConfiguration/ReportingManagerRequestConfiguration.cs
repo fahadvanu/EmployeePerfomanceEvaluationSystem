@@ -24,8 +24,7 @@ namespace EmployeePerfomanceEvaluationSystem.ModelConfiguration
                    .IsRequired();
 
             builder.Property(m => m.CurrentReportingManagerId)
-                  .HasColumnName("current_reporting_manager_id")
-                  .IsRequired();
+                  .HasColumnName("current_reporting_manager_id");
 
             builder.Property(m => m.NewReportingManagerId)
                   .HasColumnName("new_reporting_manager_id")
@@ -42,8 +41,13 @@ namespace EmployeePerfomanceEvaluationSystem.ModelConfiguration
                    .WithMany(g => g.ReportingManagerRequests)
                    .HasForeignKey(s => s.ReportedUserId);
 
-            builder.Ignore(x => x.CurrentReportingManager);
-            builder.Ignore(x => x.NewReportingManager);
+            builder.HasOne<User>(s => s.CurrentReportingManager)
+                   .WithMany()
+                   .HasForeignKey(s => s.CurrentReportingManagerId);
+
+            builder.HasOne<User>(s => s.NewReportingManager)
+                   .WithMany()
+                   .HasForeignKey(s => s.NewReportingManagerId);
         }
     }
 }

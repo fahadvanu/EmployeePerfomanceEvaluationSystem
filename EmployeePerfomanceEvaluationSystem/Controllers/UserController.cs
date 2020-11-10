@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using EmployeePerfomanceEvaluationSystem.CustomAttributes;
 using EmployeePerfomanceEvaluationSystem.Extensions;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
@@ -100,7 +101,17 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 if (null == user)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {userId} does not exists" });
 
+                var requestUser = await _userManager.FindByIdAsync(reportingManagerRequestModel.ReportedUserId.ToString());
+                if (null == requestUser)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {reportingManagerRequestModel.ReportedUserId} does not exists" });
+
+                if(requestUser.ReportingManagerId == reportingManagerRequestModel.NewReportingManagerId)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"You already have requested reporting manager assigned" });
+
                 var requestModel = _mapper.Map<ReportingManagerRequest>(reportingManagerRequestModel);
+                if (reportingManagerRequestModel.CurrentReportingManagerId == 0)
+                    requestModel.CurrentReportingManagerId = null;
+
                 var exists = await _userService.CheckReportingManagerRequestExists(requestModel);
                 if(exists)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Your request for reporting manager is already there in database" });
@@ -136,6 +147,72 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 _logger.LogError(ex, "Failed to fetch registered users");
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch registered users" });
+            }
+        }
+
+        [HttpPost("pending_reporting_manager_requests")]
+        [AdminAuthorize]
+        public async Task<IActionResult> GetPendingReportingManagerRequests()
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {userId} does not exists" });
+
+                var requests = await _userService.GetPendingReportingManagerRequests();
+             
+                return Ok(new ApiResponseOKResult() { StatusCode = StatusCodes.Status200OK, Data = requests });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch pending reporting manager requests");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch pending reporting manager requests" });
+            }
+        }
+
+        [HttpPost("approve_reporting_manager_request")]
+        [AdminAuthorize]
+        public async Task<IActionResult> ApprovePendingReportingManagerRequests([FromBody]ApproveReportingManagerPendingRequest request)
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {userId} does not exists" });
+
+                await _userService.ApprovePendingReportingManagerRequests(request);
+
+                return Ok(new ApiResponseOKResult() { StatusCode = StatusCodes.Status200OK, Data = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to approve reporting manager requests");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to approve reporting manager request" });
+            }
+        }
+
+        [HttpDelete("reject_reporting_manager_requests/{requestId}")]
+        [AdminAuthorize]
+        public async Task<IActionResult> RejectPendingReportingManagerRequests(int requestId)
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+                var user = await _userManager.FindByIdAsync(userId.ToString());
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {userId} does not exists" });
+
+                await _userService.RejectPendingReportingManagerRequests(requestId);
+
+                return Ok(new ApiResponseOKResult() { StatusCode = StatusCodes.Status200OK, Data = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to rejecting reporting manager requests");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to reject reporting manager request" });
             }
         }
     }

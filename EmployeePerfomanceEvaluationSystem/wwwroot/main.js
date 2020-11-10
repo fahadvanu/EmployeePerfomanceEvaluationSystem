@@ -634,12 +634,13 @@ function NavBarComponent_li_9_a_4_Template(rf, ctx) { if (rf & 1) {
 } if (rf & 2) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](1, _c4));
 } }
+const _c5 = function () { return ["/view-reporting-manager-request"]; };
 function NavBarComponent_li_9_a_5_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "a", 14);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Reporting Manager");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](1, _c2));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](1, _c5));
 } }
 function NavBarComponent_li_9_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li", 11);
@@ -658,7 +659,7 @@ function NavBarComponent_li_9_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r2.accountService.isAdminUser());
 } }
-const _c5 = function () { return ["/user-details"]; };
+const _c6 = function () { return ["/user-details"]; };
 function NavBarComponent_ul_10_Template(rf, ctx) { if (rf & 1) {
     const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "ul", 16);
@@ -682,7 +683,7 @@ function NavBarComponent_ul_10_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" WELCOME, ", ctx_r3.accountService.getUserName(), " ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c5));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](2, _c6));
 } }
 class NavBarComponent {
     constructor(accountService, router) {
@@ -733,6 +734,339 @@ NavBarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
                 styleUrls: ['./nav-bar.component.css']
             }]
     }], function () { return [{ type: _shared_services_accounts_accounts_service__WEBPACK_IMPORTED_MODULE_1__["AccountService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "6vQF":
+/*!**********************************************************************************************************!*\
+  !*** ./src/app/reporting-manager/view-reporting-manger-requests/reporting-manager-requests-component.ts ***!
+  \**********************************************************************************************************/
+/*! exports provided: ReportingManagerRequestsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportingManagerRequestsComponent", function() { return ReportingManagerRequestsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _shared_models_user_reporting_manager_response_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../shared/models/user/reporting-manager-response-model */ "kMgH");
+/* harmony import */ var _confirm_modal_component_confirm_modal_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../confirm-modal-component/confirm-modal-component */ "Gs7e");
+/* harmony import */ var _shared_models_user_approve_reporting_manager_request_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/models/user/approve-reporting-manager-request-model */ "EIli");
+/* harmony import */ var _shared_services_user_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/services/user/user-service */ "xB9q");
+/* harmony import */ var _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/services/spinner/spinner-service */ "3PAx");
+/* harmony import */ var _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared/services/toastr/toastr-service */ "jonD");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var ngx_bootstrap_pagination__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-bootstrap/pagination */ "Lm2G");
+/* harmony import */ var _shared_pipes_pagination_client__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../shared/pipes/pagination-client */ "SrT9");
+
+
+
+
+
+
+
+
+
+
+
+
+
+function ReportingManagerRequestsComponent_div_5_table_10_tr_12_Template(rf, ctx) { if (rf & 1) {
+    const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "tr", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "th", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "th", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "th", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "td", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "button", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ReportingManagerRequestsComponent_div_5_table_10_tr_12_Template_button_click_8_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8); const request_r6 = ctx.$implicit; const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3); return ctx_r7.approveRequest(request_r6); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "span", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "td", 22);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 23);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ReportingManagerRequestsComponent_div_5_table_10_tr_12_Template_button_click_11_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8); const request_r6 = ctx.$implicit; const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](3); return ctx_r9.deleteRequest(request_r6); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](12, "span", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const request_r6 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", request_r6.reportedUserEmail, "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", request_r6.currentReportingManagerEmail, "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", request_r6.newReportingManagerEmail, "");
+} }
+function ReportingManagerRequestsComponent_div_5_table_10_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "table", 16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "thead", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "tr");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "User");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Current Manager");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "New Manager");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](10, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "tbody");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, ReportingManagerRequestsComponent_div_5_table_10_tr_12_Template, 13, 3, "tr", 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](13, "paginationPipe");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](13, 1, ctx_r2.pendingRequestsToDisplay, ctx_r2.currentPage, ctx_r2.itemsPerPage));
+} }
+function ReportingManagerRequestsComponent_div_5_table_11_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "table", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "thead", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "tr");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "User");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "Current Manager");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "New Manager");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](10, "th", 18);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "tbody");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "tr", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "td", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, " No Records Found ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} }
+function ReportingManagerRequestsComponent_div_5_div_12_Template(rf, ctx) { if (rf & 1) {
+    const _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 29);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "pagination", 30);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("pageChanged", function ReportingManagerRequestsComponent_div_5_div_12_Template_pagination_pageChanged_2_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r11); const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r10.pageChanged($event); })("ngModelChange", function ReportingManagerRequestsComponent_div_5_div_12_Template_pagination_ngModelChange_2_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r11); const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r12.currentPage = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("totalItems", ctx_r4.pendingRequestsToDisplay.length)("itemsPerPage", ctx_r4.itemsPerPage)("maxSize", ctx_r4.itemsPerPage)("ngModel", ctx_r4.currentPage);
+} }
+function ReportingManagerRequestsComponent_div_5_Template(rf, ctx) { if (rf & 1) {
+    const _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "form", 4, 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "input", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function ReportingManagerRequestsComponent_div_5_Template_input_ngModelChange_4_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r13.searchTerm = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "span", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "button", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ReportingManagerRequestsComponent_div_5_Template_button_click_6_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r14); const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r15.searchRequests(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "i", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 11);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "div", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](10, ReportingManagerRequestsComponent_div_5_table_10_Template, 14, 5, "table", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](11, ReportingManagerRequestsComponent_div_5_table_11_Template, 15, 0, "table", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](12, ReportingManagerRequestsComponent_div_5_div_12_Template, 3, 4, "div", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx_r0.searchTerm);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.pendingRequestsToDisplay.length > 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.pendingRequestsToDisplay.length == 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r0.pendingRequestsToDisplay.length > 0);
+} }
+class ReportingManagerRequestsComponent {
+    constructor(userService, spinnerService, toastrNotificationService, cdRef, modalService) {
+        this.userService = userService;
+        this.spinnerService = spinnerService;
+        this.toastrNotificationService = toastrNotificationService;
+        this.cdRef = cdRef;
+        this.modalService = modalService;
+        this.pendingRequests = new Array();
+        this.pendingRequestsToDisplay = new Array();
+        this.currentPage = 1;
+        this.itemsPerPage = 5;
+        this.loading = false;
+    }
+    ngOnInit() {
+        this.resetVariables();
+        this.getPendingRequestsFromDatabase();
+    }
+    resetVariables() {
+        this.searchTerm = '';
+    }
+    getPendingRequestsFromDatabase() {
+        this.loading = true;
+        this.spinnerService.updateMessage('Loading pending reporting manager requests.....');
+        this.spinnerService.busy();
+        this.userService.getPendingReportingManagerRequests()
+            .subscribe((response) => {
+            if (response.data != null) {
+                this.pendingRequests = _shared_models_user_reporting_manager_response_model__WEBPACK_IMPORTED_MODULE_1__["ReportingManagerResponseModel"].FormReportingRequestsModelArray(response);
+                this.pendingRequestsToDisplay = this.pendingRequests.slice();
+            }
+            this.loading = false;
+            this.spinnerService.idle();
+        }, error => {
+            this.loading = false;
+            this.spinnerService.idle();
+            console.log('Exception occured while fetching pending reporting manager requests from Database');
+        });
+    }
+    pageChanged(event) {
+        this.currentPage = event.page;
+    }
+    searchRequests() {
+        if (this.searchTerm != '' && this.searchTerm != null && this.searchTerm != undefined) {
+            this.pendingRequestsToDisplay = this.pendingRequests.filter(r => r.reportedUserEmail.toLocaleLowerCase()
+                .indexOf(this.searchTerm.toLocaleLowerCase()) != -1);
+            setTimeout(() => {
+                this.currentPage = 1;
+            });
+            this.cdRef.detectChanges();
+        }
+        else {
+            this.pendingRequestsToDisplay = this.pendingRequests.slice();
+            setTimeout(() => {
+                this.currentPage = 1;
+            });
+            this.cdRef.detectChanges();
+        }
+    }
+    approveRequest(request) {
+        this.modalRef = this.modalService.show(_confirm_modal_component_confirm_modal_component__WEBPACK_IMPORTED_MODULE_2__["ConfirmModalComponent"], {
+            initialState: {
+                promptMessage: 'Are you sure you want to confirm request?',
+                callback: (result) => {
+                    if (result) {
+                        let approvalRequest = this.mapApprovalReportingManagerRequest(request);
+                        this.spinnerService.updateMessage('Updating reporting manager.....');
+                        this.spinnerService.busy();
+                        this.userService.approvePendingReportingManagerRequests(approvalRequest)
+                            .subscribe((response) => {
+                            this.getPendingRequestsFromDatabaseAfterEditDelete('Request approved successfully');
+                        }, error => {
+                            this.spinnerService.idle();
+                            console.log('Exception occured while approving reporting manager request');
+                        });
+                    }
+                }
+            }
+        });
+    }
+    mapApprovalReportingManagerRequest(request) {
+        let approvalRequest = new _shared_models_user_approve_reporting_manager_request_model__WEBPACK_IMPORTED_MODULE_3__["ApproveReportingManagerRequestModel"]();
+        approvalRequest.reportingManagerRequestId = request.reportingManagerRequestId;
+        approvalRequest.reportedUserId = request.reportedUserId;
+        approvalRequest.reportedUserEmail = request.reportedUserEmail;
+        approvalRequest.currentReportingManagerId = request.currentReportingManagerId;
+        approvalRequest.currentReportingManagerEmail = request.currentReportingManagerEmail;
+        approvalRequest.newReportingManagerId = request.newReportingManagerId;
+        approvalRequest.newReportingManagerEmail = request.newReportingManagerEmail;
+        approvalRequest.status = request.status;
+        return approvalRequest;
+    }
+    deleteRequest(request) {
+        this.modalRef = this.modalService.show(_confirm_modal_component_confirm_modal_component__WEBPACK_IMPORTED_MODULE_2__["ConfirmModalComponent"], {
+            initialState: {
+                promptMessage: 'Are you sure you want to delete request?',
+                callback: (result) => {
+                    if (result) {
+                        this.spinnerService.updateMessage('Deleting reporting manager request.....');
+                        this.spinnerService.busy();
+                        this.userService.rejectPendingReportingManagerRequests(request.reportingManagerRequestId)
+                            .subscribe((response) => {
+                            this.getPendingRequestsFromDatabaseAfterEditDelete('Request deleted successfully');
+                        }, error => {
+                            this.spinnerService.idle();
+                            console.log('Exception occured while deleting reporting manager request');
+                        });
+                    }
+                }
+            }
+        });
+    }
+    getPendingRequestsFromDatabaseAfterEditDelete(message) {
+        this.userService.getPendingReportingManagerRequests()
+            .subscribe((response) => {
+            if (response.data != null) {
+                this.pendingRequests = _shared_models_user_reporting_manager_response_model__WEBPACK_IMPORTED_MODULE_1__["ReportingManagerResponseModel"].FormReportingRequestsModelArray(response);
+                this.pendingRequestsToDisplay = this.pendingRequests.slice();
+            }
+            this.resetAfterDbOperation();
+            this.spinnerService.idle();
+            this.toastrNotificationService.success(message);
+        }, error => {
+            this.loading = false;
+            this.spinnerService.idle();
+            console.log('Exception occured getPendingRequestsFromDatabaseAfterEditDelete()');
+        });
+    }
+    resetAfterDbOperation() {
+        this.resetVariables();
+        setTimeout(() => {
+            this.currentPage = 1;
+        });
+        this.cdRef.detectChanges();
+    }
+}
+ReportingManagerRequestsComponent.ɵfac = function ReportingManagerRequestsComponent_Factory(t) { return new (t || ReportingManagerRequestsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_user_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_5__["SpinnerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_6__["ToastrNotificationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_7__["BsModalService"])); };
+ReportingManagerRequestsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ReportingManagerRequestsComponent, selectors: [["ng-component"]], decls: 6, vars: 1, consts: [[1, "row", "mt-3"], [1, "col-md-9", "offset-1"], [1, "title_reporting_manager_requests_management"], [4, "ngIf"], ["novalidate", ""], ["goalForm", "ngForm"], [1, "input-group", "col-md-5", "reporting_manager_search_control"], ["placeholder", "search by reported user", "value", "search", "name", "search-input", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "input-group-append"], ["type", "button", 1, "btn", "btn-outline-secondary", 3, "click"], [1, "fa", "fa-search"], [1, "row", "table_container_row"], [1, "col-md-12", "table_container_column"], ["name", "goalsTable", "class", "table table-bordered table-hover reporting_manager_table", 4, "ngIf"], ["name", "norequestsTable", "class", "table table-bordered table-hover mt-5 reporting_manager_table", 4, "ngIf"], ["class", "row", 4, "ngIf"], ["name", "goalsTable", 1, "table", "table-bordered", "table-hover", "reporting_manager_table"], [1, "thead-dark"], ["scope", "col"], ["class", "table-style", 4, "ngFor", "ngForOf"], [1, "table-style"], ["scope", "row"], [1, "reporting_manager_table_controls"], ["type", "button", 1, "btn", "btn-default", 3, "click"], [1, "fa", "fa-check-square-o", "fa-lg"], [1, "fa", "fa-trash-o", "fa-lg"], ["name", "norequestsTable", 1, "table", "table-bordered", "table-hover", "mt-5", "reporting_manager_table"], ["colspan", "5", 1, "reporting_manager_table_controls"], [1, "row"], [1, "col-xs-12", "col-12", "pager-div"], ["name", "paginationControl", 3, "totalItems", "itemsPerPage", "maxSize", "ngModel", "pageChanged", "ngModelChange"]], template: function ReportingManagerRequestsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h3");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " Reporting Manager Requests ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](5, ReportingManagerRequestsComponent_div_5_Template, 13, 4, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", !ctx.loading);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_8__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_9__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_8__["NgForOf"], ngx_bootstrap_pagination__WEBPACK_IMPORTED_MODULE_10__["PaginationComponent"]], pipes: [_shared_pipes_pagination_client__WEBPACK_IMPORTED_MODULE_11__["PaginationPipePipe"]], styles: [".title_reporting_manager_requests_management[_ngcontent-%COMP%] {\r\n    text-align: center;\r\n}\r\n\r\n.pager-div[_ngcontent-%COMP%] {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.reporting_manager_table_controls[_ngcontent-%COMP%] {\r\n    text-align: center;\r\n}\r\n\r\n.reporting_manager_search_control[_ngcontent-%COMP%] {\r\n    float: right;\r\n    padding: 0;\r\n    margin-top: 20px;\r\n}\r\n\r\n.table_container_row[_ngcontent-%COMP%] {\r\n    clear: both;\r\n}\r\n\r\n.table_container_column[_ngcontent-%COMP%] {\r\n    min-height: 400px;\r\n    max-height: 400px;\r\n    padding-left: 0px;\r\n    padding-right: 0px;\r\n}\r\n\r\n.reporting_manager_table[_ngcontent-%COMP%] {\r\n    margin-top: 20px !important;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVwb3J0aW5nLW1hbmFnZXIvdmlldy1yZXBvcnRpbmctbWFuZ2VyLXJlcXVlc3RzL3JlcG9ydGluZy1tYW5hZ2VyLXJlcXVlc3RzLWNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxhQUFhO0lBQ2IsdUJBQXVCO0FBQzNCOztBQUVBO0lBQ0ksa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0ksWUFBWTtJQUNaLFVBQVU7SUFDVixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxXQUFXO0FBQ2Y7O0FBRUE7SUFDSSxpQkFBaUI7SUFDakIsaUJBQWlCO0lBQ2pCLGlCQUFpQjtJQUNqQixrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSwyQkFBMkI7QUFDL0IiLCJmaWxlIjoic3JjL2FwcC9yZXBvcnRpbmctbWFuYWdlci92aWV3LXJlcG9ydGluZy1tYW5nZXItcmVxdWVzdHMvcmVwb3J0aW5nLW1hbmFnZXItcmVxdWVzdHMtY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50aXRsZV9yZXBvcnRpbmdfbWFuYWdlcl9yZXF1ZXN0c19tYW5hZ2VtZW50IHtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLnBhZ2VyLWRpdiB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbn1cclxuXHJcbi5yZXBvcnRpbmdfbWFuYWdlcl90YWJsZV9jb250cm9scyB7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbi5yZXBvcnRpbmdfbWFuYWdlcl9zZWFyY2hfY29udHJvbCB7XHJcbiAgICBmbG9hdDogcmlnaHQ7XHJcbiAgICBwYWRkaW5nOiAwO1xyXG4gICAgbWFyZ2luLXRvcDogMjBweDtcclxufVxyXG5cclxuLnRhYmxlX2NvbnRhaW5lcl9yb3cge1xyXG4gICAgY2xlYXI6IGJvdGg7XHJcbn1cclxuXHJcbi50YWJsZV9jb250YWluZXJfY29sdW1uIHtcclxuICAgIG1pbi1oZWlnaHQ6IDQwMHB4O1xyXG4gICAgbWF4LWhlaWdodDogNDAwcHg7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDBweDtcclxuICAgIHBhZGRpbmctcmlnaHQ6IDBweDtcclxufVxyXG5cclxuLnJlcG9ydGluZ19tYW5hZ2VyX3RhYmxlIHtcclxuICAgIG1hcmdpbi10b3A6IDIwcHggIWltcG9ydGFudDtcclxufVxyXG4iXX0= */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ReportingManagerRequestsComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                templateUrl: './reporting-manager-requests-component.html',
+                styleUrls: ['./reporting-manager-requests-component.css']
+            }]
+    }], function () { return [{ type: _shared_services_user_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"] }, { type: _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_5__["SpinnerService"] }, { type: _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_6__["ToastrNotificationService"] }, { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"] }, { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_7__["BsModalService"] }]; }, null); })();
 
 
 /***/ }),
@@ -953,6 +1287,22 @@ class Goal {
         }
         return goalArray;
     }
+}
+
+
+/***/ }),
+
+/***/ "EIli":
+/*!*******************************************************************************!*\
+  !*** ./src/app/shared/models/user/approve-reporting-manager-request-model.ts ***!
+  \*******************************************************************************/
+/*! exports provided: ApproveReportingManagerRequestModel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApproveReportingManagerRequestModel", function() { return ApproveReportingManagerRequestModel; });
+class ApproveReportingManagerRequestModel {
 }
 
 
@@ -2925,6 +3275,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var _add_reporting_manager_requests_new_reporting_manager_request_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-reporting-manager-requests/new-reporting-manager-request-component */ "wghx");
 /* harmony import */ var _shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/guards/check-user-authenticated-guard */ "Dste");
+/* harmony import */ var _view_reporting_manger_requests_reporting_manager_requests_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./view-reporting-manger-requests/reporting-manager-requests-component */ "6vQF");
+
 
 
 
@@ -2932,7 +3284,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const reportingManagerRoutes = [
-    { path: 'reporting-manager-request', component: _add_reporting_manager_requests_new_reporting_manager_request_component__WEBPACK_IMPORTED_MODULE_2__["AddReportingManagerRequestComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuardService"]] }
+    { path: 'reporting-manager-request', component: _add_reporting_manager_requests_new_reporting_manager_request_component__WEBPACK_IMPORTED_MODULE_2__["AddReportingManagerRequestComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuardService"]] },
+    { path: 'view-reporting-manager-request', component: _view_reporting_manger_requests_reporting_manager_requests_component__WEBPACK_IMPORTED_MODULE_4__["ReportingManagerRequestsComponent"], canActivate: [_shared_guards_check_user_authenticated_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuardService"]] },
 ];
 class ReportingManagerRoutingModule {
 }
@@ -3471,6 +3824,9 @@ class ToastrNotificationService {
     failed(message) {
         this.toastrService.error(message);
     }
+    warning(message) {
+        this.toastrService.warning(message);
+    }
 }
 ToastrNotificationService.ɵfac = function ToastrNotificationService_Factory(t) { return new (t || ToastrNotificationService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](ngx_toastr__WEBPACK_IMPORTED_MODULE_1__["ToastrService"])); };
 ToastrNotificationService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: ToastrNotificationService, factory: ToastrNotificationService.ɵfac, providedIn: 'root' });
@@ -3480,6 +3836,38 @@ ToastrNotificationService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["�
                 providedIn: 'root'
             }]
     }], function () { return [{ type: ngx_toastr__WEBPACK_IMPORTED_MODULE_1__["ToastrService"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "kMgH":
+/*!************************************************************************!*\
+  !*** ./src/app/shared/models/user/reporting-manager-response-model.ts ***!
+  \************************************************************************/
+/*! exports provided: ReportingManagerResponseModel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportingManagerResponseModel", function() { return ReportingManagerResponseModel; });
+class ReportingManagerResponseModel {
+    static FormReportingRequestsModelArray(response) {
+        var reportingRequestsArray = new Array();
+        for (var data of response.data) {
+            var reportingRequest = new ReportingManagerResponseModel();
+            reportingRequest.reportingManagerRequestId = data.reportingManagerRequestId;
+            reportingRequest.reportedUserId = data.reportedUserId;
+            reportingRequest.reportedUserEmail = data.reportedUserEmail;
+            reportingRequest.currentReportingManagerId = data.currentReportingManagerId;
+            reportingRequest.currentReportingManagerEmail = data.currentReportingManagerEmail;
+            reportingRequest.newReportingManagerId = data.newReportingManagerId;
+            reportingRequest.newReportingManagerEmail = data.newReportingManagerEmail;
+            reportingRequest.status = data.status;
+            reportingRequestsArray.push(reportingRequest);
+        }
+        return reportingRequestsArray;
+    }
+}
 
 
 /***/ }),
@@ -4098,6 +4486,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/shared-module */ "+fd8");
 /* harmony import */ var _add_reporting_manager_requests_new_reporting_manager_request_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./add-reporting-manager-requests/new-reporting-manager-request-component */ "wghx");
 /* harmony import */ var _reporting_request_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./reporting-request-routing-module */ "X97Q");
+/* harmony import */ var _view_reporting_manger_requests_reporting_manager_requests_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./view-reporting-manger-requests/reporting-manager-requests-component */ "6vQF");
+/* harmony import */ var _ngx_bootstrap_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ngx-bootstrap-module */ "rEVn");
+
+
 
 
 
@@ -4108,18 +4500,23 @@ class ReportingManagerModule {
 ReportingManagerModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: ReportingManagerModule });
 ReportingManagerModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function ReportingManagerModule_Factory(t) { return new (t || ReportingManagerModule)(); }, imports: [[
             _shared_shared_module__WEBPACK_IMPORTED_MODULE_1__["SharedModule"],
+            _ngx_bootstrap_module__WEBPACK_IMPORTED_MODULE_5__["NgxBootstrapModule"],
             _reporting_request_routing_module__WEBPACK_IMPORTED_MODULE_3__["ReportingManagerRoutingModule"]
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](ReportingManagerModule, { declarations: [_add_reporting_manager_requests_new_reporting_manager_request_component__WEBPACK_IMPORTED_MODULE_2__["AddReportingManagerRequestComponent"]], imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_1__["SharedModule"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](ReportingManagerModule, { declarations: [_add_reporting_manager_requests_new_reporting_manager_request_component__WEBPACK_IMPORTED_MODULE_2__["AddReportingManagerRequestComponent"],
+        _view_reporting_manger_requests_reporting_manager_requests_component__WEBPACK_IMPORTED_MODULE_4__["ReportingManagerRequestsComponent"]], imports: [_shared_shared_module__WEBPACK_IMPORTED_MODULE_1__["SharedModule"],
+        _ngx_bootstrap_module__WEBPACK_IMPORTED_MODULE_5__["NgxBootstrapModule"],
         _reporting_request_routing_module__WEBPACK_IMPORTED_MODULE_3__["ReportingManagerRoutingModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ReportingManagerModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
                 declarations: [
-                    _add_reporting_manager_requests_new_reporting_manager_request_component__WEBPACK_IMPORTED_MODULE_2__["AddReportingManagerRequestComponent"]
+                    _add_reporting_manager_requests_new_reporting_manager_request_component__WEBPACK_IMPORTED_MODULE_2__["AddReportingManagerRequestComponent"],
+                    _view_reporting_manger_requests_reporting_manager_requests_component__WEBPACK_IMPORTED_MODULE_4__["ReportingManagerRequestsComponent"]
                 ],
                 imports: [
                     _shared_shared_module__WEBPACK_IMPORTED_MODULE_1__["SharedModule"],
+                    _ngx_bootstrap_module__WEBPACK_IMPORTED_MODULE_5__["NgxBootstrapModule"],
                     _reporting_request_routing_module__WEBPACK_IMPORTED_MODULE_3__["ReportingManagerRoutingModule"]
                 ]
             }]
@@ -4333,6 +4730,9 @@ class AddReportingManagerRequestComponent {
                 }
             });
         }
+        else {
+            this.toastrNotificationService.warning('Please check the reporting manager selected');
+        }
     }
     checkManagerValid() {
         return this.reportingManagerRequestFormGroup.value.currentReportingManagerId * 1 !=
@@ -4537,6 +4937,33 @@ class UserService {
             headers: headers
         };
         return this.http.post('/api/user/reporting_manager_request', reportingManagerRequestModel, httpOptions);
+    }
+    getPendingReportingManagerRequests() {
+        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+            'Content-Type': 'application/json'
+        });
+        const httpOptions = {
+            headers: headers
+        };
+        return this.http.post('/api/user/pending_reporting_manager_requests', {}, httpOptions);
+    }
+    approvePendingReportingManagerRequests(request) {
+        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+            'Content-Type': 'application/json'
+        });
+        const httpOptions = {
+            headers: headers
+        };
+        return this.http.post('/api/user/approve_reporting_manager_request', request, httpOptions);
+    }
+    rejectPendingReportingManagerRequests(requestId) {
+        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+            'Content-Type': 'application/json'
+        });
+        const httpOptions = {
+            headers: headers
+        };
+        return this.http.delete(`/api/user/reject_reporting_manager_requests/${requestId}`);
     }
 }
 UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };

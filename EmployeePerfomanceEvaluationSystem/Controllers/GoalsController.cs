@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
+using EmployeePerfomanceEvaluationSystem.CustomAttributes;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Goals;
@@ -51,7 +52,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("add_goal")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> AddNewGoal([FromBody] CreateGoalRequestModel goalCreateRequestModel)
         {
             try
@@ -72,7 +73,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpDelete("delete_goal/{goalId}")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> DeleteGoal(int goalId)
         {
             try
@@ -93,7 +94,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("update_goal/{goalId}")]
-        [Authorize]
+        [AdminAuthorize]
         public async Task<IActionResult> UpdateGoal(int goalId, [FromBody] UpdateGoalRequestModel updateGoalRequestModel)
         {
             try

@@ -6,6 +6,7 @@ import { RoleService } from '../roles/role-service';
 import { DepartmentService } from '../departments/departments-service';
 import { UserUpdateRequestModel } from '../../models/user/user-update-request-model';
 import { ReportingManagerRequest } from '../../models/user/reporting-manager-request-model';
+import { ApproveReportingManagerRequestModel } from '../../models/user/approve-reporting-manager-request-model';
 
 @Injectable({
     providedIn: 'root'
@@ -84,5 +85,44 @@ export class UserService {
         }
 
         return this.http.post<ApiResponse>('/api/user/reporting_manager_request', reportingManagerRequestModel, httpOptions);
+    }
+
+    getPendingReportingManagerRequests(): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>('/api/user/pending_reporting_manager_requests', {}, httpOptions);
+    }
+
+    approvePendingReportingManagerRequests(request: ApproveReportingManagerRequestModel): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>('/api/user/approve_reporting_manager_request', request, httpOptions);
+    }
+
+    rejectPendingReportingManagerRequests(requestId: number): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.delete<ApiResponse>(`/api/user/reject_reporting_manager_requests/${requestId}`);
     }
 }

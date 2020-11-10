@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201110060722_current_reporting_manager_null.cs" />
+    <Compile Remove="Migrations\20201110060722_current_reporting_manager_null.Designer.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031113412_usertable.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031113412_usertable.Designer.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031115201_usertable-updates-new.cs" />
@@ -22,9 +24,12 @@
     <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\add-reporting-manager-requests\new-reporting-manager-request-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\view-reporting-manger-requests\reporting-manager-requests-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\approve-reporting-manager-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\registered-users.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\reporting-manager-request-model.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\reporting-manager-response-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\user-update-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\goals\goals-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\user-details\user-details-component.ts" />
@@ -92,9 +97,12 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\add-reporting-manager-requests\new-reporting-manager-request-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\view-reporting-manger-requests\reporting-manager-requests-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\approve-reporting-manager-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\registered-users.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\reporting-manager-request-model.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\reporting-manager-response-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\user-update-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\services\goals\goals-service.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\user-details\user-details-component.ts" />
