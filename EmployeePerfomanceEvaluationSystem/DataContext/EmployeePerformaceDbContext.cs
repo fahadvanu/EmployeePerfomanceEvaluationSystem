@@ -20,6 +20,8 @@ namespace EmployeePerfomanceEvaluationSystem.DataContext
         public DbSet<Department> Departments { get; set; }
         public DbSet<Goal> Goals { get; set; }
         public DbSet<ReportingManagerRequest> ReportingManagerRequests { get; set; }
+        public DbSet<IterationStatus> IterationStatus { get; set; }
+        public DbSet<Iteration> Iteration { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

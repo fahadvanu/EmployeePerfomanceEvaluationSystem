@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20201110060722_current_reporting_manager_null.cs" />
     <Compile Remove="Migrations\20201110060722_current_reporting_manager_null.Designer.cs" />
+    <Compile Remove="Migrations\20201111073800_iterations.cs" />
+    <Compile Remove="Migrations\20201111073800_iterations.Designer.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031113412_usertable.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031113412_usertable.Designer.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031115201_usertable-updates-new.cs" />
