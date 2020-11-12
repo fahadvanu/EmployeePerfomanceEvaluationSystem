@@ -36,8 +36,9 @@ namespace EmployeePerfomanceEvaluationSystem.Request_Models.Iterations
 
         public int GetMonthDifference(DateTime startDate, DateTime endDate)
         {
+            endDate = endDate.AddDays(1);
             int monthsApart = 12 * (startDate.Year - endDate.Year) + startDate.Month - endDate.Month;
-            return Math.Abs(monthsApart) + 1;
+            return Math.Abs(monthsApart);
         }
     }
 }

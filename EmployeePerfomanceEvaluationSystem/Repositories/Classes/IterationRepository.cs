@@ -12,13 +12,10 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
     public class IterationRepository : IIterationRepository
     {
         private EmployeePerformaceDbContext _context;
-        private UserIdentityDbContext _userContext;
 
-        public IterationRepository(EmployeePerformaceDbContext context,
-                                   UserIdentityDbContext userContext)
+        public IterationRepository(EmployeePerformaceDbContext context)
         {
             _context = context;
-            _userContext = userContext;
         }
 
         public async Task<Iteration> CreateNewIteration(Iteration iteration)
@@ -37,10 +34,10 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
             if (existingIteration != null)
                 return false;
 
-            var iterationBetweenDate = await _context.Iteration.FirstOrDefaultAsync(x => x.EndDate < iteration.StartDate
-                                                                                      && x.Status != (int)Constants.Constants.ITERATION_STATUS.DELETED);
-            if (iterationBetweenDate != null)
-                return false;
+           // var iterationBetweenDate = await _context.Iteration.FirstOrDefaultAsync(x => x.EndDate > iteration.StartDate
+                                                                                      //&& x.Status != (int)Constants.Constants.ITERATION_STATUS.DELETED);
+           // if (iterationBetweenDate != null)
+                //return false;
 
             return true;
         }
@@ -81,7 +78,7 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
         public async Task<List<Iteration>> GetExistingIterations()
         {
-            return await _context.Iteration.ToListAsync();
+            return await _context.Iteration.Where(x => x.Status != (int)Constants.Constants.ITERATION_STATUS.DELETED).ToListAsync();
         }
     }
 }

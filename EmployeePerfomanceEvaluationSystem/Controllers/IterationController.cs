@@ -35,7 +35,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("get_iterations")]
-        //[AdminAuthorize]
+        [AdminAuthorize]
         public async Task<IActionResult> GetIterations()
         {
             try
@@ -53,7 +53,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("update_iteration/{iterationId}")]
-        //[AdminAuthorize]
+        [AdminAuthorize]
         public async Task<IActionResult> UpdateIteration(int iterationId, 
                                                          [FromBody] UpdateIterationRequestModel updateIterationRequestModel)
         {
@@ -74,7 +74,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpDelete("remove_iteration/{iterationId}")]
-       // [AdminAuthorize]
+        [AdminAuthorize]
         public async Task<IActionResult> RemoveIteration(int iterationId)
         {
             try
@@ -94,7 +94,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         }
 
         [HttpPost("new _iteration")]
-        //[AdminAuthorize]
+        [AdminAuthorize]
         public async Task<IActionResult> CreateIteration([FromBody] CreateIterationRequestModel createIterationRequestModel)
         {
             try

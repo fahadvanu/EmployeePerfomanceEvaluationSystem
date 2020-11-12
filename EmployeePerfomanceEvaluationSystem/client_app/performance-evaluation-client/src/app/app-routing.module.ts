@@ -16,6 +16,7 @@ const routes: Routes = [
     { path: 'goals', component: GoalsComponentComponent, canActivate: [AuthGuardService] },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuardService]  },
     { path: 'need-help', loadChildren: () => import('./accounts/need-help/need-help-module').then(m => m.NeedHelpModule) },
+    { path: 'iterations', loadChildren: () => import('./iteration/iteration-module').then(m => m.IterationModule) },
     { path: 'unauthorized', component: UnAuthorizedComponent },
     { path: 'forbidden', component: ForbiddenComponent  },
     { path: '', redirectTo: 'login', pathMatch:'full' },
