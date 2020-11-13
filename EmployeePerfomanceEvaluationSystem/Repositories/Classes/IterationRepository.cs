@@ -34,12 +34,15 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
             if (existingIteration != null)
                 return false;
 
-           // var iterationBetweenDate = await _context.Iteration.FirstOrDefaultAsync(x => x.EndDate > iteration.StartDate
-                                                                                      //&& x.Status != (int)Constants.Constants.ITERATION_STATUS.DELETED);
-           // if (iterationBetweenDate != null)
-                //return false;
-
-            return true;
+            var iterationBetweenDate = await _context.Iteration
+                                                      .FirstOrDefaultAsync(x => 
+                                                                               ( (x.StartDate == iteration.StartDate)
+                                                                              || (x.StartDate <= iteration.StartDate
+                                                                                  && x.EndDate >= iteration.StartDate)
+                                                                              || (x.StartDate <= iteration.EndDate
+                                                                                  && x.EndDate >= iteration.EndDate))
+                                                                              && x.Status != (int)Constants.Constants.ITERATION_STATUS.DELETED);
+            return iterationBetweenDate == null;
         }
 
         public async Task<bool> CheckIterationExists(int iterationId)
@@ -78,7 +81,10 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
         public async Task<List<Iteration>> GetExistingIterations()
         {
-            return await _context.Iteration.Where(x => x.Status != (int)Constants.Constants.ITERATION_STATUS.DELETED).ToListAsync();
+            return await _context.Iteration
+                                .Where(x => x.Status != (int)Constants.Constants.ITERATION_STATUS.DELETED)
+                                .OrderByDescending(x => x.StartDate)
+                                .ToListAsync();
         }
     }
 }

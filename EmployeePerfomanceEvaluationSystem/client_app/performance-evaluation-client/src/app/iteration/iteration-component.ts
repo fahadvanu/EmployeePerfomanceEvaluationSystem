@@ -3,6 +3,7 @@ import { IterationService } from '../shared/services/iteration/iteration-service
 import { ApiResponse } from '../shared/models/api-responses/api-response';
 import { IterationResponseModel, IterationStatus } from '../shared/models/iteration/iteration-reponse-model';
 import { CreateIterationRequestModel, CreateIterationRequestModelAPI } from '../shared/models/iteration/create-iteration-request-model';
+import { UpdateIterationRequestModel } from '../shared/models/iteration/update-iteration-request-model';
 import { NgForm } from '@angular/forms';
 import { SpinnerService } from '../shared/services/spinner/spinner-service';
 import { ToastrNotificationService } from '../shared/services/toastr/toastr-service';
@@ -221,7 +222,7 @@ export class IterationComponent implements OnInit {
                                 error => {
 
                                     this.spinnerService.idle();
-                                    console.log('Exception occured while creating deleting iteration');
+                                    console.log('Exception occured while deleting iteration');
 
                                 });
                         }
@@ -229,5 +230,61 @@ export class IterationComponent implements OnInit {
                 }
             });            
 
+    }
+
+    updateIteration(iteration: IterationResponseModel) {
+
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: this.getUpdateIterationPromptMessage(iteration),
+                callback: (result) => {
+                    if (result) {
+
+                        this.spinnerService.updateMessage('Updating iteration.....');
+                        this.spinnerService.busy();
+                        let requestModel: UpdateIterationRequestModel = this.getUpdateIterationRequestModel(iteration);
+
+                        this.iterationService.updateIteration(iteration.iterationId, requestModel)
+                            .subscribe((response: ApiResponse) => {
+
+                                this.getIterationsAfterUpdate('Iteration updated successfully');
+
+                            },
+                            error => {
+
+                                this.spinnerService.idle();
+                                console.log('Exception occured while updating iteration');
+                           });
+                    }
+                }
+            }
+        });
+    }
+
+    private getUpdateIterationPromptMessage(iteration: IterationResponseModel): string {
+
+        let message = "";
+
+        if (iteration.status == IterationStatus.NOTACTIVE)
+            message = "Are you sure you want to Activate iteration?";
+
+        if (iteration.status == IterationStatus.ACTIVE)
+            message = "Are you sure you want to Locked iteration?";
+
+        return message;
+    }
+
+    private getUpdateIterationRequestModel(iteration: IterationResponseModel): UpdateIterationRequestModel {
+
+        let requestModel: UpdateIterationRequestModel = new UpdateIterationRequestModel();
+
+        if (iteration.status == IterationStatus.NOTACTIVE)
+            requestModel.newStatus = IterationStatus.ACTIVE;
+
+        if (iteration.status == IterationStatus.ACTIVE)
+            requestModel.newStatus = IterationStatus.LOCKED;
+
+
+        return requestModel;
     }
 }

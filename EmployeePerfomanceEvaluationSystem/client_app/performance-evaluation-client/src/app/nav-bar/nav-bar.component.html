@@ -18,10 +18,15 @@
                     Manage
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/roles']" routerLinkActive="active">Manage Roles</a>
-                    <a class="dropdown-item" [routerLink]="['/departments']" routerLinkActive="active">Manage Departments</a>
-                    <a class="dropdown-item" [routerLink]="['/goals']" routerLinkActive="active">Manage Goals</a>
-                    <a class="dropdown-item" [routerLink]="['/iterations']" routerLinkActive="active">Manage Iterations</a>
+                    <a class="dropdown-item" [routerLink]="['/roles']" routerLinkActive="active">
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Roles
+                    </a>
+                    <a class="dropdown-item" [routerLink]="['/departments']" routerLinkActive="active">
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Departments</a>
+                    <a class="dropdown-item" [routerLink]="['/goals']" routerLinkActive="active">
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Goals</a>
+                    <a class="dropdown-item" [routerLink]="['/iterations']" routerLinkActive="active">
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Iterations</a>
                 </div>
             </li>
 
@@ -34,11 +39,13 @@
 
                     <a class="dropdown-item" [routerLink]="['/reporting-manager-request']"
                        routerLinkActive="active"
-                       *ngIf="!accountService.isAdminUser()">Reporting Manager</a>
+                       *ngIf="!accountService.isAdminUser()">
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Reporting Manager</a>
 
                     <a class="dropdown-item" [routerLink]="['/view-reporting-manager-request']" 
                        routerLinkActive="active"
-                       *ngIf="accountService.isAdminUser()">Reporting Manager</a>
+                       *ngIf="accountService.isAdminUser()">
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Reporting Manager</a>
                 
                 </div>
             </li>
@@ -54,8 +61,12 @@
                     WELCOME, {{accountService.getUserName() }}
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" [routerLink]="['/user-details']" routerLinkActive="active">Edit Profile</a>
-                    <a class="dropdown-item" (click)="logout()">Logout</a>
+                    <a class="dropdown-item" [routerLink]="['/user-details']" routerLinkActive="active">
+                        <span class="fa fa-user fa-lg mr-2"></span> Edit Profile
+                    </a>
+                    <a class="dropdown-item" (click)="logout()" style="cursor:pointer">
+                        <span class="fa fa-sign-out fa-lg mr-2"></span> Logout
+                    </a>
                 </div>
             </li>
         </ul>

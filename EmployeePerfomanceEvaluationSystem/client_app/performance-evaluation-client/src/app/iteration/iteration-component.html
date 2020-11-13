@@ -30,6 +30,7 @@
                                    [(ngModel)]="iteration_model.startDate"
                                    #startDate="ngModel"
                                    required
+                                   autocomplete="off"
                                    bsDatepicker
                                    [bsConfig]="{ isAnimated: true, containerClass: 'theme-orange', 
                                                  showClearButton: true, clearPosition: 'right',
@@ -43,6 +44,7 @@
                                    [(ngModel)]="iteration_model.endDate"
                                    #endDate="ngModel"
                                    required
+                                   autocomplete="off"
                                    bsDatepicker
                                    [bsConfig]="{ isAnimated: true, containerClass: 'theme-orange',
                                                  showClearButton: true, clearPosition: 'right',
@@ -112,22 +114,44 @@
                                 <tr>
                                     <th scope="col">Title</th>
                                     <th scope="col">Duration</th>
-                                    <th scope="col">Created Date</th>
-                                    <th scope="col">Activated Date</th>
-                                    <th scope="col">Locked Date</th>
+                                    <th scope="col">Created On</th>
+                                    <th scope="col">Activated On</th>
+                                    <th scope="col">Locked On</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let iteration of (iterationsToDisplay | paginationPipe:currentPage:itemsPerPage)" class="table-style">
                                     <th scope="row"> {{ iteration.title }}</th>
-                                    <th scope="row"> {{ iteration.startDate }} - {{ iteration.endDate }}</th>
+                                    <th scope="row"> {{ iteration.startDate }} / {{ iteration.endDate }}</th>
                                     <th scope="row"> {{ iteration.createdDate }}</th>
                                     <th scope="row"> {{ iteration.activatedDate }}</th>
                                     <th scope="row"> {{ iteration.lockedDate }}</th>
                                     <th scope="row"> {{ getIterationStatus(iteration.status) }}</th>
-                                  
+
+                                    <td class="iteration_table_controls" *ngIf="(iteration.status == 1 || iteration.status == 2)">
+                                        <button type="button" class="btn btn-default" (click)="updateIteration(iteration)">
+
+                                            <span class="fa fa-toggle-on fa-lg"
+                                                  *ngIf="(iteration.status == 1)"
+                                                  title="Activate Iteration"></span>
+
+                                            <span class="fa fa-lock fa-lg"
+                                                  *ngIf="(iteration.status == 2)"
+                                                  title="Locked Iteration">
+
+                                            </span>
+
+                                        </button>
+                                    </td>
+
+                                    <td class="iteration_table_controls" *ngIf="(iteration.status == 3)">
+                                     
+                                            <span class="fa fa-ban fa-lg" title="Iteration is Locked"></span>
+                                    </td>
+
                                     <td class="iteration_table_controls">
                                         <button type="button" class="btn btn-default" (click)="deleteIteration(iteration)">
                                             <span class="fa fa-trash-o fa-lg"></span>
@@ -143,17 +167,18 @@
                                 <tr>
                                     <th scope="col">Title</th>
                                     <th scope="col">Duration</th>
-                                    <th scope="col">Created Date</th>
-                                    <th scope="col">Activated Date</th>
-                                    <th scope="col">Locked Date</th>
+                                    <th scope="col">Created On</th>
+                                    <th scope="col">Activated On</th>
+                                    <th scope="col">Locked On</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="table-style">
 
-                                    <td class="iteration_table_controls" colspan="7">
+                                    <td class="iteration_table_controls" colspan="8">
                                         No Records Found
                                     </td>
 
