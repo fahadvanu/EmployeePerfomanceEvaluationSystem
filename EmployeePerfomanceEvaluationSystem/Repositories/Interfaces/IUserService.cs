@@ -17,5 +17,6 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
         Task<List<ReportingManagerResponseModel>> GetPendingReportingManagerRequests();
         Task ApprovePendingReportingManagerRequests(ApproveReportingManagerPendingRequest request);
         Task RejectPendingReportingManagerRequests(int requestId);
+        Task<List<UserResponseModel>> GetReportingManagerEmployees(int reportingManagerId);
     }
 }

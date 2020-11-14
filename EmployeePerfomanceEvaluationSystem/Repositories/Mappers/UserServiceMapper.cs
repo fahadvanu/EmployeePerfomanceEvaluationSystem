@@ -35,5 +35,35 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Mappers
 
             return userResponseModel;
         }
+
+        public static List<UserResponseModel> ToUsers(DbDataReader dataReader)
+        {
+            List<UserResponseModel> users = new List<UserResponseModel>();
+            while (dataReader.Read())
+            {
+                var userResponseModel = new UserResponseModel()
+                {
+
+                    UserId = int.Parse(dataReader["id"].ToString()),
+                    FirstName = dataReader["firstName"].ToString(),
+                    LastName = dataReader["lastName"].ToString(),
+                    Email = dataReader["email"].ToString(),
+                    ContactNumber = dataReader["contactNumber"].ToString(),
+                    Gender = dataReader["gender"].ToString(),
+                    IsAdmin = bool.Parse(dataReader["isAdmin"].ToString()),
+                    RoleId = int.Parse(dataReader["roleId"].ToString()),
+                    RoleName = dataReader["role_name"].ToString(),
+                    DepartmentId = int.Parse(dataReader["departmentId"].ToString()),
+                    DepartmentName = dataReader["department_name"].ToString(),
+                    ReportingManagerId = int.Parse(dataReader["reportingManagerId"].ToString()),
+                    ReportingManager = dataReader["manager"].ToString()
+                };
+
+                users.Add(userResponseModel);
+            };
+
+            users = users.OrderBy(x => x.FirstName).ToList();
+            return users;
+        }
     }
 }

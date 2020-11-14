@@ -140,4 +140,17 @@ export class AccountService {
             }
         }
     }
+
+    isManager() {
+
+        let token = this.getTokenFromStorage();
+        if (token != null) {
+            const helper = new JwtHelperService();
+            let decodedToken: any = helper.decodeToken(token);
+            if (decodedToken != null) {
+                this.loggedIn.next(true);
+                return (decodedToken.RoleId == Constant.MANAGER_ROLE_ID);
+            }
+        }
+    }
 }

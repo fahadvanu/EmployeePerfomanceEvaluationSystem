@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiResponse } from '../../models/api-responses/api-response'
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { CreateIterationRequestModelAPI } from '../../models/iteration/create-iteration-request-model';
 import { UpdateIterationRequestModel } from '../../models/iteration/update-iteration-request-model';
 
@@ -46,5 +46,25 @@ export class IterationService {
         }
 
         return this.http.post<ApiResponse>(`/api/iteration/update_iteration/${iterationId}`, requestModel, httpOptions);
+    }
+
+    getActiveIterations(): Observable<ApiResponse> {
+        return this.http.post<ApiResponse>('/api/iteration/active_iterations', {});
+    }
+
+    getActiveIterationScreenData(): Observable<[ApiResponse, ApiResponse]> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        var activeIterationCall = this.http.post<ApiResponse>('/api/iteration/active_iterations', {});
+        var manager_users_call = this.http.post<ApiResponse>('/api/user/reporting_manager_employees', {});
+
+        return forkJoin(activeIterationCall, manager_users_call);
     }
 }

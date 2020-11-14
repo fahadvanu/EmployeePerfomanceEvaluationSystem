@@ -1,0 +1,103 @@
+﻿.title_iteration_management {
+    background: #ffff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title_employee_management {
+    background: #ffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review_period_container {
+    background: #ffff;
+    height: 80px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+}
+
+.user_table_container {
+    background: #ffff;
+    height: 480px;
+   
+    margin-top: 2em;
+    width: 100%;
+}
+
+.user_table_row{
+
+    padding:10px;
+}
+
+.review_period_details_container {
+    background: #ffff;
+    height: 150px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+}
+
+.review_period_details_container_row {
+    width: 100%;
+    display: block;
+}
+
+.container_row {
+    background: #F1F1F1;
+    box-sizing: border-box;
+}
+
+.review_period_col {
+   padding:0px;
+}
+
+.title_Col {
+    margin-top: 1em;
+}
+
+.review_period_dropdown{
+    margin-bottom:0px;
+    width: 50%;
+}
+
+.pager-div {
+    display: flex;
+    justify-content: center;
+}
+
+.user_table_controls {
+    text-align: center;
+}
+
+.user_search_control {
+    float: right;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.table_container_row {
+    clear: both;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.table_container_column {
+    min-height: 300px;
+    max-height: 300px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.user_table {
+    margin-top: 20px !important;
+}

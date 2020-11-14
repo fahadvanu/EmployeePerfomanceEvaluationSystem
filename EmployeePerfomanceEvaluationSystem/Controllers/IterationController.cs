@@ -11,6 +11,7 @@ using EmployeePerfomanceEvaluationSystem.Request_Models.Iterations;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.Iteration;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -112,6 +113,23 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 _logger.LogError(ex, "Failed to create iteration");
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to create iteration" });
+            }
+        }
+
+        [HttpPost("active_iterations")]
+        [Authorize]
+        public async Task<IActionResult> GetActiveIterations()
+        {
+            try
+            {
+                var iterations = await _iterationRepository.GetActiveIterations();
+                var response = _mapper.Map<List<IterationReposnseModel>>(iterations);
+                return Ok(new ApiResponseOKResult() { Data = response });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch active iterations");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch active iterations" });
             }
         }
     }

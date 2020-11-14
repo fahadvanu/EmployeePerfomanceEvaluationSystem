@@ -14,5 +14,6 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
         Task RemoveIteration(int iterationId);
         Task<Iteration> UpdateIteration(int iterationId, int newStatus);
         Task<List<Iteration>> GetExistingIterations();
+        Task<List<Iteration>> GetActiveIterations();
     }
 }

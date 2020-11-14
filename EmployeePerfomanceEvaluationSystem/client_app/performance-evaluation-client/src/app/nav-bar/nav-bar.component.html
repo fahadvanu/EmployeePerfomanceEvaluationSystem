@@ -22,11 +22,14 @@
                         <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Roles
                     </a>
                     <a class="dropdown-item" [routerLink]="['/departments']" routerLinkActive="active">
-                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Departments</a>
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Departments
+                    </a>
                     <a class="dropdown-item" [routerLink]="['/goals']" routerLinkActive="active">
-                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Goals</a>
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Goals
+                    </a>
                     <a class="dropdown-item" [routerLink]="['/iterations']" routerLinkActive="active">
-                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Iterations</a>
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Manage Iterations
+                    </a>
                 </div>
             </li>
 
@@ -40,13 +43,30 @@
                     <a class="dropdown-item" [routerLink]="['/reporting-manager-request']"
                        routerLinkActive="active"
                        *ngIf="!accountService.isAdminUser()">
-                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Reporting Manager</a>
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Reporting Manager
+                    </a>
 
-                    <a class="dropdown-item" [routerLink]="['/view-reporting-manager-request']" 
+                    <a class="dropdown-item" [routerLink]="['/view-reporting-manager-request']"
                        routerLinkActive="active"
                        *ngIf="accountService.isAdminUser()">
-                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Reporting Manager</a>
-                
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Reporting Manager
+                    </a>
+
+                </div>
+            </li>
+
+            <li class="nav-item dropdown" *ngIf="accountService.isAuthenticated()">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Iterations
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                    <a class="dropdown-item" [routerLink]="['/active-iterations']"
+                       routerLinkActive="active">
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Active Iterations
+                    </a>
+
                 </div>
             </li>
 

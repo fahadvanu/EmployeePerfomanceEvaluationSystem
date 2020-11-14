@@ -135,5 +135,25 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<List<UserResponseModel>> GetReportingManagerEmployees(int reportingManagerId)
+        {
+
+            List<UserResponseModel> users = new List<UserResponseModel>();
+            using (MySqlConnection conn = new MySqlConnection(_configuration["Database:ConnectionString"]))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("get_reporting_manager_users", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("userId", reportingManagerId);
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    users = UserServiceMapper.ToUsers(reader);
+                }
+            }
+
+            return users;
+        }
     }
 }

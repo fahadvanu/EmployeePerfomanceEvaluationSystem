@@ -76,6 +76,9 @@
     <None Remove="client_app\performance-evaluation-client\src\app\shared\services\user\user-service.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\shared-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\unauthorized\unauthorized-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\view-iterations\view-iterations-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\view-iterations\view-iterations-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\view-iterations\view-iterations-routing-module.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -158,6 +161,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\unauthorized\unauthorized-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\view-iterations\view-iterations-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\view-iterations\view-iterations-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\view-iterations\view-iterations-routing-module.ts" />
   </ItemGroup>
 
   <ItemGroup>

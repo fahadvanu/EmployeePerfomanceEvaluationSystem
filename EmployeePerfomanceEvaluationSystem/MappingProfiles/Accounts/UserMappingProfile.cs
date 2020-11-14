@@ -27,6 +27,9 @@ namespace EmployeePerfomanceEvaluationSystem.MappingProfiles.Accounts
 
             CreateMap<ReportingManagerRequestModel, EmployeePerfomanceEvaluationSystem.Models.ReportingManagerRequest>();
             CreateMap<User, RegisteredUsers>()
+                .ForMember(x => x.UserId, p => p.MapFrom(y => y.Id));
+
+            CreateMap<User, UserResponseModel>()
                 .ForMember(x => x.UserId, p => p.MapFrom(y => y.Id)); ;
         }
     }

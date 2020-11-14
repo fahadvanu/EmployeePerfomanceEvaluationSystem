@@ -86,5 +86,13 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
                                 .OrderByDescending(x => x.StartDate)
                                 .ToListAsync();
         }
+
+        public async Task<List<Iteration>> GetActiveIterations()
+        {
+            return await _context.Iteration
+                                .Where(x => x.Status == (int)Constants.Constants.ITERATION_STATUS.ACTIVE)
+                                .OrderByDescending(x => x.StartDate)
+                                .ToListAsync();
+        }
     }
 }

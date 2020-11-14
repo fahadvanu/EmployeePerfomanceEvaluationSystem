@@ -215,5 +215,28 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to reject reporting manager request" });
             }
         }
+
+
+        [HttpPost("reporting_manager_employees")]
+        [Authorize]
+        public async Task<IActionResult> GetReportingManagerEmployees()
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+                var user = await _userService.GetUserById(userId);
+
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {userId} does not exists" });
+
+                var manager_under_users = await _userService.GetReportingManagerEmployees(userId);
+                return Ok(new ApiResponseOKResult() { StatusCode = StatusCodes.Status200OK, Data = manager_under_users });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to reporting manager users");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to reporting manager users" });
+            }
+        }
     }
 }

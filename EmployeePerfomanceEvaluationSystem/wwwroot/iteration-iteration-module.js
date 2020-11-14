@@ -640,63 +640,6 @@ class UpdateIterationRequestModel {
 
 /***/ }),
 
-/***/ "OqMo":
-/*!****************************************************************!*\
-  !*** ./src/app/shared/services/iteration/iteration-service.ts ***!
-  \****************************************************************/
-/*! exports provided: IterationService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IterationService", function() { return IterationService; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-
-
-
-
-class IterationService {
-    constructor(http) {
-        this.http = http;
-    }
-    getIterations() {
-        return this.http.post('/api/iteration/get_iterations', {});
-    }
-    addNewIteration(iteration) {
-        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-            'Content-Type': 'application/json'
-        });
-        const httpOptions = {
-            headers: headers
-        };
-        return this.http.post(`/api/iteration/new _iteration`, iteration, httpOptions);
-    }
-    deleteIteration(iterationId) {
-        return this.http.delete(`/api/iteration/remove_iteration/${iterationId}`);
-    }
-    updateIteration(iterationId, requestModel) {
-        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-            'Content-Type': 'application/json'
-        });
-        const httpOptions = {
-            headers: headers
-        };
-        return this.http.post(`/api/iteration/update_iteration/${iterationId}`, requestModel, httpOptions);
-    }
-}
-IterationService.ɵfac = function IterationService_Factory(t) { return new (t || IterationService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-IterationService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: IterationService, factory: IterationService.ɵfac, providedIn: 'root' });
-/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](IterationService, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
-        args: [{
-                providedIn: 'root'
-            }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
-
-
-/***/ }),
-
 /***/ "Uu1S":
 /*!***************************************************************************!*\
   !*** ./src/app/shared/models/iteration/create-iteration-request-model.ts ***!
@@ -712,48 +655,6 @@ class CreateIterationRequestModel {
 }
 class CreateIterationRequestModelAPI {
 }
-
-
-/***/ }),
-
-/***/ "WDFA":
-/*!********************************************************************!*\
-  !*** ./src/app/shared/models/iteration/iteration-reponse-model.ts ***!
-  \********************************************************************/
-/*! exports provided: IterationResponseModel, IterationStatus */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IterationResponseModel", function() { return IterationResponseModel; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IterationStatus", function() { return IterationStatus; });
-class IterationResponseModel {
-    constructor() {
-    }
-    static FormIterationModelArray(response) {
-        var iterationArray = new Array();
-        for (var data of response.data) {
-            var iteration = new IterationResponseModel();
-            iteration.iterationId = data.iterationId;
-            iteration.title = data.title;
-            iteration.startDate = data.startDate;
-            iteration.endDate = data.endDate;
-            iteration.status = data.status;
-            iteration.createdDate = data.createdDate;
-            iteration.activatedDate = data.activatedDate;
-            iteration.lockedDate = data.lockedDate;
-            iterationArray.push(iteration);
-        }
-        return iterationArray;
-    }
-}
-var IterationStatus;
-(function (IterationStatus) {
-    IterationStatus[IterationStatus["NOTACTIVE"] = 1] = "NOTACTIVE";
-    IterationStatus[IterationStatus["ACTIVE"] = 2] = "ACTIVE";
-    IterationStatus[IterationStatus["LOCKED"] = 3] = "LOCKED";
-    IterationStatus[IterationStatus["DELETED"] = 4] = "DELETED";
-})(IterationStatus || (IterationStatus = {}));
 
 
 /***/ }),
