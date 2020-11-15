@@ -9,6 +9,7 @@ import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { ConfirmModalComponent } from '../confirm-modal-component/confirm-modal-component';
 import { Constant } from '../shared/constant/constants';
 import { UserResponseModel } from '../shared/models/user/user-response-model';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: './view-iterations-component.html',
@@ -31,7 +32,8 @@ export class ViewIterationsComponent implements  OnInit  {
                 private spinnerService: SpinnerService,
                 private toastrNotificationService: ToastrNotificationService,
                 private cdRef: ChangeDetectorRef,
-                private modalService: BsModalService) { }
+                private modalService: BsModalService,
+                private router: Router) { }
 
     ngOnInit(): void {
         this.resetVariables();
@@ -118,5 +120,22 @@ export class ViewIterationsComponent implements  OnInit  {
     setGoal(user: UserResponseModel) {
         console.log(user);
         console.log(this.selectedReviewPeriod);
+
+        if (this.selectedReviewPeriod == '') {
+            this.toastrNotificationService.warning("Please select the active iteration")
+            return;
+        }
+
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: `Continue to set goals for ${user.email}`,
+                callback: (result) => {
+                    if (result) {
+
+                        this.router.navigate(['/set-goals', user.id, this.selectedReviewPeriod])
+                    }
+                }
+            }
+        });
     }
 }
