@@ -4,7 +4,7 @@ import { SetGoalsComponent } from './set-goals-component';
 import { AuthGuardService } from '../shared/guards/check-user-authenticated-guard';
 
 const setGoalsRoutes: Routes = [
-    { path: 'set-goals/:user/:iteration', component: SetGoalsComponent, canActivate: [AuthGuardService] }
+    { path: 'set-goals/user/:user/iteration/:iteration', component: SetGoalsComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

@@ -238,5 +238,31 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to reporting manager users" });
             }
         }
+
+        [HttpPost("reporting_manager_employee/{reportingUserId}")]
+        [Authorize]
+        public async Task<IActionResult> GetReportingManagerEmployeeDetails(int reportingUserId)
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+                var user = await _userService.GetUserById(reportingUserId);
+
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {reportingUserId} does not exists" });
+
+                if(user.ReportingManagerId != userId)
+                    return new JsonResult(new ApiResponseFailure() { ErrorMessage = "Requested User has different reporting manager assigned", 
+                                                                     StatusCode = (int)StatusCodes.Status403Forbidden })
+                                                                   { StatusCode = StatusCodes.Status403Forbidden };
+
+                return Ok(new ApiResponseOKResult() { StatusCode = StatusCodes.Status200OK, Data = user });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to reporting manager user details");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to reporting manager user details" });
+            }
+        }
     }
 }

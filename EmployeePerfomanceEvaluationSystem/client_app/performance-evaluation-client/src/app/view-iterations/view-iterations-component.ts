@@ -132,7 +132,7 @@ export class ViewIterationsComponent implements  OnInit  {
                 callback: (result) => {
                     if (result) {
 
-                        this.router.navigate(['/set-goals', user.id, this.selectedReviewPeriod])
+                        this.router.navigate(['/set-goals/user', user.id, 'iteration', this.selectedReviewPeriod])
                     }
                 }
             }

@@ -94,5 +94,13 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
                                 .OrderByDescending(x => x.StartDate)
                                 .ToListAsync();
         }
+
+        public async Task<Iteration> GetIteration(int iterationId)
+        {
+            var existingIteration = await _context.Iteration.FirstOrDefaultAsync(x => x.Id == iterationId
+                                                                                   && x.Status != (int)Constants.Constants.ITERATION_STATUS.DELETED);
+
+            return existingIteration;
+        }
     }
 }

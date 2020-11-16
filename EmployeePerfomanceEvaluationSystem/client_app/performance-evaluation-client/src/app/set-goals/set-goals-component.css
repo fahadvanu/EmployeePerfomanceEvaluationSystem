@@ -1,1 +1,115 @@
-﻿
+﻿.container_row {
+    background: #F1F1F1;
+    box-sizing: border-box;
+}
+
+.title_Col {
+    margin-top: 1em;
+}
+
+.label_controls_bold{
+    font-weight:bold;
+    text-transform:uppercase;
+}
+
+.title_set_goals {
+    background: #ffff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.iteration_details_div {
+    padding: 0px;
+}
+
+.iteration_details_container {
+    background: #ffff;
+    height: 150px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.iteration_details_container_row {
+    width: 100%;
+    display: block;
+}
+
+.user_details_div {
+    padding: 0px;
+}
+
+.user_details_container {
+    background: #ffff;
+    height: 150px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.user_details_container_row {
+    width: 100%;
+    display: block;
+}
+
+.goals_table_container {
+    background: #ffff;
+    height: 480px;
+    margin-top: 2em;
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.goals_table_row {
+    padding: 10px;
+}
+
+.goal_table_controls {
+    text-align: center;
+}
+
+.goals_search_control {
+    float: right;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.table_container_row {
+    clear: both;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.table_container_column {
+
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.goal_table {
+    margin-top: 20px !important;
+}
+
+.pager-div{
+    display:flex;
+    justify-content:center;
+}
+
+.goal_name_th{
+    width: 90%;
+}
+
+.add_control_th {
+    width: 10%;
+}

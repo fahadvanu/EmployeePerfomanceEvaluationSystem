@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 .title_employee_management {
@@ -21,15 +22,16 @@
     align-items: center;
     margin-top: 2em;
     width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 .user_table_container {
     background: #ffff;
     height: 480px;
-   
     margin-top: 2em;
     width: 100%;
-    margin-bottom:20px;
+    margin-bottom: 20px;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 .user_table_row{
@@ -45,6 +47,7 @@
     align-items: center;
     margin-top: 2em;
     width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 .review_period_details_container_row {

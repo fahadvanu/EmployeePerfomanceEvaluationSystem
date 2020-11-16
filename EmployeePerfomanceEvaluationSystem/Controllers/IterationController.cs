@@ -132,5 +132,25 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch active iterations" });
             }
         }
+
+        [HttpPost("get_iteration/{iterationId}")]
+        [Authorize]
+        public async Task<IActionResult> GetIteration(int iterationId)
+        {
+            try
+            {
+                var iteration= await _iterationRepository.GetIteration(iterationId);
+                if (null == iteration)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Iteration does not exists" });
+
+                var response = _mapper.Map<IterationReposnseModel>(iteration);
+                return Ok(new ApiResponseOKResult() { Data = response });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to get iteration");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to get iteration" });
+            }
+        }
     }
 }
