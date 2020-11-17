@@ -71,6 +71,27 @@
 
                             </div>
 
+                            <div class="row iteration_details_container_row" *ngIf="!showGoalSettingSections()">
+
+                                <div class="col-sm-12">
+
+                                    <label class="label_controls label_controls_bold col-form-label col-sm-6">Set Goals</label>
+
+                                
+                                    <div class="col-sm-6 set_goals_button">
+
+                                        <button class="btn btn-dark"
+                                                type="button" 
+                                                (click)="updateEmployeeIterationState()">
+                                            Activate
+                                        </button>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -157,7 +178,7 @@
 
                 <!-- GOALS -->
 
-                <div class="row goals_table_container">
+                <div class="row goals_table_container" *ngIf="showGoalSettingSections()">
 
                     <div class="col-md-12 mt-4 goals_table_row">
 
@@ -197,7 +218,7 @@
                                             <td class="goal_table_controls">
                                                 <button type="button" class="btn btn-default"
                                                         (click)="addGoal(goal)">
-                                                    <span class="fa fa-plus-square-o fa-lg" title="Add Goal"></span>
+                                                    <span class="fa fa-calendar-plus-o fa-lg" title="Add Goal"></span>
                                                 </button>
                                             </td>
                                         </tr>
@@ -244,7 +265,7 @@
 
                 <!-- GOALS ADD/UPDATE -->
 
-                <div class="row goals_add_update_container" formGroupName="goalFormGroup">
+                <div class="row goals_add_update_container" formGroupName="goalFormGroup" *ngIf="showGoalSettingSections()">
 
                     <div class="col-md-12 goals_add_update_container_row">
 

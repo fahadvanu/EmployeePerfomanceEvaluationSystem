@@ -68,7 +68,7 @@ export class IterationService {
         return forkJoin(activeIterationCall, manager_users_call);
     }
 
-    setGoalScreenData(reportingUserId: number, iterationId: number): Observable<[ApiResponse, ApiResponse, ApiResponse]> {
+    setGoalScreenData(reportingUserId: number, iterationId: number): Observable<[ApiResponse, ApiResponse, ApiResponse, ApiResponse]> {
 
         let headers: HttpHeaders = new HttpHeaders({
             'Content-Type': 'application/json'
@@ -85,6 +85,10 @@ export class IterationService {
 
         var iterationCall = this.http.post<ApiResponse>(`/api/iteration/get_iteration/${iterationId}`, {});
 
-        return forkJoin(reportingUserDetailCall, iterationCall, goalsCall);
+        var iterationStateCall = this.http.post<ApiResponse>(`/api/employee-iteration/employee-iteration-state/`,
+                                                            { employeeId: reportingUserId, iterationId: iterationId },
+                                                                                        httpOptions);
+
+        return forkJoin(reportingUserDetailCall, iterationCall, goalsCall, iterationStateCall);
     }
 }

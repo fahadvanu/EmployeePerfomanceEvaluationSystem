@@ -10,5 +10,7 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
     {
         Task<EmployeeIterationGoals> AddEmployeeIterationGoal(EmployeeIterationGoals employeeIterationGoal);
         Task<EmployeeIterationGoals> GetEmployeeIterationGoal(int employeeId, int iterationId, int goalId);
+        Task<EmployeeIterationState> GetEmployeeIterationState(int employeeId, int iterationId);
+        Task UpdateEmployeeIterationState(int employeeId, int iterationId, int iterationStateId, int reportingManagerId);
     }
 }

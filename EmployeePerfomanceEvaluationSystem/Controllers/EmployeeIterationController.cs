@@ -83,5 +83,67 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to add iteration goal" });
             }
         }
+
+        [HttpPost("employee-iteration-state")]
+        [Authorize]
+        public async Task<IActionResult> GetEmployeeIterationState([FromBody] EmployeeIterationStateRequestModel employeeIterationStateRequestModel)
+        {
+            try
+            {
+
+               
+                var employeeIterationState = await _employeeIterationRepository.GetEmployeeIterationState(employeeIterationStateRequestModel.EmployeeId,
+                                                                                        employeeIterationStateRequestModel.IterationId);
+                if(employeeIterationState == null)
+                    return Ok(new ApiResponseOKResult() { Data = Constants.Constants.ITERATION_STATE.NOT_STARTED });
+
+                return Ok(new ApiResponseOKResult() { Data = employeeIterationState.IterationStateId });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to load employee iteration state");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to load employee iteration state" });
+            }
+        }
+
+        [HttpPost("update-employee-iteration-state")]
+        [Authorize]
+        public async Task<IActionResult> UpdateEmployeeIterationState([FromBody] UpdateEmployeeIterationState updateEmployeeIterationStateRequestModel)
+        {
+            try
+            {
+                var reportingManagerId = HttpContext.User.GetUserIdClaim();
+
+                var user = await _userService.GetUserById(updateEmployeeIterationStateRequestModel.EmployeeId);
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {updateEmployeeIterationStateRequestModel.EmployeeId} does not exists" });
+
+                if (user.ReportingManagerId != reportingManagerId)
+                    return new JsonResult(new ApiResponseFailure()
+                    {
+                        ErrorMessage = "Requested User has different reporting manager assigned",
+                        StatusCode = (int)StatusCodes.Status403Forbidden
+                    })
+                    { StatusCode = StatusCodes.Status403Forbidden };
+
+
+                var iteration = await _iterationRepository.GetIteration(updateEmployeeIterationStateRequestModel.IterationId);
+                if (null != iteration && iteration.Status != (int)Constants.Constants.ITERATION_STATUS.ACTIVE)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Iteration." });
+
+
+                await _employeeIterationRepository.UpdateEmployeeIterationState(updateEmployeeIterationStateRequestModel.EmployeeId,
+                                                                                updateEmployeeIterationStateRequestModel.IterationId,
+                                                                                updateEmployeeIterationStateRequestModel.IterationStateId,
+                                                                                reportingManagerId);
+
+                return Ok(new ApiResponseOKResult() { Data = true});
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to update employee iteration state");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to update employee iteration state" });
+            }
+        }
     }
 }

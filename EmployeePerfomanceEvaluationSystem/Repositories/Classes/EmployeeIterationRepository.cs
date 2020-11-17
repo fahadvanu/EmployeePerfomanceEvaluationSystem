@@ -33,5 +33,40 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
                                                                       .SingleOrDefaultAsync();
             return iterationGoal;
         }
+
+        public async Task<EmployeeIterationState> GetEmployeeIterationState(int employeeId, int iterationId)
+        {
+            var iterationState = await _context.EmployeeIterationStates.Where(x => x.EmployeeId == employeeId
+                                                                               && x.IterationId == iterationId
+                                                                            ).SingleOrDefaultAsync();
+            return iterationState;
+        }
+
+        public async Task UpdateEmployeeIterationState(int employeeId, int iterationId, int iterationStateId, 
+                                                       int reportingManagerId)
+        {
+            var iterationState = await _context.EmployeeIterationStates.Where(x => x.EmployeeId == employeeId
+                                                                              && x.IterationId == iterationId)
+                                                                      .SingleOrDefaultAsync();
+
+            if(null != iterationState)
+            {
+                iterationState.IterationStateId = iterationStateId;
+            }
+            else
+            {
+                iterationState = new EmployeeIterationState()
+                {
+                    EmployeeId = employeeId,
+                    IterationId = iterationId,
+                    IterationStateId = iterationStateId,
+                    ReportingManagerId = reportingManagerId
+                };
+
+                _context.EmployeeIterationStates.Add(iterationState);
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace EmployeePerfomanceEvaluationSystem.DataContext
         public DbSet<Ratings> Ratings { get; set; }
         public DbSet<IterationStates> IterationStates { get; set; }
         public DbSet<EmployeeIterationGoals> EmployeeIterationGoals { get; set; }
+        public DbSet<EmployeeIterationState> EmployeeIterationStates{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

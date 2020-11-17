@@ -12,6 +12,8 @@ import { IterationResponseModel, IterationStatus } from '../shared/models/iterat
 import { Goal } from '../shared/models/goals/goal';
 import { Constant } from '../shared/constant/constants';
 import { EmployeeIterationGoalRequestModel } from '../shared/models/set-goals/employee-iteration-goal-request-model';
+import { UpdateEmployeeIterationState } from '../shared/models/set-goals/update-iteration-request-model';
+import { UpdateIterationRequestModel } from '../shared/models/iteration/update-iteration-request-model';
 
 @Component({
     templateUrl: './set-goals-component.html',
@@ -21,6 +23,7 @@ export class SetGoalsComponent implements OnInit {
 
     iterationId: number;
     employeeId: number;
+    employeeIterationStateId: number = Constant.ITERATION_STATE.NOT_STARTED;
     loading: boolean;
     setGoalFormGroup: FormGroup;
     itemsPerPage: number = 4;
@@ -74,7 +77,6 @@ export class SetGoalsComponent implements OnInit {
         this.iterationService.setGoalScreenData(this.employeeId, this.iterationId)
             .subscribe((responses: Array<ApiResponse>) => {
 
-                console.log(responses);
                 let goals: Array<Goal> = new Array<Goal>();
                 if (responses[2].data != null) {
                    goals = Goal.FormGoalModelArray(responses[2]);
@@ -92,7 +94,7 @@ export class SetGoalsComponent implements OnInit {
                     iteration: responses[1].data
                 });
 
-             
+                this.employeeIterationStateId = responses[3].data;
                 console.log(this.setGoalFormGroup.value);
                 this.loading = false;
                 this.spinnerService.idle();
@@ -231,5 +233,41 @@ export class SetGoalsComponent implements OnInit {
         employeeIterationGoalRequestModel.weightage = addUpdateFormGroup.value.weightage * 1;
 
         return employeeIterationGoalRequestModel;
+    }
+
+    showGoalSettingSections() {
+        return this.employeeIterationStateId != Constant.ITERATION_STATE.NOT_STARTED;
+    }
+
+    updateEmployeeIterationState() {
+
+            this.modalRef = this.modalService.show(ConfirmModalComponent, {
+                initialState: {
+                    promptMessage: 'Activate Iteration for setting goals?',
+                    callback: (result) => {
+                        if (result) {
+
+                            this.spinnerService.updateMessage('Activating Iteration. Please wait.....');
+                            this.spinnerService.busy();
+                            let updateIterationStateRequestModel: UpdateEmployeeIterationState = new UpdateEmployeeIterationState();
+                            updateIterationStateRequestModel.employeeId = this.employeeId * 1;
+                            updateIterationStateRequestModel.iterationId = this.iterationId * 1;
+                            updateIterationStateRequestModel.iterationStateId = Constant.ITERATION_STATE.SET_GOALS;
+
+                            this.setGoalsService.updateEmployeeIterationState(updateIterationStateRequestModel)
+                                .subscribe((response: ApiResponse) => {
+
+                                    this.employeeIterationStateId = Constant.ITERATION_STATE.SET_GOALS;
+                                    this.spinnerService.idle();
+                                    this.toastrNotificationService.success('Iteration state actiated successfully');
+                                },
+                                error => {
+                                    this.spinnerService.idle();
+                                    console.log('Exception occured while updating iteration state');
+                                });
+                        }
+                    }
+                }
+            });       
     }
 }

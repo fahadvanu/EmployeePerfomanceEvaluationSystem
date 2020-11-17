@@ -54,6 +54,7 @@
     margin-top: 2em;
     width: 100%;
     box-shadow: 10px 10px 5px #aaaaaa;
+    margin-bottom: 20px;
 }
 
 .user_details_container_row {
@@ -138,4 +139,8 @@
 
 .help-block {
     color: #DD0031;
+}
+
+.set_goals_button{
+    display: inline-block;
 }

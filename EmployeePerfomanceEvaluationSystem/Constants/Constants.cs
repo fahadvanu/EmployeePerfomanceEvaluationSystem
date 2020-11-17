@@ -16,5 +16,15 @@ namespace EmployeePerfomanceEvaluationSystem.Constants
             LOCKED = 3,
             DELETED = 4
         }
+
+        public enum ITERATION_STATE
+        {
+            NOT_STARTED = 0,
+            SET_GOALS = 1,
+            SELF_EVALUATION = 2,
+            MANAGER_EVALUATION = 3,
+            ACKNOWLEGDE_REVIEW_MEETING = 4,
+            COMPLETED = 5
+        }
     }
 }
