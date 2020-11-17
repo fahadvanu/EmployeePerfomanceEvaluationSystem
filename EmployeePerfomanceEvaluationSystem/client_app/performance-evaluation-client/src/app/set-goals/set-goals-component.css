@@ -113,3 +113,29 @@
 .add_control_th {
     width: 10%;
 }
+
+.goals_add_update_container {
+    background: #ffff;
+    height: 480px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    margin-bottom: 20px;
+}
+
+.goals_add_update_container_row {
+    width: 100%;
+    display: block;
+    padding:20px;
+}
+
+.goal_submit_button{
+    margin-left: 15px;
+}
+
+.help-block {
+    color: #DD0031;
+}

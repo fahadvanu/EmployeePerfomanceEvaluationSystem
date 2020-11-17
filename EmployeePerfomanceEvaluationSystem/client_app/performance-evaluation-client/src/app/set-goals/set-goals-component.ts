@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SpinnerService } from '../shared/services/spinner/spinner-service';
+import { SetGoalsService } from '../shared/services/set-goals/set-goals-service';
 import { ToastrNotificationService } from '../shared/services/toastr/toastr-service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { ConfirmModalComponent } from '../confirm-modal-component/confirm-modal-component';
@@ -10,6 +11,7 @@ import { IterationService } from '../shared/services/iteration/iteration-service
 import { IterationResponseModel, IterationStatus } from '../shared/models/iteration/iteration-reponse-model';
 import { Goal } from '../shared/models/goals/goal';
 import { Constant } from '../shared/constant/constants';
+import { EmployeeIterationGoalRequestModel } from '../shared/models/set-goals/employee-iteration-goal-request-model';
 
 @Component({
     templateUrl: './set-goals-component.html',
@@ -30,6 +32,7 @@ export class SetGoalsComponent implements OnInit {
                 private toastrNotificationService: ToastrNotificationService,
                 private modalService: BsModalService,
                 private iterationService: IterationService,
+                private setGoalsService: SetGoalsService,
                 private route: ActivatedRoute,
                 private setGoalsFormBuilder: FormBuilder) { }
 
@@ -52,7 +55,13 @@ export class SetGoalsComponent implements OnInit {
             goals: this.setGoalsFormBuilder.array([]),
             goalsToDisplay: this.setGoalsFormBuilder.array([]),
             searchTerm: [''],
-            currentPage: [1]
+            currentPage: [1],
+            goalFormGroup: this.setGoalsFormBuilder.group({
+                goalId: [''],
+                goalTitle: ['', [Validators.required]],
+                goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
+                weightage:['', [Validators.required]]
+            })
         })
     }
 
@@ -150,5 +159,77 @@ export class SetGoalsComponent implements OnInit {
             });
            // this.cdRef.detectChanges();
         }
+    }
+
+    resetAddUpdateFormGroup() {
+
+        let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
+        addUpdateFormGroup.patchValue({
+            goalId: '',
+            goalTitle: '',
+            goalDescription: '',
+            weightage: ''
+        });
+
+        addUpdateFormGroup.reset();
+    }
+
+    addGoal(goal: Goal) {
+
+        let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
+        addUpdateFormGroup.patchValue({
+            goalId: goal.goalId,
+            goalTitle: goal.goalName,
+            goalDescription: '',
+            weightage: ''
+        });
+    }
+
+    addUpdateIterationGoal() {
+
+        let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
+        if (addUpdateFormGroup.valid && !((addUpdateFormGroup.value.weightage * 1) == 0)) {
+
+            this.modalRef = this.modalService.show(ConfirmModalComponent, {
+                initialState: {
+                    promptMessage: 'Continue to save iteration goal?',
+                    callback: (result) => {
+                        if (result) {
+
+                            this.spinnerService.updateMessage('Saving Iteration Goal. Please wait.....');
+                            this.spinnerService.busy();
+                            let userUpdateRequestModel: EmployeeIterationGoalRequestModel = this.mapFormGroupToEmployeeGoalRequestModel();
+                            this.setGoalsService.addEmployeeIterationGoal(userUpdateRequestModel)
+                                .subscribe((response: ApiResponse) => {
+
+                                    addUpdateFormGroup.reset();
+                                    this.spinnerService.idle();
+                                    this.toastrNotificationService.success('Goal added successfully');
+                                },
+                                error => {
+                                     this.spinnerService.idle();
+                                     console.log('Exception occured while adding goal');
+                                });
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            this.toastrNotificationService.warning('Invalid Data Entered');
+        }
+    }
+
+    private mapFormGroupToEmployeeGoalRequestModel(): EmployeeIterationGoalRequestModel {
+
+        let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
+        let employeeIterationGoalRequestModel: EmployeeIterationGoalRequestModel = new EmployeeIterationGoalRequestModel();
+        employeeIterationGoalRequestModel.iterationId = this.iterationId;
+        employeeIterationGoalRequestModel.employeeId = this.employeeId;
+        employeeIterationGoalRequestModel.description = addUpdateFormGroup.value.goalDescription;
+        employeeIterationGoalRequestModel.goalId = addUpdateFormGroup.value.goalId * 1;
+        employeeIterationGoalRequestModel.weightage = addUpdateFormGroup.value.weightage * 1;
+
+        return employeeIterationGoalRequestModel;
     }
 }

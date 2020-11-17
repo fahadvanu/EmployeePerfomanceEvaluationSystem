@@ -3,14 +3,16 @@ using System;
 using EmployeePerfomanceEvaluationSystem.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmployeePerfomanceEvaluationSystem.Migrations
 {
     [DbContext(typeof(EmployeePerformaceDbContext))]
-    partial class EmployeePerformaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201117071131_employee_iteration_goals_table")]
+    partial class employee_iteration_goals_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,40 +85,6 @@ namespace EmployeePerfomanceEvaluationSystem.Migrations
                     b.HasIndex("EmployeeId", "IterationId");
 
                     b.ToTable("employee_iteration_goals");
-                });
-
-            modelBuilder.Entity("EmployeePerfomanceEvaluationSystem.Models.EmployeeIterationState", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnName("employee_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IterationId")
-                        .HasColumnName("iteration_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IterationStateId")
-                        .HasColumnName("iteration_state_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReportingManagerId")
-                        .HasColumnName("reporting_manager_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IterationId");
-
-                    b.HasIndex("ReportingManagerId");
-
-                    b.HasIndex("EmployeeId", "IterationId");
-
-                    b.ToTable("employee_iteration_state");
                 });
 
             modelBuilder.Entity("EmployeePerfomanceEvaluationSystem.Models.EmployeeRole", b =>
@@ -381,33 +349,6 @@ namespace EmployeePerfomanceEvaluationSystem.Migrations
                         .IsRequired();
 
                     b.HasOne("EmployeePerfomanceEvaluationSystem.Models.Iteration", "Iteration")
-                        .WithMany()
-                        .HasForeignKey("IterationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EmployeePerfomanceEvaluationSystem.Models.User", "ReportingManager")
-                        .WithMany()
-                        .HasForeignKey("ReportingManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EmployeePerfomanceEvaluationSystem.Models.EmployeeIterationState", b =>
-                {
-                    b.HasOne("EmployeePerfomanceEvaluationSystem.Models.User", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EmployeePerfomanceEvaluationSystem.Models.Iteration", "Iteration")
-                        .WithMany()
-                        .HasForeignKey("IterationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EmployeePerfomanceEvaluationSystem.Models.IterationStates", "IterationState")
                         .WithMany()
                         .HasForeignKey("IterationId")
                         .OnDelete(DeleteBehavior.Cascade)

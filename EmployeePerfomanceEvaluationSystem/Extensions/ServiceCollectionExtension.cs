@@ -64,6 +64,7 @@ namespace EmployeePerfomanceEvaluationSystem.Extensions
             serviceCollection.AddScoped<IDepartmentRepository, DepartmentRepository>();
             serviceCollection.AddScoped<IGoalsRepository, GoalRepository>();
             serviceCollection.AddScoped<IIterationRepository, IterationRepository>();
+            serviceCollection.AddScoped<IEmployeeIterationRepository, EmployeeIterationRepository>();
         }
 
         public static void AddAutoMapperService(this IServiceCollection serviceCollection)

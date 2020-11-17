@@ -3,14 +3,16 @@ using System;
 using EmployeePerfomanceEvaluationSystem.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmployeePerfomanceEvaluationSystem.Migrations
 {
     [DbContext(typeof(EmployeePerformaceDbContext))]
-    partial class EmployeePerformaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201117072217_employee_iteration_state_table")]
+    partial class employee_iteration_state_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

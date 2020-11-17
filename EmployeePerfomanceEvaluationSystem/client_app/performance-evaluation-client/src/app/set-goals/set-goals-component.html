@@ -187,7 +187,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let goal of (setGoalFormGroup.get('goalsToDisplay').value 
+                                        <tr *ngFor="let goal of (setGoalFormGroup.get('goalsToDisplay').value
                                                                         | paginationPipe:
                                                                           setGoalFormGroup.get('currentPage').value:
                                                                           itemsPerPage)" class="table-style">
@@ -242,7 +242,83 @@
                     </div>
                 </div>
 
-                <!-- GOALS CHOSEN -->
+                <!-- GOALS ADD/UPDATE -->
+
+                <div class="row goals_add_update_container" formGroupName="goalFormGroup">
+
+                    <div class="col-md-12 goals_add_update_container_row">
+
+                       
+                                <div class="col-sm-8">
+
+                                    <div class="form-group">
+                                        <label for="goalName">Goal</label>
+                                        <textarea class="form-control"
+                                                  name="goalName" placeholder="Choose Goal..."
+                                                  formControlName="goalTitle"
+                                                  rows="3"
+                                                  readonly
+                                                  spellcheck="false"></textarea>
+
+                                    
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-8">
+
+                                    <div class="form-group">
+                                        <label for="goalDescription">Description</label>
+                                        <textarea class="form-control"
+                                                  name="goalDescription" placeholder="Enter Description(Max 300 characters)"
+                                                  formControlName="goalDescription"
+                                                  required
+                                                  maxlength="300"
+                                                  rows="3"
+                                                  spellcheck="false"></textarea>
+
+                                        <p class="help-block" *ngIf="setGoalFormGroup.get('goalFormGroup').get('goalDescription').hasError('required')
+                                                                   && setGoalFormGroup.get('goalFormGroup').get('goalDescription').touched">* Description is required</p>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-4">
+
+                                    <div class="form-group">
+                                        <label for="goalWeightage">Goal Weightage</label>
+                                        <input type="number" class="form-control"
+                                               name="goalWeightage" placeholder="Enter Weightage"
+                                               formControlName="weightage"
+                                               required />
+
+                                        <p class="help-block" *ngIf="setGoalFormGroup.get('goalFormGroup').get('weightage').hasError('required')
+                                                                   && setGoalFormGroup.get('goalFormGroup').get('weightage').touched">* Weightage is required</p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <button type="submit" class="btn btn-primary goal_submit_button"
+                                        [disabled]="!setGoalFormGroup.get('goalFormGroup').valid"
+                                        (click)="addUpdateIterationGoal()">
+                                    Submit
+                                </button>
+
+                                <button type="button" class="btn btn-warning ml-3"
+                                        (click)="resetAddUpdateFormGroup()">
+                                    Reset
+                                </button>
+
+                            </div>
+
+                     
+
+                </div>
+
+                <!--GOALs CHOSEN-->
 
             </form>
 
