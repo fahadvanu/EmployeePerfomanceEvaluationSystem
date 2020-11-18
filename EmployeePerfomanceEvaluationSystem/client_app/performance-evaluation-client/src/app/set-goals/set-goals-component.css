@@ -144,3 +144,36 @@
 .set_goals_button{
     display: inline-block;
 }
+
+.existing_goals_container {
+    background: #ffff;
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    margin-bottom: 20px;
+}
+
+.existing_goals_container_row {
+    padding: 20px;
+}
+
+.existing_goal_col{
+    margin-top:20px;
+}
+
+.weightage{
+    text-align:center;
+}
+
+.existing_goal_card{
+    height: 300px;
+}
+
+.footer_buttons{
+    display:flex;
+    justify-content:center;
+}

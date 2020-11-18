@@ -77,11 +77,11 @@
 
                                     <label class="label_controls label_controls_bold col-form-label col-sm-6">Set Goals</label>
 
-                                
+
                                     <div class="col-sm-6 set_goals_button">
 
                                         <button class="btn btn-dark"
-                                                type="button" 
+                                                type="button"
                                                 (click)="updateEmployeeIterationState()">
                                             Activate
                                         </button>
@@ -269,77 +269,126 @@
 
                     <div class="col-md-12 goals_add_update_container_row">
 
-                       
-                                <div class="col-sm-8">
 
-                                    <div class="form-group">
-                                        <label for="goalName">Goal</label>
-                                        <textarea class="form-control"
-                                                  name="goalName" placeholder="Choose Goal..."
-                                                  formControlName="goalTitle"
-                                                  rows="3"
-                                                  readonly
-                                                  spellcheck="false"></textarea>
+                        <div class="col-sm-8">
 
-                                    
-                                    </div>
+                            <div class="form-group">
+                                <label for="goalName">Goal</label>
+                                <textarea class="form-control"
+                                          name="goalName" placeholder="Choose Goal..."
+                                          formControlName="goalTitle"
+                                          rows="3"
+                                          readonly
+                                          spellcheck="false"></textarea>
 
-                                </div>
-
-                                <div class="col-sm-8">
-
-                                    <div class="form-group">
-                                        <label for="goalDescription">Description</label>
-                                        <textarea class="form-control"
-                                                  name="goalDescription" placeholder="Enter Description(Max 300 characters)"
-                                                  formControlName="goalDescription"
-                                                  required
-                                                  maxlength="300"
-                                                  rows="3"
-                                                  spellcheck="false"></textarea>
-
-                                        <p class="help-block" *ngIf="setGoalFormGroup.get('goalFormGroup').get('goalDescription').hasError('required')
-                                                                   && setGoalFormGroup.get('goalFormGroup').get('goalDescription').touched">* Description is required</p>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-sm-4">
-
-                                    <div class="form-group">
-                                        <label for="goalWeightage">Goal Weightage</label>
-                                        <input type="number" class="form-control"
-                                               name="goalWeightage" placeholder="Enter Weightage"
-                                               formControlName="weightage"
-                                               required />
-
-                                        <p class="help-block" *ngIf="setGoalFormGroup.get('goalFormGroup').get('weightage').hasError('required')
-                                                                   && setGoalFormGroup.get('goalFormGroup').get('weightage').touched">* Weightage is required</p>
-
-                                    </div>
-
-                                </div>
-
-
-                                <button type="submit" class="btn btn-primary goal_submit_button"
-                                        [disabled]="!setGoalFormGroup.get('goalFormGroup').valid"
-                                        (click)="addUpdateIterationGoal()">
-                                    Submit
-                                </button>
-
-                                <button type="button" class="btn btn-warning ml-3"
-                                        (click)="resetAddUpdateFormGroup()">
-                                    Reset
-                                </button>
 
                             </div>
 
-                     
+                        </div>
+
+                        <div class="col-sm-8">
+
+                            <div class="form-group">
+                                <label for="goalDescription">Description</label>
+                                <textarea class="form-control"
+                                          name="goalDescription" placeholder="Enter Description(Max 300 characters)"
+                                          formControlName="goalDescription"
+                                          required
+                                          maxlength="300"
+                                          rows="3"
+                                          spellcheck="false"></textarea>
+
+                                <p class="help-block" *ngIf="setGoalFormGroup.get('goalFormGroup').get('goalDescription').hasError('required')
+                                                                   && setGoalFormGroup.get('goalFormGroup').get('goalDescription').touched">* Description is required</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-4">
+
+                            <div class="form-group">
+                                <label for="goalWeightage">Goal Weightage</label>
+                                <input type="number" class="form-control"
+                                       name="goalWeightage" placeholder="Enter Weightage"
+                                       formControlName="weightage"
+                                       required />
+
+                                <p class="help-block" *ngIf="setGoalFormGroup.get('goalFormGroup').get('weightage').hasError('required')
+                                                                   && setGoalFormGroup.get('goalFormGroup').get('weightage').touched">* Weightage is required</p>
+
+                            </div>
+
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary goal_submit_button"
+                                [disabled]="!setGoalFormGroup.get('goalFormGroup').valid"
+                                (click)="addUpdateIterationGoal()">
+                            Submit
+                        </button>
+
+                        <button type="button" class="btn btn-warning ml-3"
+                                (click)="resetAddUpdateFormGroup()">
+                            Reset
+                        </button>
+
+                    </div>
+
+
 
                 </div>
 
                 <!--GOALs CHOSEN-->
+
+                <div class="row existing_goals_container" *ngIf="showGoalSettingSections()">
+
+                    <div class="col-md-12 existing_goals_container_row">
+
+                         <div class="row">
+
+                             <div class="col-md-6 existing_goal_col" *ngFor="let existingGoal of setGoalFormGroup.get('employee_goals').value">
+
+
+                                 <div class="card existing_goal_card">
+                                     <div class="card-header bg-primary text-white text-center">
+                                         {{existingGoal.goalTitle}}
+                                     </div>
+                                     <div class="card-body">
+
+                                         <p>{{existingGoal.description}}</p>
+                                         <p>Last Updated : {{existingGoal.lastUpdated | date:'dd/MM/yyy hh:mm'}}</p>
+
+                                         <p class="weightage"> {{existingGoal.weightage}}%</p>
+                                     </div>
+                                     <div class="card-footer">
+
+                                         <div class="footer_buttons">
+
+                                             <button type="button" class="btn btn-default"
+                                                     (click)="addGoal(goal)">
+                                                 <span class="fa fa-edit fa-lg" title="Add Goal"></span>
+                                             </button>
+
+                                             <button type="button" class="btn btn-default"
+                                                     (click)="addGoal(goal)">
+                                                 <span class="fa fa-remove fa-lg" title="Add Goal"></span>
+                                             </button>
+
+                                         </div>
+
+                                     </div>
+                                 </div>
+
+                             </div>
+
+                         </div>
+
+                    </div>
+
+                </div>
+
+
 
             </form>
 

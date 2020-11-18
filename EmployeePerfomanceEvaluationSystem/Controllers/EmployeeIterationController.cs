@@ -62,7 +62,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
 
 
                 var iteration = await _iterationRepository.GetIteration(employeeIterationGoalRequestModel.IterationId);
-                if(null != iteration && iteration.Status != (int)Constants.Constants.ITERATION_STATUS.ACTIVE)
+                if(null == iteration || iteration.Status != (int)Constants.Constants.ITERATION_STATUS.ACTIVE)
                      return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Iteration." });
 
                 var iterationGoal = await _employeeIterationRepository.GetEmployeeIterationGoal(employeeIterationGoalRequestModel.EmployeeId,
@@ -128,7 +128,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
 
 
                 var iteration = await _iterationRepository.GetIteration(updateEmployeeIterationStateRequestModel.IterationId);
-                if (null != iteration && iteration.Status != (int)Constants.Constants.ITERATION_STATUS.ACTIVE)
+                if (null == iteration || iteration.Status != (int)Constants.Constants.ITERATION_STATUS.ACTIVE)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Iteration." });
 
 
@@ -143,6 +143,34 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 _logger.LogError(ex, "Failed to update employee iteration state");
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to update employee iteration state" });
+            }
+        }
+
+        [HttpPost("employee-iteration-goals")]
+        [Authorize]
+        public async Task<IActionResult> GetEmployeeIterationGoals([FromBody] IterationGoalRequestModel iterationGoalRequestModel)
+        {
+            try
+            {
+
+                var user = await _userService.GetUserById(iterationGoalRequestModel.EmployeeId);
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {iterationGoalRequestModel.EmployeeId} does not exists" });
+
+                var iteration = await _iterationRepository.GetIteration(iterationGoalRequestModel.IterationId);
+                if (null == iteration)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Iteration." });
+
+
+                var employeeIterationGoals = await _employeeIterationRepository.GetEmployeeIterationGoals(iterationGoalRequestModel.EmployeeId,
+                                                                             iterationGoalRequestModel.IterationId);
+
+                return Ok(new ApiResponseOKResult() { Data = employeeIterationGoals });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch employee iteration goals");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch employee iteration goals" });
             }
         }
     }

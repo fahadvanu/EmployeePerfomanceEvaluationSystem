@@ -37,6 +37,7 @@
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\iteration\iteration-reponse-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\iteration\update-iteration-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal-request-model.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\update-iteration-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\approve-reporting-manager-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\user\registered-users.ts" />
@@ -126,6 +127,7 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\iteration\iteration-reponse-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\iteration\update-iteration-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal-request-model.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\update-iteration-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\approve-reporting-manager-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\user\registered-users.ts" />

@@ -54,4 +54,20 @@ export class SetGoalsService {
 
         return this.http.post<ApiResponse>('/api/employee-iteration/update-employee-iteration-state', updateEmployeeIterationRequestModel, httpOptions);
     }
+
+    getEmployeeIterationGoals(reportingUserId: number, iterationId: number): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>(`/api/employee-iteration/employee-iteration-goals/`,
+            { employeeId: reportingUserId, iterationId: iterationId },
+            httpOptions);
+
+    }
 }

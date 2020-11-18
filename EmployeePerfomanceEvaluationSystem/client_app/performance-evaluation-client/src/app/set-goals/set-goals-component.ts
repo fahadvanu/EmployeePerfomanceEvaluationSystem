@@ -14,6 +14,7 @@ import { Constant } from '../shared/constant/constants';
 import { EmployeeIterationGoalRequestModel } from '../shared/models/set-goals/employee-iteration-goal-request-model';
 import { UpdateEmployeeIterationState } from '../shared/models/set-goals/update-iteration-request-model';
 import { UpdateIterationRequestModel } from '../shared/models/iteration/update-iteration-request-model';
+import { EmployeeIerationGoal } from '../shared/models/set-goals/employee-iteration-goal';
 
 @Component({
     templateUrl: './set-goals-component.html',
@@ -64,7 +65,11 @@ export class SetGoalsComponent implements OnInit {
                 goalTitle: ['', [Validators.required]],
                 goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
                 weightage:['', [Validators.required]]
-            })
+            }),
+            employee_goals: this.setGoalsFormBuilder.array([])
+            //employeeGoalsFormGroup: this.setGoalsFormBuilder.group({
+            //    employee_goals: this.setGoalsFormBuilder.array([])
+            //})
         })
     }
 
@@ -88,14 +93,26 @@ export class SetGoalsComponent implements OnInit {
                 this.setGoalFormGroup.controls['goalsToDisplay'] = this.setGoalsFormBuilder.array(
                                                             goals.slice().map(i => this.setGoalsFormBuilder.group(i)));
 
+               
+                this.employeeIterationStateId = responses[3].data;
+
+                let employee_goals: Array<EmployeeIerationGoal> = new Array<EmployeeIerationGoal>();
+                if (responses[4].data != null) {
+
+                    employee_goals = EmployeeIerationGoal.FormEmployeeIterationGoalModelArray(responses[4]);
+
+                    this.setGoalFormGroup.controls['employee_goals'] = this.setGoalsFormBuilder.array(
+                        employee_goals.slice().map(i => this.setGoalsFormBuilder.group(i)));
+                }
+
                 this.setGoalFormGroup.patchValue({
 
                     user: responses[0].data,
                     iteration: responses[1].data
                 });
 
-                this.employeeIterationStateId = responses[3].data;
                 console.log(this.setGoalFormGroup.value);
+
                 this.loading = false;
                 this.spinnerService.idle();
             },
@@ -176,21 +193,45 @@ export class SetGoalsComponent implements OnInit {
         addUpdateFormGroup.reset();
     }
 
-    addGoal(goal: Goal) {
+    addGoal(goalToAdd: Goal) {
 
         let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
-        addUpdateFormGroup.patchValue({
-            goalId: goal.goalId,
-            goalTitle: goal.goalName,
-            goalDescription: '',
-            weightage: ''
-        });
+
+        let existing_goals = this.setGoalFormGroup.get('employee_goals').value;
+        let goal = existing_goals.find(x => x.goalId === goalToAdd.goalId);
+        let weightage_sum = existing_goals.reduce((sum, cur) => sum + cur.weightage, 0);
+        console.log(weightage_sum);
+
+        if (goal != null) {
+            this.toastrNotificationService.warning(`Goal ${goalToAdd.goalName} already added`);
+        }
+        else if (weightage_sum == 100) {
+            this.toastrNotificationService.warning(`Goals already added have total of 100% weightage`);
+        }
+        else {
+            addUpdateFormGroup.patchValue({
+                goalId: goalToAdd.goalId,
+                goalTitle: goalToAdd.goalName,
+                goalDescription: '',
+                weightage: ''
+            });
+        }
+    }
+
+    private isValidWeightageSum(currentWeightage): boolean {
+        let valid: boolean = true;
+        let existing_goals = this.setGoalFormGroup.get('employee_goals').value;
+        let weightage_sum = existing_goals.reduce((sum, cur) => sum + cur.weightage, 0);
+        if ((weightage_sum + currentWeightage) > 100)
+            valid = false;
+        return valid;
     }
 
     addUpdateIterationGoal() {
 
         let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
-        if (addUpdateFormGroup.valid && !((addUpdateFormGroup.value.weightage * 1) == 0)) {
+        if (addUpdateFormGroup.valid && !((addUpdateFormGroup.value.weightage * 1) == 0)
+            && this.isValidWeightageSum(addUpdateFormGroup.value.weightage * 1)) {
 
             this.modalRef = this.modalService.show(ConfirmModalComponent, {
                 initialState: {
@@ -221,6 +262,8 @@ export class SetGoalsComponent implements OnInit {
             this.toastrNotificationService.warning('Invalid Data Entered');
         }
     }
+
+
 
     private mapFormGroupToEmployeeGoalRequestModel(): EmployeeIterationGoalRequestModel {
 

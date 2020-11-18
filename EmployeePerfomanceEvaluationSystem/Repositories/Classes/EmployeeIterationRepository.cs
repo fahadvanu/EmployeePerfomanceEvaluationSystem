@@ -1,6 +1,7 @@
 ﻿using EmployeePerfomanceEvaluationSystem.DataContext;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
+using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.EmployeeIteration;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -67,6 +68,29 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
             }
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<EmployeeIterationGoalResponse>> GetEmployeeIterationGoals(int employeeId, int iterationId)
+        {
+
+            var employee_iteration_goals = await _context.EmployeeIterationGoals
+                                                         .Where(i => i.EmployeeId == employeeId && i.IterationId == iterationId)
+                                                         .Include(x => x.Goal)
+                                                         .Select(y => new EmployeeIterationGoalResponse
+                                                         {
+                                                             Id = y.Id,
+                                                             EmployeeId = y.EmployeeId,
+                                                             ReportingManagerId = y.ReportingManagerId,
+                                                             IterationId = y.IterationId,
+                                                             GoalId = y.GoalId,
+                                                             GoalTitle = y.Goal.GoalName,
+                                                             Description = y.Description,
+                                                             Weightage = y.Weightage,
+                                                             LastUpdated = y.CreatedDate
+
+                                                         }).ToListAsync();
+
+            return employee_iteration_goals;
         }
     }
 }

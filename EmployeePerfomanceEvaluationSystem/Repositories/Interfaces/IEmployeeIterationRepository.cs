@@ -1,4 +1,5 @@
 ﻿using EmployeePerfomanceEvaluationSystem.Models;
+using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.EmployeeIteration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
         Task<EmployeeIterationGoals> GetEmployeeIterationGoal(int employeeId, int iterationId, int goalId);
         Task<EmployeeIterationState> GetEmployeeIterationState(int employeeId, int iterationId);
         Task UpdateEmployeeIterationState(int employeeId, int iterationId, int iterationStateId, int reportingManagerId);
+        Task<List<EmployeeIterationGoalResponse>> GetEmployeeIterationGoals(int employeeId, int iterationId);
     }
 }
