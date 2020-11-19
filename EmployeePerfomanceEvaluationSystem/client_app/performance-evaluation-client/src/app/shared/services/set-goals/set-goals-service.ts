@@ -70,4 +70,30 @@ export class SetGoalsService {
             httpOptions);
 
     }
+
+    updateEmployeeIterationGoal(employeeIterationGoalRequestModel: EmployeeIterationGoalRequestModel): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>(`/api/employee-iteration/update-iteration-goal/${employeeIterationGoalRequestModel.id}`, employeeIterationGoalRequestModel, httpOptions);
+    }
+
+    removeEmployeeIterationGoal(employeeIterationGoalId: number): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.delete<ApiResponse>(`/api/employee-iteration/remove-iteration-goal/${employeeIterationGoalId}`, httpOptions);
+    }
 }

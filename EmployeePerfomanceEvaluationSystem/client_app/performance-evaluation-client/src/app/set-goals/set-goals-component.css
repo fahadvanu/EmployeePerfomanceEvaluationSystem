@@ -170,10 +170,17 @@
 }
 
 .existing_goal_card{
-    height: 300px;
+    height: 350px;
 }
 
 .footer_buttons{
     display:flex;
     justify-content:center;
+}
+
+.donut_weightage {
+    width: 300px;
+    height: 100px;
+    margin: 0 auto;
+    text-align: center;
 }

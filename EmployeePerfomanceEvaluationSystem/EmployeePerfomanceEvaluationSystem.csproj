@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20201110060722_current_reporting_manager_null.Designer.cs" />
     <Compile Remove="Migrations\20201111073800_iterations.cs" />
     <Compile Remove="Migrations\20201111073800_iterations.Designer.cs" />
+    <Compile Remove="Migrations\20201119111904_fixed_foreign_key.cs" />
+    <Compile Remove="Migrations\20201119111904_fixed_foreign_key.Designer.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031113412_usertable.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031113412_usertable.Designer.cs" />
     <Compile Remove="Migrations\UserIdentityDb\20201031115201_usertable-updates-new.cs" />
@@ -33,7 +35,9 @@
     <None Remove="client_app\performance-evaluation-client\src\app\set-goals\set-goals-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\set-goals\set-goals-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\set-goals\set-goals-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\directives\half-donut-directive.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\half-donut\half-donut-data.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\iteration\iteration-reponse-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\iteration\update-iteration-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal-request-model.ts" />
@@ -123,7 +127,9 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\set-goals\set-goals-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\set-goals\set-goals-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\set-goals\set-goals-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\directives\half-donut\half-donut-directive.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\half-donut\half-donut-data.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\iteration\iteration-reponse-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\iteration\update-iteration-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal-request-model.ts" />

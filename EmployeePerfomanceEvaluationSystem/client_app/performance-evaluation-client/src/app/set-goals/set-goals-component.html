@@ -358,7 +358,12 @@
 
                                          <p>{{existingGoal.description}}</p>
                                          <p>Last Updated : {{existingGoal.lastUpdated | date:'dd/MM/yyy hh:mm'}}</p>
-
+                                         <div class="donut_weightage">
+                                             <half-donut [width]="200"
+                                                          [height]="100"
+                                                         [pieData]="[{value: existingGoal.weightage, label: 'Weightage'},
+                                                                     {value: (100 - existingGoal.weightage), label: 'Weightage'}]"></half-donut>
+                                         </div>
                                          <p class="weightage"> {{existingGoal.weightage}}%</p>
                                      </div>
                                      <div class="card-footer">
@@ -366,13 +371,13 @@
                                          <div class="footer_buttons">
 
                                              <button type="button" class="btn btn-default"
-                                                     (click)="addGoal(goal)">
-                                                 <span class="fa fa-edit fa-lg" title="Add Goal"></span>
+                                                     (click)="editGoal(existingGoal)">
+                                                 <span class="fa fa-edit fa-lg" title="Edit Goal"></span>
                                              </button>
 
                                              <button type="button" class="btn btn-default"
-                                                     (click)="addGoal(goal)">
-                                                 <span class="fa fa-remove fa-lg" title="Add Goal"></span>
+                                                     (click)="removeGoal(existingGoal)">
+                                                 <span class="fa fa-remove fa-lg" title="Remove Goal"></span>
                                              </button>
 
                                          </div>

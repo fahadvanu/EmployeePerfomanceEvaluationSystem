@@ -173,5 +173,69 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch employee iteration goals" });
             }
         }
+
+        [HttpPost("update-iteration-goal/{employeeIterationGoalId}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateIterationGoal(int employeeIterationGoalId, [FromBody] EmployeeIterationGoalRequestModel employeeIterationGoalRequestModel)
+        {
+            try
+            {
+
+                var reportingManagerId = HttpContext.User.GetUserIdClaim();
+
+                var user = await _userService.GetUserById(employeeIterationGoalRequestModel.EmployeeId);
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {employeeIterationGoalRequestModel.EmployeeId} does not exists" });
+
+                if (user.ReportingManagerId != reportingManagerId)
+                    return new JsonResult(new ApiResponseFailure()
+                    {
+                        ErrorMessage = "Requested User has different reporting manager assigned",
+                        StatusCode = (int)StatusCodes.Status403Forbidden
+                    })
+                    { StatusCode = StatusCodes.Status403Forbidden };
+
+
+                var iteration = await _iterationRepository.GetIteration(employeeIterationGoalRequestModel.IterationId);
+                if (null == iteration || iteration.Status != (int)Constants.Constants.ITERATION_STATUS.ACTIVE)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Iteration." });
+
+                var iterationGoal = await _employeeIterationRepository.GetEmployeeIterationGoal(employeeIterationGoalId);
+                if (iterationGoal == null)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Requested Goal not found" });
+
+                var model = _mapper.Map<EmployeeIterationGoals>(employeeIterationGoalRequestModel);
+                model.ReportingManagerId = reportingManagerId;
+                await _employeeIterationRepository.UpdateEmployeeIterationGoal(model);
+
+                return Ok(new ApiResponseOKResult() { Data = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to update iteration goal");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to update iteration goal" });
+            }
+        }
+
+        [HttpDelete("remove-iteration-goal/{employeeIterationGoalId}")]
+        [Authorize]
+        public async Task<IActionResult> RemoveIterationGoal(int employeeIterationGoalId)
+        {
+            try
+            {
+                var iterationGoal = await _employeeIterationRepository.GetEmployeeIterationGoal(employeeIterationGoalId);
+                if (iterationGoal == null)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Requested Goal not found" });
+
+                await _employeeIterationRepository.RemoveEmployeeIterationGoal(employeeIterationGoalId);
+
+                return Ok(new ApiResponseOKResult() { Data = true });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to remove iteration goal");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to remove iteration goal" });
+            }
+        }
     }
 }

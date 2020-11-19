@@ -49,7 +49,7 @@ namespace EmployeePerfomanceEvaluationSystem.ModelConfiguration
 
             builder.HasOne<IterationStates>(s => s.IterationState)
                    .WithMany()
-                   .HasForeignKey(s => s.IterationId);
+                   .HasForeignKey(s => s.IterationStateId);
 
           
             builder.HasIndex(x => new { x.EmployeeId, x.IterationId });

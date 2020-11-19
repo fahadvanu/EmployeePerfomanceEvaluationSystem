@@ -35,6 +35,13 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
             return iterationGoal;
         }
 
+        public async Task<EmployeeIterationGoals> GetEmployeeIterationGoal(int employeeIterationGoalId)
+        {
+            var iterationGoal = await _context.EmployeeIterationGoals.Where(x => x.Id == employeeIterationGoalId)
+                                                                      .SingleOrDefaultAsync();
+            return iterationGoal;
+        }
+
         public async Task<EmployeeIterationState> GetEmployeeIterationState(int employeeId, int iterationId)
         {
             var iterationState = await _context.EmployeeIterationStates.Where(x => x.EmployeeId == employeeId
@@ -91,6 +98,24 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
                                                          }).ToListAsync();
 
             return employee_iteration_goals;
+        }
+
+        public async Task<EmployeeIterationGoals> UpdateEmployeeIterationGoal(EmployeeIterationGoals employeeIterationGoal)
+        {
+            var iterationGoal = await _context.EmployeeIterationGoals.Where(x => x.Id == employeeIterationGoal.Id)
+                                                                      .SingleOrDefaultAsync();
+            iterationGoal.Weightage = employeeIterationGoal.Weightage;
+            iterationGoal.Description = employeeIterationGoal.Description;
+            await _context.SaveChangesAsync();
+            return iterationGoal;
+        }
+
+        public async Task RemoveEmployeeIterationGoal(int employeeIterationGoalId)
+        {
+            var iterationGoal = await _context.EmployeeIterationGoals.Where(x => x.Id == employeeIterationGoalId)
+                                                                      .SingleOrDefaultAsync();
+            _context.EmployeeIterationGoals.Remove(iterationGoal);
+            await _context.SaveChangesAsync();
         }
     }
 }

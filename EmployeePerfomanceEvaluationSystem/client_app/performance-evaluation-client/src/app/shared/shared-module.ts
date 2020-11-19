@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationPipePipe } from '../shared/pipes/pagination-client';
 import { ControlsValueMatchValidator } from './directives/match-controls-directive';
+import { HalfDonutDirectiveComponent } from './directives/half-donut/half-donut-directive';
 
 @NgModule({
     declarations: [
         PaginationPipePipe,
-        ControlsValueMatchValidator
+        ControlsValueMatchValidator,
+        HalfDonutDirectiveComponent
     ],
     imports: [
         CommonModule,
@@ -19,7 +21,8 @@ import { ControlsValueMatchValidator } from './directives/match-controls-directi
         FormsModule,
         ReactiveFormsModule,
         PaginationPipePipe,
-        ControlsValueMatchValidator
+        ControlsValueMatchValidator,
+        HalfDonutDirectiveComponent
     ]
 })
 export class SharedModule {

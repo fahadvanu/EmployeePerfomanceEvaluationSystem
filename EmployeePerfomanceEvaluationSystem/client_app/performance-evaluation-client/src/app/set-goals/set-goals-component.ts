@@ -61,6 +61,7 @@ export class SetGoalsComponent implements OnInit {
             searchTerm: [''],
             currentPage: [1],
             goalFormGroup: this.setGoalsFormBuilder.group({
+                id: [0],
                 goalId: [''],
                 goalTitle: ['', [Validators.required]],
                 goalDescription: ['', [Validators.required, Validators.maxLength(300)]],
@@ -184,6 +185,7 @@ export class SetGoalsComponent implements OnInit {
 
         let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
         addUpdateFormGroup.patchValue({
+            id: 0,
             goalId: '',
             goalTitle: '',
             goalDescription: '',
@@ -210,6 +212,7 @@ export class SetGoalsComponent implements OnInit {
         }
         else {
             addUpdateFormGroup.patchValue({
+                id: 0,
                 goalId: goalToAdd.goalId,
                 goalTitle: goalToAdd.goalName,
                 goalDescription: '',
@@ -221,16 +224,39 @@ export class SetGoalsComponent implements OnInit {
     private isValidWeightageSum(currentWeightage): boolean {
         let valid: boolean = true;
         let existing_goals = this.setGoalFormGroup.get('employee_goals').value;
-        let weightage_sum = existing_goals.reduce((sum, cur) => sum + cur.weightage, 0);
-        if ((weightage_sum + currentWeightage) > 100)
-            valid = false;
+        let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
+        if (addUpdateFormGroup.value.id == 0) {
+            let weightage_sum = existing_goals.reduce((sum, cur) => sum + cur.weightage, 0);
+            if ((weightage_sum + currentWeightage) > 100)
+                valid = false;
+        }
+        else {
+            let existing_goals_edit = existing_goals.filter(x => x.goalId !== addUpdateFormGroup.value.goalId);
+            let weightage_sum = existing_goals_edit.reduce((sum, cur) => sum + cur.weightage, 0);
+            if ((weightage_sum + currentWeightage) > 100)
+                valid = false;
+        }
         return valid;
+    }
+
+    editGoal(goal: EmployeeIerationGoal) {
+
+        let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
+      
+        addUpdateFormGroup.patchValue({
+            id: goal.id,
+            goalId: goal.goalId,
+            goalTitle: goal.goalTitle,
+            goalDescription: goal.description,
+            weightage: goal.weightage
+         });
+        
     }
 
     addUpdateIterationGoal() {
 
         let addUpdateFormGroup: FormGroup = <FormGroup>this.setGoalFormGroup.get('goalFormGroup');
-        if (addUpdateFormGroup.valid && !((addUpdateFormGroup.value.weightage * 1) == 0)
+        if (addUpdateFormGroup.valid && !((addUpdateFormGroup.value.weightage * 1) <= 0)
             && this.isValidWeightageSum(addUpdateFormGroup.value.weightage * 1)) {
 
             this.modalRef = this.modalService.show(ConfirmModalComponent, {
@@ -242,17 +268,36 @@ export class SetGoalsComponent implements OnInit {
                             this.spinnerService.updateMessage('Saving Iteration Goal. Please wait.....');
                             this.spinnerService.busy();
                             let userUpdateRequestModel: EmployeeIterationGoalRequestModel = this.mapFormGroupToEmployeeGoalRequestModel();
-                            this.setGoalsService.addEmployeeIterationGoal(userUpdateRequestModel)
-                                .subscribe((response: ApiResponse) => {
 
-                                    addUpdateFormGroup.reset();
-                                    this.spinnerService.idle();
-                                    this.toastrNotificationService.success('Goal added successfully');
-                                },
-                                error => {
-                                     this.spinnerService.idle();
-                                     console.log('Exception occured while adding goal');
-                                });
+                            if (userUpdateRequestModel.id == 0) {
+
+                                this.setGoalsService.addEmployeeIterationGoal(userUpdateRequestModel)
+                                    .subscribe((response: ApiResponse) => {
+
+                                        addUpdateFormGroup.reset();
+                                        this.refreshGoalsAfterDbOperation('Goal added successfully');
+
+                                    },
+                                    error => {
+                                         this.spinnerService.idle();
+                                         console.log('Exception occured while adding goal');
+                                    });
+
+                            }
+                            else {
+
+                                this.setGoalsService.updateEmployeeIterationGoal(userUpdateRequestModel)
+                                    .subscribe((response: ApiResponse) => {
+
+                                        addUpdateFormGroup.reset();
+                                        this.refreshGoalsAfterDbOperation('Goal updated successfully');
+                                    },
+                                    error => {
+
+                                        this.spinnerService.idle();
+                                        console.log('Exception occured while updating goal');
+                                    });
+                            }
                         }
                     }
                 }
@@ -263,6 +308,57 @@ export class SetGoalsComponent implements OnInit {
         }
     }
 
+    removeGoal(goal: EmployeeIerationGoal) {
+
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: `Continue to remove iteration goal - ${goal.goalTitle }?`,
+                callback: (result) => {
+                    if (result) {
+
+                        this.spinnerService.updateMessage('Deleting Iteration Goal. Please wait.....');
+                        this.spinnerService.busy();
+                     
+                        this.setGoalsService.removeEmployeeIterationGoal(goal.id)
+                                .subscribe((response: ApiResponse) => {
+
+                                    this.refreshGoalsAfterDbOperation('Goal deleted successfully');
+
+                                },
+                                error => {
+                                    this.spinnerService.idle();
+                                    console.log('Exception occured while deleting goal');
+                                });
+                    }
+                }
+            }
+        });
+
+    }
+
+
+    private refreshGoalsAfterDbOperation(message: string) {
+
+        this.setGoalsService.getEmployeeIterationGoals(this.employeeId, this.iterationId)
+            .subscribe((response: ApiResponse) => {
+
+                let employee_goals: Array<EmployeeIerationGoal> = new Array<EmployeeIerationGoal>();
+                if (response.data != null) {
+
+                    employee_goals = EmployeeIerationGoal.FormEmployeeIterationGoalModelArray(response);
+
+                    this.setGoalFormGroup.controls['employee_goals'] = this.setGoalsFormBuilder.array(
+                        employee_goals.slice().map(i => this.setGoalsFormBuilder.group(i)));
+                }
+
+                this.spinnerService.idle();
+                this.toastrNotificationService.success(message);
+            },
+            error => {
+                 this.spinnerService.idle();
+                 console.log('Exception occured while fetching employee iteration goals');
+            });
+    }
 
 
     private mapFormGroupToEmployeeGoalRequestModel(): EmployeeIterationGoalRequestModel {
@@ -274,6 +370,7 @@ export class SetGoalsComponent implements OnInit {
         employeeIterationGoalRequestModel.description = addUpdateFormGroup.value.goalDescription;
         employeeIterationGoalRequestModel.goalId = addUpdateFormGroup.value.goalId * 1;
         employeeIterationGoalRequestModel.weightage = addUpdateFormGroup.value.weightage * 1;
+        employeeIterationGoalRequestModel.id = addUpdateFormGroup.value.id * 1;
 
         return employeeIterationGoalRequestModel;
     }
