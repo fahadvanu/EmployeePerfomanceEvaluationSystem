@@ -379,27 +379,44 @@ export class SetGoalsComponent implements OnInit {
         return this.employeeIterationStateId != Constant.ITERATION_STATE.NOT_STARTED;
     }
 
+    isGoalSet() {
+        return this.employeeIterationStateId > Constant.ITERATION_STATE.SET_GOALS;
+    }
+
     updateEmployeeIterationState() {
 
+            if (this.employeeIterationStateId == Constant.ITERATION_STATE.SET_GOALS) {
+
+                let result: boolean = this.checkGoalsSetAreALLValid();
+                if (!result) {
+                    this.toastrNotificationService.failed('Weightage sum for all goals added should be 100%');
+                    return;
+                }
+            }
+
+            let message = (this.employeeIterationStateId == Constant.ITERATION_STATE.NOT_STARTED) ? 'SET GOALS' : 'EMPLOYEE SELF EVALUATION';
             this.modalRef = this.modalService.show(ConfirmModalComponent, {
                 initialState: {
-                    promptMessage: 'Activate Iteration for setting goals?',
+                    promptMessage: `Proceed Iteration stage for ${message}?`,
                     callback: (result) => {
                         if (result) {
 
-                            this.spinnerService.updateMessage('Activating Iteration. Please wait.....');
+                            
+                            this.spinnerService.updateMessage(`Proceeding ${message} state. Please wait.....`);
                             this.spinnerService.busy();
                             let updateIterationStateRequestModel: UpdateEmployeeIterationState = new UpdateEmployeeIterationState();
                             updateIterationStateRequestModel.employeeId = this.employeeId * 1;
                             updateIterationStateRequestModel.iterationId = this.iterationId * 1;
-                            updateIterationStateRequestModel.iterationStateId = Constant.ITERATION_STATE.SET_GOALS;
+                            updateIterationStateRequestModel.iterationStateId = (this.employeeIterationStateId == Constant.ITERATION_STATE.NOT_STARTED)
+                                                                                ? Constant.ITERATION_STATE.SET_GOALS
+                                                                                : Constant.ITERATION_STATE.SELF_EVALUATION;
 
                             this.setGoalsService.updateEmployeeIterationState(updateIterationStateRequestModel)
                                 .subscribe((response: ApiResponse) => {
 
-                                    this.employeeIterationStateId = Constant.ITERATION_STATE.SET_GOALS;
+                                    this.employeeIterationStateId = updateIterationStateRequestModel.iterationStateId;
                                     this.spinnerService.idle();
-                                    this.toastrNotificationService.success('Iteration state actiated successfully');
+                                    this.toastrNotificationService.success('Iteration state activated successfully');
                                 },
                                 error => {
                                     this.spinnerService.idle();
@@ -409,5 +426,39 @@ export class SetGoalsComponent implements OnInit {
                     }
                 }
             });       
+    }
+
+    private checkGoalsSetAreALLValid(): boolean {
+
+        let valid: boolean = true;
+
+        let existing_goals = this.setGoalFormGroup.get('employee_goals').value;
+        let weightage_sum = existing_goals.reduce((sum, cur) => sum + cur.weightage, 0);
+        if ((weightage_sum) != 100)
+            valid = false;
+
+        return valid;
+    }
+
+    showSelfEvaluationButton() {
+        return this.employeeIterationStateId == Constant.ITERATION_STATE.SET_GOALS;
+    }
+
+    showSetGoalsButton() {
+        return this.employeeIterationStateId == Constant.ITERATION_STATE.NOT_STARTED;
+    }
+
+    getIterationCurrentState() {
+
+        if (this.employeeIterationStateId == Constant.ITERATION_STATE.NOT_STARTED)
+            return Constant.NOT_STARTED;
+
+        if (this.employeeIterationStateId == Constant.ITERATION_STATE.SET_GOALS)
+            return Constant.SET_GOALS;
+
+        if (this.employeeIterationStateId == Constant.ITERATION_STATE.SELF_EVALUATION)
+            return Constant.EMPLOYEE_EVALUATION;
+
+        return Constant.NOT_STARTED;
     }
 }

@@ -71,7 +71,16 @@
 
                             </div>
 
-                            <div class="row iteration_details_container_row" *ngIf="!showGoalSettingSections()">
+                            <div class="row iteration_details_container_row" *ngIf="showSetGoalsButton()">
+
+                                <div class="col-sm-12">
+
+                                    <label class="label_controls label_controls_bold col-form-label col-sm-6">Current State</label>
+
+                                    <label class="label_controls col-form-label col-sm-6">
+                                        {{getIterationCurrentState()}}
+                                    </label>
+                                </div>
 
                                 <div class="col-sm-12">
 
@@ -83,12 +92,57 @@
                                         <button class="btn btn-dark"
                                                 type="button"
                                                 (click)="updateEmployeeIterationState()">
-                                            Activate
+                                            Proceed
                                         </button>
 
                                     </div>
                                 </div>
 
+
+                            </div>
+
+                            <div class="row iteration_details_container_row" *ngIf="showSelfEvaluationButton()">
+
+
+                                <div class="col-sm-12">
+
+                                    <label class="label_controls label_controls_bold col-form-label col-sm-6">Current State</label>
+
+                                    <label class="label_controls col-form-label col-sm-6">
+                                        {{getIterationCurrentState()}}
+                                    </label>
+                                </div>
+
+
+                                <div class="col-sm-12">
+
+                                    <label class="label_controls label_controls_bold col-form-label col-sm-6">Self Evaluation</label>
+
+
+                                    <div class="col-sm-6 set_goals_button">
+
+                                        <button class="btn btn-dark"
+                                                type="button"
+                                                (click)="updateEmployeeIterationState()">
+                                            Proceed
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row iteration_details_container_row" *ngIf="isGoalSet()">
+
+
+                                <div class="col-sm-12">
+
+                                    <label class="label_controls label_controls_bold col-form-label col-sm-6">Current State</label>
+
+                                    <label class="label_controls col-form-label col-sm-6">
+                                        {{getIterationCurrentState()}}
+                                    </label>
+                                </div>
 
                             </div>
 
@@ -178,7 +232,7 @@
 
                 <!-- GOALS -->
 
-                <div class="row goals_table_container" *ngIf="showGoalSettingSections()">
+                <div class="row goals_table_container" *ngIf="showGoalSettingSections() && !isGoalSet()">
 
                     <div class="col-md-12 mt-4 goals_table_row">
 
@@ -265,7 +319,7 @@
 
                 <!-- GOALS ADD/UPDATE -->
 
-                <div class="row goals_add_update_container" formGroupName="goalFormGroup" *ngIf="showGoalSettingSections()">
+                <div class="row goals_add_update_container" formGroupName="goalFormGroup" *ngIf="showGoalSettingSections() && !isGoalSet()">
 
                     <div class="col-md-12 goals_add_update_container_row">
 
@@ -345,6 +399,10 @@
 
                     <div class="col-md-12 existing_goals_container_row">
 
+                        <div class="row no_goals" *ngIf="setGoalFormGroup.get('employee_goals').value.length == 0">
+                            <h4> No goals added </h4>
+                        </div>
+
                          <div class="row">
 
                              <div class="col-md-6 existing_goal_col" *ngFor="let existingGoal of setGoalFormGroup.get('employee_goals').value">
@@ -360,15 +418,16 @@
                                          <p>Last Updated : {{existingGoal.lastUpdated | date:'dd/MM/yyy hh:mm'}}</p>
                                          <div class="donut_weightage">
                                              <half-donut [width]="200"
-                                                          [height]="100"
+                                                         [height]="100"
                                                          [pieData]="[{value: existingGoal.weightage, label: 'Weightage'},
                                                                      {value: (100 - existingGoal.weightage), label: 'Weightage'}]"></half-donut>
+                                             <p class="weightage"> {{existingGoal.weightage}}%</p>
                                          </div>
-                                         <p class="weightage"> {{existingGoal.weightage}}%</p>
+                                      
                                      </div>
                                      <div class="card-footer">
 
-                                         <div class="footer_buttons">
+                                         <div class="footer_buttons" *ngIf="!isGoalSet()">
 
                                              <button type="button" class="btn btn-default"
                                                      (click)="editGoal(existingGoal)">

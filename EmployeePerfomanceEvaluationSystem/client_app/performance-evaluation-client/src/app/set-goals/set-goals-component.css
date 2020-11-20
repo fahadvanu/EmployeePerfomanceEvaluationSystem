@@ -165,8 +165,11 @@
     margin-top:20px;
 }
 
-.weightage{
-    text-align:center;
+.weightage {
+    
+    position: absolute;
+    top: 59px;
+    width: 100%;
 }
 
 .existing_goal_card{
@@ -183,4 +186,11 @@
     height: 100px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+}
+
+.no_goals{
+    display:flex;
+    justify-content:center;
+    align-content:center;
 }
