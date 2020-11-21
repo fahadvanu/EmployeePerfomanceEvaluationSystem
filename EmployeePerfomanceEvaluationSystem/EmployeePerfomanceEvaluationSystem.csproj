@@ -24,6 +24,9 @@
   <ItemGroup>
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-routing-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\goals\goals-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\iteration\iteration-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\iteration\iteration-module.ts" />
@@ -38,6 +41,7 @@
     <None Remove="client_app\performance-evaluation-client\src\app\shared\directives\half-donut-directive.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\half-donut\half-donut-data.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\iteration\iteration-details-response.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\iteration\iteration-reponse-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\iteration\update-iteration-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal-request-model.ts" />
@@ -116,6 +120,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\accounts\accounts-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-routing-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\goals\goals-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\iteration\iteration-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\iteration\iteration-module.ts" />
@@ -130,6 +137,7 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\directives\half-donut\half-donut-directive.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\goals\goal.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\half-donut\half-donut-data.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\iteration\iteration-details-response.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\iteration\iteration-reponse-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\iteration\update-iteration-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal-request-model.ts" />

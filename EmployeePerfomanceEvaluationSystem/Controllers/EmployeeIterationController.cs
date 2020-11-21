@@ -10,6 +10,7 @@ using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.EmployeeIteration;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
+using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.EmployeeIteration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -235,6 +236,33 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 _logger.LogError(ex, "Failed to remove iteration goal");
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to remove iteration goal" });
+            }
+        }
+
+        [HttpPost("employee-iteration-details")]
+        [Authorize]
+        public async Task<IActionResult> EmployeeIterationDetails([FromBody] IterationDetailsRequestModel iterationDetailsRequestModel)
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+
+                var iteration = await _iterationRepository.GetIteration(iterationDetailsRequestModel.IterationId);
+                if (iteration == null)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Requested Iteration not found" });
+
+                var iterationState = await _employeeIterationRepository.GetEmployeeIterationState(userId, 
+                                                                             iterationDetailsRequestModel.IterationId);
+                var response = _mapper.Map<IterationDetailsResponseModel>(iteration);
+                response.IterationStateId = (iterationState == null) ? (int)Constants.Constants.ITERATION_STATE.NOT_STARTED
+                                                                     : iterationState.IterationStateId;
+
+                return Ok(new ApiResponseOKResult() { Data = response });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch iteration details");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch iteration details" });
             }
         }
     }

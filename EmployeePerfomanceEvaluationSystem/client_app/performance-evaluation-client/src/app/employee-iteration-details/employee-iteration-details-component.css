@@ -1,0 +1,106 @@
+﻿
+.container_row {
+    background: #F1F1F1;
+    box-sizing: border-box;
+}
+
+.title_Col {
+    margin-top: 1em;
+}
+
+.label_controls_bold {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.title_iteration_details {
+    background: #ffff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.review_period_container {
+    background: #ffff;
+    height: 80px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    padding-left: 12px !important;
+   
+}
+
+.review_period_details_container {
+    background: #ffff;
+    height: 150px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+  
+}
+
+.review_period_details_container_row {
+    width: 100%;
+    display: block;
+}
+
+.review_period_col {
+    padding: 0px;
+}
+
+.review_period_dropdown {
+    margin-bottom: 0px;
+    width: 50%;
+}
+
+.user_details_div {
+    padding: 0px;
+}
+
+.user_details_container {
+    background: #ffff;
+    height: 150px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    margin-bottom: 20px;
+
+}
+
+.user_details_container_row {
+    width: 100%;
+    display: block;
+}
+
+.iteration_details_container {
+    background: #ffff;
+    height: 150px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+.iteration_details_container_row {
+    width: 100%;
+    display: block;
+}
+
+.iteration_details_div {
+    padding: 0px;
+}
