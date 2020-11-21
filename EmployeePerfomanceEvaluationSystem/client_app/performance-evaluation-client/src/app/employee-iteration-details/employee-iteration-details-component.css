@@ -104,3 +104,7 @@
 .iteration_details_div {
     padding: 0px;
 }
+
+.iteration_details_button{
+    display: inline-block;
+}

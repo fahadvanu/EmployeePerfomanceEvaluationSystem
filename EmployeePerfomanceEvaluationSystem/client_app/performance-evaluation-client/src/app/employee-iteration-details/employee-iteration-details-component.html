@@ -231,15 +231,29 @@
 
                                     <label class="label_controls col-form-label col-sm-7">
                                         <progressbar max="100" [value]="iterationStepCompleted" type="danger" [striped]="true" [animate]="true">
-                                            <i> 
+                                            <i>
                                                 {{getStepsCompleted(iterationDetailResponseModel.iterationStateId)}} / 4
-                                             </i>
+                                            </i>
                                         </progressbar>
-                                       
+
                                     </label>
                                 </div>
 
-                            
+                                <div class="col-sm-12" *ngIf="iterationDetailResponseModel.iterationStateId > 1">
+
+                                    <label class="label_controls label_controls_bold col-form-label col-sm-5">View Details</label>
+
+                                    <div class="col-sm-7 iteration_details_button">
+
+                                        <button class="btn btn-dark"
+                                                type="button"
+                                                (click)="viewIterationDetails()">
+                                            Proceed
+                                        </button>
+
+                                    </div>
+
+                                </div>
 
                             </div>
 

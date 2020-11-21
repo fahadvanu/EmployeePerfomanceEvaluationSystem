@@ -169,4 +169,19 @@ export class EmployeeIterationDetailsComponent implements OnInit {
             this.iterationStepCompleted = 100;
 
     }
+
+    viewIterationDetails() {
+
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: `Continue to view iteration ${ this.iterationDetailResponseModel.title }`,
+                callback: (result) => {
+                    if (result) {
+
+                        this.router.navigate(['/view-iteration/user', this.user.id, 'iteration', this.iterationDetailResponseModel.iterationId])
+                    }
+                }
+            }
+        });
+    }
 }
