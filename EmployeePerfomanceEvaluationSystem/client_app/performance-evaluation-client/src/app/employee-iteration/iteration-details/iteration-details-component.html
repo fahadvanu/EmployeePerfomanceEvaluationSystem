@@ -1,0 +1,119 @@
+﻿<div class="row" *ngIf="iteration != null">
+
+    <div class="col-md-12 iteration_details_div">
+
+        <div class="iteration_details_container">
+
+            <div class="row iteration_details_container_row">
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Title</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{iteration.title}}
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Start Date</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{iteration.startDate}}
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">End Date</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{iteration.endDate}}
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="row iteration_details_container_row">
+
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Created Date</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{ iteration.createdDate}}
+                    </label>
+                </div>
+
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Activated Date</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{ iteration.activatedDate }}
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Status</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{ getIterationStatus(iteration.status) }}
+                    </label>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row" *ngIf="iteration != null">
+
+    <div class="col-md-12 iteration_details_div">
+
+        <div class="iteration_details_container">
+
+            <div class="row iteration_details_container_row">
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-5">Current Step</label>
+
+                    <label class="label_controls col-form-label col-sm-7">
+                        {{ getIterationState(iteration.iterationStateId) }}
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-5">Steps Completed </label>
+
+                    <label class="label_controls col-form-label col-sm-7">
+                        <progressbar max="100" [value]="iterationStepCompleted" type="danger" [striped]="true" [animate]="true">
+                            <i>
+                                {{getStepsCompleted(iteration.iterationStateId)}} / 4
+                            </i>
+                        </progressbar>
+
+                    </label>
+                </div>
+
+           
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

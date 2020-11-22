@@ -1,0 +1,25 @@
+﻿.user_details_div {
+    padding: 0px;
+}
+
+.user_details_container {
+    background: #ffff;
+    height: 150px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    margin-bottom: 20px;
+}
+
+.user_details_container_row {
+    width: 100%;
+    display: block;
+}
+
+.label_controls_bold {
+    font-weight: bold;
+    text-transform: uppercase;
+}

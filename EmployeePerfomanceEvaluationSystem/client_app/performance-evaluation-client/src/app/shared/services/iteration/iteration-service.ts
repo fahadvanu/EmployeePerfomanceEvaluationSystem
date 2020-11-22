@@ -125,4 +125,21 @@ export class IterationService {
         return this.http.post<ApiResponse>('/api/employee-iteration/employee-iteration-details',
                                             { iterationId: iterationId }, httpOptions);
     }
+
+    getEmployeeIterationScreenData(iterationId: number): Observable<[ApiResponse, ApiResponse]> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        var employeeIterationDetailCall = this.http.post<ApiResponse>('/api/employee-iteration/employee-iteration-details',
+                                                                      { iterationId: iterationId }, httpOptions);
+        var userDetailCall = this.http.post<ApiResponse>('/api/user/get_user', {}, httpOptions);
+
+        return forkJoin(employeeIterationDetailCall, userDetailCall);
+    }
 }

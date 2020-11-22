@@ -27,6 +27,11 @@
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration\employee-details\employee-details-display-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration\iteration-details\iteration-details-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\goals\goals-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\iteration\iteration-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\iteration\iteration-module.ts" />
@@ -123,6 +128,11 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration\employee-details\employee-details-display-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration\iteration-details\iteration-details-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\goals\goals-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\iteration\iteration-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\iteration\iteration-module.ts" />

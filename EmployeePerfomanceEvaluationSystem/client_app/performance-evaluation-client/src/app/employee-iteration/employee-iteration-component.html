@@ -1,0 +1,27 @@
+﻿<div class="container_row">
+
+    <div class="row">
+        <div class="col-md-12 title_Col">
+
+            <div class="title_performance_document">
+                <h3> Performance Document </h3>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <form [formGroup]="employee_iteration_formgroup" novalidate>
+
+                <employee-details [employee]="employee_iteration_formgroup.value.employee_detail"></employee-details>
+
+                <iteration-details [iteration]="employee_iteration_formgroup.value.iteration_detail"></iteration-details>
+
+            </form>
+
+        </div>
+    </div>
+</div>

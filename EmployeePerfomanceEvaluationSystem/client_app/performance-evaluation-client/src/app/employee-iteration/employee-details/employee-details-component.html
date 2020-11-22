@@ -1,0 +1,75 @@
+﻿<div class="row" *ngIf="employee != null">
+
+    <div class="col-md-12 user_details_div">
+
+        <div class="user_details_container">
+
+            <div class="row user_details_container_row">
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">First Name</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{employee.firstName}}
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Last Name</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{employee.lastName}}
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Email</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{employee.email}}
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="row user_details_container_row">
+
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4"> Manager</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{ employee.reportingManager }}
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Role</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{ employee.roleName}}
+                    </label>
+                </div>
+
+                <div class="col-sm-12">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-4">Department</label>
+
+                    <label class="label_controls col-form-label col-sm-8">
+                        {{ employee.departmentName }}
+                    </label>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

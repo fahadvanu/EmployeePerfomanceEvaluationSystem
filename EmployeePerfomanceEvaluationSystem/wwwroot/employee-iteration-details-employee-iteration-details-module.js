@@ -530,36 +530,6 @@ EmployeeIterationDetailsModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0_
     }], null, null); })();
 
 
-/***/ }),
-
-/***/ "wkPD":
-/*!***********************************************************************!*\
-  !*** ./src/app/shared/models/iteration/iteration-details-response.ts ***!
-  \***********************************************************************/
-/*! exports provided: IterationDetailsResponse */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IterationDetailsResponse", function() { return IterationDetailsResponse; });
-class IterationDetailsResponse {
-    constructor() {
-    }
-    static FormIterationDetailsModel(response) {
-        let iterationDetails = new IterationDetailsResponse();
-        iterationDetails.iterationId = response.data.iterationId;
-        iterationDetails.title = response.data.title;
-        iterationDetails.startDate = response.data.startDate;
-        iterationDetails.endDate = response.data.endDate;
-        iterationDetails.status = response.data.status;
-        iterationDetails.createdDate = response.data.createdDate;
-        iterationDetails.activatedDate = response.data.activatedDate;
-        iterationDetails.iterationStateId = response.data.iterationStateId;
-        return iterationDetails;
-    }
-}
-
-
 /***/ })
 
 }]);

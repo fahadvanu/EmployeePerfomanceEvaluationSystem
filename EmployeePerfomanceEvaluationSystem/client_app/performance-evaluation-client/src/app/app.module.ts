@@ -15,6 +15,7 @@ import { UserDetailsModule } from './user-details/user-details-module';
 import { ReportingManagerModule } from './reporting-manager/reporting-request-module';
 import { ViewIterationsModule } from './view-iterations/view-iterations-module';
 import { SetGoalsModule } from './set-goals/set-goals-module';
+import { EmployeeIterationModule } from './employee-iteration/employee-iteration-module';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -57,6 +58,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/error-interceptor';
         ReportingManagerModule,
         ViewIterationsModule,
         SetGoalsModule,
+        EmployeeIterationModule,
         AppRoutingModule     
   ],
     providers: [
