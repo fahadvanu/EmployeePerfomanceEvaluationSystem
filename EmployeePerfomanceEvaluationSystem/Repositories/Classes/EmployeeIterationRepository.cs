@@ -117,5 +117,33 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
             _context.EmployeeIterationGoals.Remove(iterationGoal);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<EmployeeIterationGoalRatings>> GetEmployeeIterationGoalRatings(int employeeId, int iterationId)
+        {
+
+            var employee_iteration_ratings = await 
+                                                (  from iteration_goals in _context.EmployeeIterationGoals.Include(x => x.Goal)
+                                                   join iteration_ratings in _context.EmployeeIterationRatings
+                                                   on   iteration_goals.Id equals iteration_ratings.IterationGoalId into eg
+                                                   from rating in eg.DefaultIfEmpty()
+                                                   where iteration_goals.IterationId == iterationId 
+                                                         && iteration_goals.EmployeeId == employeeId
+                                                    select new EmployeeIterationGoalRatings
+                                                    {
+                                                        IterationGoalId = iteration_goals.Id,
+                                                        GoalTitle = iteration_goals.Goal.GoalName,
+                                                        Weightage = iteration_goals.Weightage,
+                                                        Description = iteration_goals.Description,
+                                                        IterationRatingId = (rating == null) ? null : (int?)rating.Id,
+                                                        EmployeeRatingId = (rating == null) ? null : (int?)rating.EmployeeRatingId,
+                                                        EmployeeComments = (rating == null) ? null : rating.EmployeeComment,
+                                                        ManagerRatingId = (rating == null) ? null : (int?)rating.ManagerRatingId,
+                                                        ManagerComments = (rating == null) ? null : rating.MAnagerComments
+                                                    }).ToListAsync(); 
+
+
+
+            return employee_iteration_ratings;
+        }
     }
 }

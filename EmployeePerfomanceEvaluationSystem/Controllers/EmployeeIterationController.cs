@@ -265,5 +265,51 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch iteration details" });
             }
         }
+
+        [HttpPost("employee-iteration-ratings")]
+        [Authorize]
+        public async Task<IActionResult> EmployeeIterationRatingDetails([FromBody] IterationRatingDetailRequestModel iterationRatingDetailsRequestModel)
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+
+                var employee = await _userService.GetUserById(iterationRatingDetailsRequestModel.EmployeeId);
+                if (null == employee)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {iterationRatingDetailsRequestModel.EmployeeId} does not exists" });
+
+
+                var iteration = await _iterationRepository.GetIteration(iterationRatingDetailsRequestModel.IterationId);
+                if (iteration == null)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Requested Iteration not found" });
+
+
+                bool isManagerRequestedDetails = (userId == employee.ReportingManagerId);
+                if (!isManagerRequestedDetails)
+                {
+                    if(userId != iterationRatingDetailsRequestModel.EmployeeId)
+                        return new JsonResult(new ApiResponseFailure()
+                        {
+                            ErrorMessage = "Not allowed",
+                            StatusCode = (int)StatusCodes.Status403Forbidden
+                        })
+                        { StatusCode = StatusCodes.Status403Forbidden };
+                }
+
+                var response = _employeeIterationRepository.GetEmployeeIterationGoalRatings(iterationRatingDetailsRequestModel.EmployeeId,
+                                                                                            iterationRatingDetailsRequestModel.IterationId);
+
+
+                return Ok(new ApiResponseOKResult() { Data = new  { 
+                                                           GoalRatings = response,
+                                                           IsManagerRequested = isManagerRequestedDetails
+                                                     }});
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch iteration ratings details");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch iteration ratings details" });
+            }
+        }
     }
 }

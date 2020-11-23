@@ -588,6 +588,51 @@ class UpdateEmployeeIterationState {
 
 /***/ }),
 
+/***/ "0vcu":
+/*!*********************************************************************!*\
+  !*** ./src/app/shared/models/set-goals/employee_iteration_model.ts ***!
+  \*********************************************************************/
+/*! exports provided: EmployeeIterationRatingModel, EmployeeGoalRatings */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmployeeIterationRatingModel", function() { return EmployeeIterationRatingModel; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmployeeGoalRatings", function() { return EmployeeGoalRatings; });
+class EmployeeIterationRatingModel {
+    constructor() {
+        this.goals_ratings = new Array();
+    }
+    static FormEmployeeIterationRatingModel(response) {
+        let employeeIterationRatingModel = new EmployeeIterationRatingModel();
+        employeeIterationRatingModel.isManagerRequested = response.data.isManagerRequested;
+        employeeIterationRatingModel.goals_ratings = EmployeeGoalRatings.FormEmployeeGoalRatingModelArray(response.data.goalRatings);
+        return employeeIterationRatingModel;
+    }
+}
+class EmployeeGoalRatings {
+    static FormEmployeeGoalRatingModelArray(goal_ratings) {
+        var goal_ratings_array = new Array();
+        for (var rating of goal_ratings.result) {
+            let goal_rating = new EmployeeGoalRatings();
+            goal_rating.iterationGoalId = rating.iterationGoalId;
+            goal_rating.goalTitle = rating.goalTitle;
+            goal_rating.weightage = rating.weightage;
+            goal_rating.description = rating.description;
+            goal_rating.iterationRatingId = rating.iterationRatingId;
+            goal_rating.employeeRatingId = rating.employeeRatingId;
+            goal_rating.employeeComments = rating.employeeComments;
+            goal_rating.managerRatingId = rating.managerRatingId;
+            goal_rating.managerComments = rating.managerComments;
+            goal_ratings_array.push(goal_rating);
+        }
+        return goal_ratings_array;
+    }
+}
+
+
+/***/ }),
+
 /***/ "3PAx":
 /*!************************************************************!*\
   !*** ./src/app/shared/services/spinner/spinner-service.ts ***!
@@ -680,6 +725,35 @@ AccountsRoutingModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
                 ]
             }]
     }], null, null); })();
+
+
+/***/ }),
+
+/***/ "4cN6":
+/*!*************************************************!*\
+  !*** ./src/app/shared/models/ratings/rating.ts ***!
+  \*************************************************/
+/*! exports provided: Rating */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rating", function() { return Rating; });
+class Rating {
+    constructor(ratingId, ratingName, weightage) {
+        this.ratingId = ratingId;
+        this.ratingName = ratingName;
+        this.weightage = weightage;
+    }
+    static FormRatingModelArray(response) {
+        var ratingArray = new Array();
+        for (var rating of response.data) {
+            var ratingModel = new Rating(rating.ratingId, rating.ratingName, rating.weightage);
+            ratingArray.push(ratingModel);
+        }
+        return ratingArray;
+    }
+}
 
 
 /***/ }),
@@ -3065,7 +3139,7 @@ class IterationService {
         };
         return this.http.post('/api/employee-iteration/employee-iteration-details', { iterationId: iterationId }, httpOptions);
     }
-    getEmployeeIterationScreenData(iterationId) {
+    getEmployeeIterationScreenData(employeeId, iterationId) {
         let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
             'Content-Type': 'application/json'
         });
@@ -3074,7 +3148,9 @@ class IterationService {
         };
         var employeeIterationDetailCall = this.http.post('/api/employee-iteration/employee-iteration-details', { iterationId: iterationId }, httpOptions);
         var userDetailCall = this.http.post('/api/user/get_user', {}, httpOptions);
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["forkJoin"])(employeeIterationDetailCall, userDetailCall);
+        var ratingCall = this.http.post('/api/ratings/get_ratings', {}, httpOptions);
+        var goal_rating_Call = this.http.post('/api/employee-iteration/employee-iteration-ratings', { employeeId: employeeId, iterationId: iterationId }, httpOptions);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["forkJoin"])(employeeIterationDetailCall, userDetailCall, ratingCall, goal_rating_Call);
     }
 }
 IterationService.ɵfac = function IterationService_Factory(t) { return new (t || IterationService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
@@ -7524,14 +7600,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _shared_models_user_user_response_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/models/user/user-response-model */ "S8qu");
 /* harmony import */ var _shared_models_iteration_iteration_details_response__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/models/iteration/iteration-details-response */ "wkPD");
-/* harmony import */ var _shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/services/iteration/iteration-service */ "OqMo");
-/* harmony import */ var _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/services/spinner/spinner-service */ "3PAx");
-/* harmony import */ var _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/toastr/toastr-service */ "jonD");
-/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _employee_details_employee_details_display_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./employee-details/employee-details-display-component */ "eOZ7");
-/* harmony import */ var _iteration_details_iteration_details_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./iteration-details/iteration-details-component */ "mcrR");
+/* harmony import */ var _shared_models_ratings_rating__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/models/ratings/rating */ "4cN6");
+/* harmony import */ var _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/models/set-goals/employee_iteration_model */ "0vcu");
+/* harmony import */ var _shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/iteration/iteration-service */ "OqMo");
+/* harmony import */ var _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/services/spinner/spinner-service */ "3PAx");
+/* harmony import */ var _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/services/toastr/toastr-service */ "jonD");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _employee_details_employee_details_display_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./employee-details/employee-details-display-component */ "eOZ7");
+/* harmony import */ var _iteration_details_iteration_details_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./iteration-details/iteration-details-component */ "mcrR");
+
+
 
 
 
@@ -7568,14 +7648,15 @@ class EmployeeIterationComponent {
     initializeUserDetailFormGroup() {
         this.employee_iteration_formgroup = this.employee_iteration_formbuilder.group({
             iteration_detail: [null],
-            employee_detail: [null]
+            employee_detail: [null],
+            iteration_rating: [null]
         });
     }
     loadEmployeeIterationComponentData() {
         this.loading = true;
         this.spinnerService.updateMessage('Loading.....');
         this.spinnerService.busy();
-        this.iterationService.getEmployeeIterationScreenData(this.iterationId)
+        this.iterationService.getEmployeeIterationScreenData(this.employeeId, this.iterationId)
             .subscribe((responses) => {
             let iteration_detail = null;
             if (responses[0].data != null) {
@@ -7585,11 +7666,21 @@ class EmployeeIterationComponent {
             if (responses[1].data != null) {
                 employee_detail = _shared_models_user_user_response_model__WEBPACK_IMPORTED_MODULE_1__["UserResponseModel"].formUserResponseModel(responses[1]);
             }
+            let ratings = new Array();
+            if (responses[2].data != null) {
+                ratings = _shared_models_ratings_rating__WEBPACK_IMPORTED_MODULE_3__["Rating"].FormRatingModelArray(responses[2]);
+            }
+            let iterationRatingModel = null;
+            if (responses[3].data != null) {
+                iterationRatingModel = _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_4__["EmployeeIterationRatingModel"].FormEmployeeIterationRatingModel(responses[3]);
+            }
             this.employee_iteration_formgroup.patchValue({
                 iteration_detail: iteration_detail,
-                employee_detail: employee_detail
+                employee_detail: employee_detail,
+                iteration_rating: iterationRatingModel
             });
             console.log(this.employee_iteration_formgroup.value);
+            console.log(ratings);
             this.loading = false;
             this.spinnerService.idle();
         }, error => {
@@ -7599,7 +7690,7 @@ class EmployeeIterationComponent {
         });
     }
 }
-EmployeeIterationComponent.ɵfac = function EmployeeIterationComponent_Factory(t) { return new (t || EmployeeIterationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_3__["IterationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_4__["SpinnerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_5__["ToastrNotificationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__["BsModalService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"])); };
+EmployeeIterationComponent.ɵfac = function EmployeeIterationComponent_Factory(t) { return new (t || EmployeeIterationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_5__["IterationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_6__["SpinnerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_7__["ToastrNotificationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__["BsModalService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"])); };
 EmployeeIterationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EmployeeIterationComponent, selectors: [["ng-component"]], decls: 11, vars: 3, consts: [[1, "container_row"], [1, "row"], [1, "col-md-12", "title_Col"], [1, "title_performance_document"], [1, "col-md-12"], ["novalidate", "", 3, "formGroup"], [3, "employee"], [3, "iteration"]], template: function EmployeeIterationComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
@@ -7627,14 +7718,14 @@ EmployeeIterationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["�
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("employee", ctx.employee_iteration_formgroup.value.employee_detail);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("iteration", ctx.employee_iteration_formgroup.value.iteration_detail);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_8__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_8__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormGroupDirective"], _employee_details_employee_details_display_component__WEBPACK_IMPORTED_MODULE_9__["EmployeeDetailsComponent"], _iteration_details_iteration_details_component__WEBPACK_IMPORTED_MODULE_10__["IterationDetailsComponent"]], styles: [".container_row[_ngcontent-%COMP%] {\r\n    background: #F1F1F1;\r\n    box-sizing: border-box;\r\n}\r\n\r\n.title_Col[_ngcontent-%COMP%] {\r\n    margin-top: 1em;\r\n}\r\n\r\n.label_controls_bold[_ngcontent-%COMP%] {\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.title_performance_document[_ngcontent-%COMP%] {\r\n    background: #ffff;\r\n    height: 80px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    box-shadow: 10px 10px 5px #aaaaaa;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlLWl0ZXJhdGlvbi1jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtJQUNJLG1CQUFtQjtJQUNuQixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLHlCQUF5QjtBQUM3Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixZQUFZO0lBQ1osYUFBYTtJQUNiLHVCQUF1QjtJQUN2QixtQkFBbUI7SUFDbkIsaUNBQWlDO0FBQ3JDIiwiZmlsZSI6InNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlLWl0ZXJhdGlvbi1jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5jb250YWluZXJfcm93IHtcclxuICAgIGJhY2tncm91bmQ6ICNGMUYxRjE7XHJcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG59XHJcblxyXG4udGl0bGVfQ29sIHtcclxuICAgIG1hcmdpbi10b3A6IDFlbTtcclxufVxyXG5cclxuLmxhYmVsX2NvbnRyb2xzX2JvbGQge1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG59XHJcblxyXG4udGl0bGVfcGVyZm9ybWFuY2VfZG9jdW1lbnQge1xyXG4gICAgYmFja2dyb3VuZDogI2ZmZmY7XHJcbiAgICBoZWlnaHQ6IDgwcHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgYm94LXNoYWRvdzogMTBweCAxMHB4IDVweCAjYWFhYWFhO1xyXG59Il19 */"] });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_10__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormGroupDirective"], _employee_details_employee_details_display_component__WEBPACK_IMPORTED_MODULE_11__["EmployeeDetailsComponent"], _iteration_details_iteration_details_component__WEBPACK_IMPORTED_MODULE_12__["IterationDetailsComponent"]], styles: [".container_row[_ngcontent-%COMP%] {\r\n    background: #F1F1F1;\r\n    box-sizing: border-box;\r\n}\r\n\r\n.title_Col[_ngcontent-%COMP%] {\r\n    margin-top: 1em;\r\n}\r\n\r\n.label_controls_bold[_ngcontent-%COMP%] {\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.title_performance_document[_ngcontent-%COMP%] {\r\n    background: #ffff;\r\n    height: 80px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    box-shadow: 10px 10px 5px #aaaaaa;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlLWl0ZXJhdGlvbi1jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtJQUNJLG1CQUFtQjtJQUNuQixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLHlCQUF5QjtBQUM3Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixZQUFZO0lBQ1osYUFBYTtJQUNiLHVCQUF1QjtJQUN2QixtQkFBbUI7SUFDbkIsaUNBQWlDO0FBQ3JDIiwiZmlsZSI6InNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlLWl0ZXJhdGlvbi1jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5jb250YWluZXJfcm93IHtcclxuICAgIGJhY2tncm91bmQ6ICNGMUYxRjE7XHJcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG59XHJcblxyXG4udGl0bGVfQ29sIHtcclxuICAgIG1hcmdpbi10b3A6IDFlbTtcclxufVxyXG5cclxuLmxhYmVsX2NvbnRyb2xzX2JvbGQge1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG59XHJcblxyXG4udGl0bGVfcGVyZm9ybWFuY2VfZG9jdW1lbnQge1xyXG4gICAgYmFja2dyb3VuZDogI2ZmZmY7XHJcbiAgICBoZWlnaHQ6IDgwcHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgYm94LXNoYWRvdzogMTBweCAxMHB4IDVweCAjYWFhYWFhO1xyXG59Il19 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](EmployeeIterationComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
                 templateUrl: './employee-iteration-component.html',
                 styleUrls: ['./employee-iteration-component.css']
             }]
-    }], function () { return [{ type: _shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_3__["IterationService"] }, { type: _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_4__["SpinnerService"] }, { type: _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_5__["ToastrNotificationService"] }, { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_6__["BsModalService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] }, { type: _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }]; }, null); })();
+    }], function () { return [{ type: _shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_5__["IterationService"] }, { type: _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_6__["SpinnerService"] }, { type: _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_7__["ToastrNotificationService"] }, { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__["BsModalService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"] }, { type: _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormBuilder"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"] }]; }, null); })();
 
 
 /***/ })
