@@ -20,6 +20,9 @@
 
                 <iteration-details [iteration]="employee_iteration_formgroup.value.iteration_detail"></iteration-details>
 
+                <employee-iteration-goal [employeeIterationGoal]="employee_iteration_formgroup.controls['iteration_rating']"
+                                         [ratings]="ratings"></employee-iteration-goal>
+
             </form>
 
         </div>

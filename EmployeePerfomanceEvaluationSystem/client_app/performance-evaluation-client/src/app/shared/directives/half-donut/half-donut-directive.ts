@@ -1,4 +1,4 @@
-﻿import { Component, ElementRef, ViewChild, AfterViewInit, Input } from "@angular/core";
+﻿import { Component, ElementRef, ViewChild, AfterViewInit, Input, OnChanges, SimpleChanges } from "@angular/core";
 import { HalfDonutData } from '../../models/half-donut/half-donut-data';
 import * as D3 from "d3";
 
@@ -6,7 +6,7 @@ import * as D3 from "d3";
     selector: "half-donut",
     templateUrl: "./half-donut-component.html"
 })
-export class HalfDonutDirectiveComponent implements AfterViewInit {
+export class HalfDonutDirectiveComponent implements AfterViewInit, OnChanges {
 
     @ViewChild("containerPieChart") element: ElementRef;
 
@@ -20,6 +20,25 @@ export class HalfDonutDirectiveComponent implements AfterViewInit {
 
     constructor() { }
 
+    private buildChart() {
+
+        
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+
+        if (changes.pieData.currentValue != null) {
+            //this.setup();
+            //this.buildSVG();
+            if (this.svg != undefined) {
+                this.setup();
+                this.buildSVG();
+                this.populatePie();
+            }
+        }
+
+    }
+
     ngAfterViewInit() {
         this.htmlElement = this.element.nativeElement;
         this.host = D3.select(this.htmlElement);
@@ -31,9 +50,11 @@ export class HalfDonutDirectiveComponent implements AfterViewInit {
     private setup(): void {
 
         this.radius = Math.min(this.width, 2 * this.height) / 2;
+        
     }
 
     private buildSVG(): void {
+
         this.host.html("");
         this.svg = this.host.append("svg")
                         .attr("viewBox", `0 0 ${this.width} ${this.height}`)

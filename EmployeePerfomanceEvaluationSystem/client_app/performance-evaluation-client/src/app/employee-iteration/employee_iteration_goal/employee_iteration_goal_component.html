@@ -1,0 +1,118 @@
+﻿<div class="row goal_main_row" [formGroup]="employeeIterationGoal" *ngIf="employeeIterationGoal != null">
+
+
+    <div class="col-md-12" formArrayName="goal_ratings">
+
+        <div class="row card_goal_row" *ngFor="let existingGoal of employeeIterationGoal.controls['goal_ratings'].controls; let n=index" [formGroupName]="n">
+
+            <div class="col-md-12 card_goal_column">
+
+                <div class="card existing_goal_card">
+                    <div class="card-header bg-primary text-white text-center">
+                        {{existingGoal.value.goalTitle}}
+                    </div>
+
+                    <div class="card-body">
+
+                        <p>{{existingGoal.value.description}}</p>
+
+                        <div class="donut_weightage">
+                            <half-donut [width]="200"
+                                        [height]="100"
+                                        [pieData]="[{value: existingGoal.value.weightage, label: 'Weightage'},
+                                                                     {value: (100 - existingGoal.value.weightage), label: 'Weightage'}]"></half-donut>
+                            <p class="weightage"> {{existingGoal.value.weightage}}%</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+                            <select id="rating" class="form-control" formControlName="employeeRatingId" (change)="setEmployeeRatingWeightage(existingGoal)">
+                                <option value="" disabled>Choose...</option>
+                                <option *ngFor="let rating of ratings" [value]="rating.ratingId">{{ rating.ratingName }}</option>
+                            </select>
+                            <p class="help-block" *ngIf="existingGoal.get('employeeRatingId').hasError('required')
+                                                    && existingGoal.get('employeeRatingId').touched">* Please select Rating</p>
+                        </div>
+
+                        <div class="donut_weightage">
+
+                            <half-donut [width]="200"
+                                        [height]="100"
+                                        [pieData]="[{value: existingGoal.value.employeeRatingWeightage, label: 'Employee Weightage'},
+                                                    {value: (100 - existingGoal.value.employeeRatingWeightage), label: 'Employee Weightage'}]"></half-donut>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Comments</label>
+                            <textarea class="form-control"
+                                      name="goalDescription" placeholder="Enter Description(Max 200 characters)"
+                                      formControlName="employeeComments"
+                                      required
+                                      maxlength="200"
+                                      rows="3"
+                                      spellcheck="false"></textarea>
+                            <p class="help-block" *ngIf="existingGoal.get('employeeComments').hasError('required')
+                                                      && existingGoal.get('employeeComments').touched">* Please enter comments</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating">Manager Rating</label>
+                            <select id="rating" class="form-control" formControlName="managerRatingId" (change)="setManagerRatingWeightage(existingGoal)">
+                                <option value="" disabled>Choose...</option>
+                                <option *ngFor="let rating of ratings" [value]="rating.ratingId">{{ rating.ratingName }}</option>
+                            </select>
+                            <p class="help-block" *ngIf="existingGoal.get('managerRatingId').hasError('required')
+                                                    && existingGoal.get('managerRatingId').touched">* Please select Rating</p>
+                        </div>
+
+                        <div class="donut_weightage">
+
+                            <half-donut [width]="200"
+                                        [height]="100"
+                                        [pieData]="[{value: existingGoal.value.managerRatingWeightage, label: 'Manager Weightage'},
+                                                    {value: (100 - existingGoal.value.managerRatingWeightage), label: 'Manager Weightage'}]"></half-donut>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">Manager Comments</label>
+                            <textarea class="form-control"
+                                      name="goalDescription" placeholder="Enter Description(Max 200 characters)"
+                                      formControlName="managerComments"
+                                      required
+                                      maxlength="200"
+                                      rows="3"
+                                      spellcheck="false"
+                                      [disabled]="!employeeIterationGoal.value.manager_requested"></textarea>
+                            <p class="help-block" *ngIf="existingGoal.get('managerComments').hasError('required')
+                                                      && existingGoal.get('managerComments').touched">* Please enter comments</p>
+                        </div>
+
+
+                    </div>
+
+                    <div class="card-footer">
+
+                        <div class="footer_buttons">
+
+                            <button type="button" class="btn btn-default"
+                                    (click)="saveIterationGoal(existingGoal)">
+                                <span class="fa fa-save fa-lg" title="Save"></span>
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>

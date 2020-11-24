@@ -27,6 +27,7 @@ export class EmployeeIterationComponent implements OnInit {
     employee_iteration_formgroup: FormGroup;
     employeeId: number = 0;
     iterationId: number = 0;
+    ratings: Array<Rating> = new Array<Rating>();
 
     constructor(private iterationService: IterationService,
                 private spinnerService: SpinnerService,
@@ -53,9 +54,11 @@ export class EmployeeIterationComponent implements OnInit {
 
             iteration_detail: [ null ],
             employee_detail: [null],
-            iteration_rating: [ null ]
+            iteration_rating: this.employee_iteration_formbuilder.group({
+                manager_requested: [null],
+                goal_ratings: this.employee_iteration_formbuilder.array([])
+            })
         });
-
     }
 
     private loadEmployeeIterationComponentData() {
@@ -76,24 +79,32 @@ export class EmployeeIterationComponent implements OnInit {
                     employee_detail = UserResponseModel.formUserResponseModel(responses[1]);
                 }
 
-                let ratings: Array<Rating> = new Array<Rating>();
                 if (responses[2].data != null) {
-                    ratings = Rating.FormRatingModelArray(responses[2]);
+                    this.ratings = Rating.FormRatingModelArray(responses[2]);
                 }
 
                 let iterationRatingModel: EmployeeIterationRatingModel = null;
                 if (responses[3].data != null) {
                     iterationRatingModel = EmployeeIterationRatingModel.FormEmployeeIterationRatingModel(responses[3]);
+
+                    let iteration_rating_formgroup: FormGroup = <FormGroup>this.employee_iteration_formgroup.controls['iteration_rating'];
+                    iteration_rating_formgroup.controls['goal_ratings'] = this.employee_iteration_formbuilder.array(
+                                                                            iterationRatingModel.goals_ratings
+                                                                                .slice()
+                                                                                .map(i => this.employee_iteration_formbuilder.group(i)));
+                    iteration_rating_formgroup.patchValue({
+                        manager_requested: iterationRatingModel.isManagerRequested
+                    });
                 }
 
                 this.employee_iteration_formgroup.patchValue({
                     iteration_detail: iteration_detail,
-                    employee_detail: employee_detail,
-                    iteration_rating: iterationRatingModel
+                    employee_detail: employee_detail
                 });
 
+                
                 console.log(this.employee_iteration_formgroup.value);
-                console.log(ratings);
+                console.log(this.ratings);
 
                 this.loading = false;
                 this.spinnerService.idle();

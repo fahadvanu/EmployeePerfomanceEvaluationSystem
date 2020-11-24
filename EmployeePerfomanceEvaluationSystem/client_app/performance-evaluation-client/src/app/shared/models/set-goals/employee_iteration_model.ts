@@ -20,8 +20,10 @@ export class EmployeeGoalRatings {
     description: string;
     iterationRatingId: number;
     employeeRatingId: number;
+    employeeRatingWeightage: number = 0;
     employeeComments: string;
     managerRatingId: number;
+    managerRatingWeightage: number = 0;
     managerComments: string;
 
     static FormEmployeeGoalRatingModelArray(goal_ratings: any): Array<EmployeeGoalRatings> {
@@ -35,9 +37,9 @@ export class EmployeeGoalRatings {
             goal_rating.weightage = rating.weightage;
             goal_rating.description = rating.description;
             goal_rating.iterationRatingId = rating.iterationRatingId;
-            goal_rating.employeeRatingId = rating.employeeRatingId;
+            goal_rating.employeeRatingId = (rating.employeeRatingId == null) ? '' : rating.employeeRatingId;
             goal_rating.employeeComments = rating.employeeComments;
-            goal_rating.managerRatingId = rating.managerRatingId;
+            goal_rating.managerRatingId = (rating.managerRatingId == null) ? '' : rating.managerRatingId;
             goal_rating.managerComments = rating.managerComments;
 
             goal_ratings_array.push(goal_rating);
