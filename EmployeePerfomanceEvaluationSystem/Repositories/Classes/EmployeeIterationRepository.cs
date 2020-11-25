@@ -1,6 +1,7 @@
 ﻿using EmployeePerfomanceEvaluationSystem.DataContext;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
+using EmployeePerfomanceEvaluationSystem.Request_Models.EmployeeIteration;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.EmployeeIteration;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -144,6 +145,41 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
 
             return employee_iteration_ratings;
+        }
+
+        public async Task UpsertEmployeeIterationRating(bool isManagerRequested, EmployeeRatingRequestModel employeeRatingRequestModel)
+        {
+            var iterationRating = await _context.EmployeeIterationRatings.Where(x => x.Id == employeeRatingRequestModel.IterationRatingId)
+                                                                        .SingleOrDefaultAsync();
+
+            if (null != iterationRating)
+            {
+                if (isManagerRequested)
+                {
+                    iterationRating.ManagerRatingId = employeeRatingRequestModel.ManagerRatingId.Value;
+                    iterationRating.MAnagerComments = employeeRatingRequestModel.ManagerComments;
+                }
+                else
+                {
+                    iterationRating.EmployeeRatingId = employeeRatingRequestModel.EmployeeRatingId;
+                    iterationRating.EmployeeComment = employeeRatingRequestModel.EmployeeComments;
+                }
+            }
+            else
+            {
+                iterationRating = new EmployeeIterationRatings()
+                {
+                    IterationGoalId = employeeRatingRequestModel.IterationGoalId,
+                    EmployeeRatingId = employeeRatingRequestModel.EmployeeRatingId,
+                    EmployeeComment = employeeRatingRequestModel.EmployeeComments,
+                    ManagerRatingId = null,
+                    MAnagerComments = null
+                };
+
+                _context.EmployeeIterationRatings.Add(iterationRating);
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace EmployeePerfomanceEvaluationSystem.Models
         public int EmployeeRatingId { get; set; }
         public Ratings EmployeeRating { get; set; }
         public string EmployeeComment { get; set; }
-        public int ManagerRatingId { get; set; }
+        public int? ManagerRatingId { get; set; }
         public Ratings ManagerRating { get; set; }
         public string MAnagerComments { get; set; }
     }

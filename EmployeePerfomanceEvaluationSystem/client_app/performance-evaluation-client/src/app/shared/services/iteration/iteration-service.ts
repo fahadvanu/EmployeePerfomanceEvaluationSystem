@@ -4,6 +4,7 @@ import { ApiResponse } from '../../models/api-responses/api-response'
 import { Observable, forkJoin } from 'rxjs';
 import { CreateIterationRequestModelAPI } from '../../models/iteration/create-iteration-request-model';
 import { UpdateIterationRequestModel } from '../../models/iteration/update-iteration-request-model';
+import { EmployeeRatingRequestModel } from '../../models/set-goals/employee-rating-request-model';
 
 @Injectable({
     providedIn: 'root'
@@ -148,5 +149,33 @@ export class IterationService {
                                                            httpOptions);
 
         return forkJoin(employeeIterationDetailCall, userDetailCall, ratingCall, goal_rating_Call);
+    }
+
+    saveEmployeeRating(employeeRatingRequestModel: EmployeeRatingRequestModel): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>(`/api/employee-iteration/save-employee-iteration-rating`, employeeRatingRequestModel, httpOptions);
+    }
+
+    getEmployeeIterationRatings(iterationId: number, employeeId: number): Observable<ApiResponse> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.post<ApiResponse>('/api/employee-iteration/employee-iteration-ratings',
+                                           { employeeId: employeeId, iterationId: iterationId },
+                                             httpOptions);
     }
 }

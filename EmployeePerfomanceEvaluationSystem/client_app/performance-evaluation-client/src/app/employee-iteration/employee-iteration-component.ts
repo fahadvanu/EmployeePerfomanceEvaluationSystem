@@ -13,6 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { IterationDetailsResponse } from '../shared/models/iteration/iteration-details-response';
 import { Rating } from '../shared/models/ratings/rating';
 import { EmployeeIterationRatingModel } from '../shared/models/set-goals/employee_iteration_model';
+import { EmployeeRatingRequestModel } from '../shared/models/set-goals/employee-rating-request-model';
 
 @Component({
 
@@ -85,13 +86,16 @@ export class EmployeeIterationComponent implements OnInit {
 
                 let iterationRatingModel: EmployeeIterationRatingModel = null;
                 if (responses[3].data != null) {
-                    iterationRatingModel = EmployeeIterationRatingModel.FormEmployeeIterationRatingModel(responses[3]);
+                    iterationRatingModel = EmployeeIterationRatingModel.FormEmployeeIterationRatingModel(responses[3], this.ratings);
 
                     let iteration_rating_formgroup: FormGroup = <FormGroup>this.employee_iteration_formgroup.controls['iteration_rating'];
                     iteration_rating_formgroup.controls['goal_ratings'] = this.employee_iteration_formbuilder.array(
-                                                                            iterationRatingModel.goals_ratings
-                                                                                .slice()
-                                                                                .map(i => this.employee_iteration_formbuilder.group(i)));
+                           iterationRatingModel.goals_ratings
+                                                        .slice()
+                                                        .map(i =>
+                                                            this.employee_iteration_formbuilder.group(i)
+                        ));
+
                     iteration_rating_formgroup.patchValue({
                         manager_requested: iterationRatingModel.isManagerRequested
                     });
@@ -116,5 +120,69 @@ export class EmployeeIterationComponent implements OnInit {
                 console.log('Exception occured while fetching employee iteration details from Database');
             });
 
+    }
+
+    saveEmployeeRating(requestModel: EmployeeRatingRequestModel) {
+
+        requestModel.employeeId = this.employeeId;
+
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: 'Continue to save iteration rating?',
+                callback: (result) => {
+                    if (result) {
+
+                        this.spinnerService.updateMessage('Saving Iteration rating. Please wait.....');
+                        this.spinnerService.busy();
+                        
+
+                        this.iterationService.saveEmployeeRating(requestModel)
+                                .subscribe((response: ApiResponse) => {
+
+                                    this.fetchRatingsAfterSaved('Rating saved successfully');
+                                },
+                                error => {
+
+                                   this.spinnerService.idle();
+                                   console.log('Exception occured while updating goal');
+                               });
+                        
+                    }
+                }
+            }
+        });
+    }
+
+    private fetchRatingsAfterSaved(message: string) {
+
+        this.iterationService.getEmployeeIterationRatings(this.iterationId, this.employeeId)
+            .subscribe((response: ApiResponse) => {
+
+
+                let iterationRatingModel: EmployeeIterationRatingModel = null;
+                if (response.data != null) {
+                    iterationRatingModel = EmployeeIterationRatingModel.FormEmployeeIterationRatingModel(response, this.ratings);
+
+                    let iteration_rating_formgroup: FormGroup = <FormGroup>this.employee_iteration_formgroup.controls['iteration_rating'];
+                    iteration_rating_formgroup.controls['goal_ratings'] = this.employee_iteration_formbuilder.array(
+                        iterationRatingModel.goals_ratings
+                            .slice()
+                            .map(i =>
+                                this.employee_iteration_formbuilder.group(i)
+                            ));
+
+                    iteration_rating_formgroup.patchValue({
+                        manager_requested: iterationRatingModel.isManagerRequested
+                    });
+                }
+
+                this.spinnerService.idle();
+                this.toastrNotificationService.success(message);
+            },
+            error => {
+
+                this.spinnerService.idle();
+                console.log('Exception occured while fecthing ratings after saved');
+            });
     }
 }

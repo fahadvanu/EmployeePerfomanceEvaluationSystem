@@ -40,8 +40,8 @@ namespace EmployeePerfomanceEvaluationSystem.ModelConfiguration
                    .HasMaxLength(200);
 
             builder.Property(m => m.ManagerRatingId)
-                   .HasColumnName("manager_rating_id")
-                   .IsRequired();
+                   .HasColumnName("manager_rating_id");
+
 
             builder.HasOne<Ratings>(s => s.ManagerRating)
                    .WithMany()

@@ -296,7 +296,7 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                         { StatusCode = StatusCodes.Status403Forbidden };
                 }
 
-                var response = _employeeIterationRepository.GetEmployeeIterationGoalRatings(iterationRatingDetailsRequestModel.EmployeeId,
+                var response = await _employeeIterationRepository.GetEmployeeIterationGoalRatings(iterationRatingDetailsRequestModel.EmployeeId,
                                                                                             iterationRatingDetailsRequestModel.IterationId);
 
 
@@ -309,6 +309,34 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             {
                 _logger.LogError(ex, "Failed to fetch iteration ratings details");
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch iteration ratings details" });
+            }
+        }
+
+        [HttpPost("save-employee-iteration-rating")]
+        [Authorize]
+        public async Task<IActionResult> SaveEmployeeIterationRating([FromBody] EmployeeRatingRequestModel employeeRatingRequestModel)
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+
+                var employee = await _userService.GetUserById(employeeRatingRequestModel.EmployeeId);
+                if (null == employee)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {employeeRatingRequestModel.EmployeeId} does not exists" });
+
+
+                bool isManagerRequestedDetails = (userId == employee.ReportingManagerId);
+                await _employeeIterationRepository.UpsertEmployeeIterationRating(isManagerRequestedDetails, employeeRatingRequestModel);
+
+                return Ok(new ApiResponseOKResult()
+                {
+                    Data = true
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to save iteration ratings");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to save iteration ratings" });
             }
         }
     }

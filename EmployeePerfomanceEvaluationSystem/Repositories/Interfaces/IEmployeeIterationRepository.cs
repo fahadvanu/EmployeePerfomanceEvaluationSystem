@@ -1,4 +1,5 @@
 ﻿using EmployeePerfomanceEvaluationSystem.Models;
+using EmployeePerfomanceEvaluationSystem.Request_Models.EmployeeIteration;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.EmployeeIteration;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
         Task<EmployeeIterationGoals> GetEmployeeIterationGoal(int employeeIterationGoalId);
         Task RemoveEmployeeIterationGoal(int employeeIterationGoalId);
         Task<List<EmployeeIterationGoalRatings>> GetEmployeeIterationGoalRatings(int employeeId, int iterationId);
+        Task UpsertEmployeeIterationRating(bool isManagerRequested, EmployeeRatingRequestModel employeeRatingRequestModel);
     }
 }
