@@ -28,7 +28,7 @@
                             <label for="rating">Rating</label>
                             <select id="rating" class="form-control" 
                                     formControlName="employeeRatingId" (change)="setEmployeeRatingWeightage(existingGoal)"
-                                    [attr.disabled]="existingGoal.value.isManagerRequested == true ? true : null">
+                                    [attr.disabled]="isEmployeeSectionDisable(existingGoal)">
                                 <option value="" disabled>Choose...</option>
                                 <option *ngFor="let rating of ratings" [value]="rating.ratingId">{{ rating.ratingName }}</option>
                             </select>
@@ -54,7 +54,7 @@
                                       maxlength="200"
                                       rows="3"
                                       spellcheck="false"
-                                      [attr.disabled]="existingGoal.value.isManagerRequested == true ? true : null"></textarea>
+                                      [attr.disabled]="isEmployeeSectionDisable(existingGoal)"></textarea>
                             <p class="help-block" *ngIf="existingGoal.get('employeeComments').hasError('required')
                                                       && existingGoal.get('employeeComments').touched">* Please enter comments</p>
                         </div>
@@ -63,7 +63,7 @@
                             <label for="rating">Manager Rating</label>
                             <select id="rating" class="form-control" 
                                     formControlName="managerRatingId" (change)="setManagerRatingWeightage(existingGoal)"
-                                    [attr.disabled]="existingGoal.value.isManagerRequested == false ? true : null">
+                                    [attr.disabled]="isManagerSectionDisable(existingGoal)">
                                 <option value="" disabled>Choose...</option>
                                 <option *ngFor="let rating of ratings" [value]="rating.ratingId">{{ rating.ratingName }}</option>
                             </select>
@@ -89,7 +89,7 @@
                                       maxlength="200"
                                       rows="3"
                                       spellcheck="false"
-                                      [attr.disabled]="existingGoal.value.isManagerRequested == false ? true : null"></textarea>
+                                      [attr.disabled]="isManagerSectionDisable(existingGoal)"></textarea>
                             <p class="help-block" *ngIf="existingGoal.get('managerComments').hasError('required')
                                                       && existingGoal.get('managerComments').touched">* Please enter comments</p>
                         </div>
@@ -99,11 +99,11 @@
 
                     <div class="card-footer">
 
-                        <div class="footer_buttons">
+                        <div class="footer_buttons" *ngIf="showSaveRatingButton(existingGoal)">
 
                             <button type="button" class="btn btn-default"
                                     (click)="saveIterationGoal(existingGoal)">
-                                <span class="fa fa-save fa-lg" title="Save"></span>
+                                <span class="fa fa-save fa-lg" title="Save" style="cursor:pointer"></span>
                             </button>
 
                         </div>

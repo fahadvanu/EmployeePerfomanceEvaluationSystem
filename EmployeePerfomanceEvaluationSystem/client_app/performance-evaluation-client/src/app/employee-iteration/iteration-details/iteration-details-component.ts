@@ -1,7 +1,8 @@
-﻿import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+﻿import { Component, OnInit, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { IterationDetailsResponse } from '../../shared/models/iteration/iteration-details-response';
 import { Constant } from '../../shared/constant/constants';
 import { IterationStatus } from '../../shared/models/iteration/iteration-reponse-model';
+import { FormGroup } from '@angular/forms';
 
 @Component({
 
@@ -12,6 +13,8 @@ import { IterationStatus } from '../../shared/models/iteration/iteration-reponse
 export class IterationDetailsComponent implements OnInit, OnChanges {
 
     @Input() iteration: IterationDetailsResponse;
+    @Input() employeeIterationGoal: FormGroup;
+    @Output() proceedNext = new EventEmitter<number>();
     iterationStepCompleted: number = 0;
 
     constructor() { }
@@ -62,6 +65,22 @@ export class IterationDetailsComponent implements OnInit, OnChanges {
             return Constant.COMPLETE;
     }
 
+    getIterationNextState(state: number) {
+
+        if (state == Constant.ITERATION_STATE.SET_GOALS)
+            return Constant.EMPLOYEE_EVALUATION;
+
+        if (state == Constant.ITERATION_STATE.SELF_EVALUATION)
+            return Constant.MANAGER_EVALUATION;
+
+        if (state == Constant.ITERATION_STATE.MANAGER_EVALUATION)
+            return Constant.REVIEW_METTING;
+
+        if (state == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING)
+            return Constant.COMPLETE_ITERATION;
+
+    }
+
     getStepsCompleted(state: number) {
 
 
@@ -104,5 +123,36 @@ export class IterationDetailsComponent implements OnInit, OnChanges {
         if (iterationStateId == Constant.ITERATION_STATE.COMPLETED)
             this.iterationStepCompleted = 100;
 
+    }
+
+    proceedIterationToNextStep() {
+
+        this.proceedNext.emit(this.iteration.iterationStateId);
+    }
+
+    showProceedButton() {
+
+        if (!this.employeeIterationGoal.value.isManagerRequested) {
+
+            if (   this.iteration.iterationStateId == Constant.ITERATION_STATE.MANAGER_EVALUATION
+                || this.iteration.iterationStateId == Constant.ITERATION_STATE.COMPLETED
+            ) {
+                return false;
+            }
+        }
+
+
+        if (this.employeeIterationGoal.value.isManagerRequested) {
+
+            if (   this.iteration.iterationStateId == Constant.ITERATION_STATE.SELF_EVALUATION
+                || this.iteration.iterationStateId == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+                || this.iteration.iterationStateId == Constant.ITERATION_STATE.COMPLETED
+            ) {
+                return false;
+            }
+        }
+
+
+        return this.iteration.iterationStateId < Constant.ITERATION_STATE.COMPLETED;
     }
 }

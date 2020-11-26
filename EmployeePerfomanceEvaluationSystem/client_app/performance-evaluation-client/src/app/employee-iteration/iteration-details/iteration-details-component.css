@@ -24,3 +24,7 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.iteration_details_button {
+    display: inline-block;
+}

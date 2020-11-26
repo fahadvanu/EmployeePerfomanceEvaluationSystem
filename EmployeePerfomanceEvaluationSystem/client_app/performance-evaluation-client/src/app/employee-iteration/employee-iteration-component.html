@@ -18,9 +18,12 @@
 
                 <employee-details [employee]="employee_iteration_formgroup.value.employee_detail"></employee-details>
 
-                <iteration-details [iteration]="employee_iteration_formgroup.value.iteration_detail"></iteration-details>
+                <iteration-details [iteration]="employee_iteration_formgroup.value.iteration_detail"
+                                   [employeeIterationGoal]="employee_iteration_formgroup.controls['iteration_rating']"
+                                   (proceedNext)="proceedIteration($event)"></iteration-details>
 
                 <employee-iteration-goal [employeeIterationGoal]="employee_iteration_formgroup.controls['iteration_rating']"
+                                         [iteration]="employee_iteration_formgroup.value.iteration_detail"
                                          [ratings]="ratings"
                                          (saveRating)="saveEmployeeRating($event)"></employee-iteration-goal>
 

@@ -3,6 +3,8 @@ import { EmployeeIterationRatingModel } from '../../shared/models/set-goals/empl
 import { FormGroup } from '@angular/forms';
 import { Rating } from '../../shared/models/ratings/rating';
 import { EmployeeRatingRequestModel } from '../../shared/models/set-goals/employee-rating-request-model';
+import { IterationDetailsResponse } from '../../shared/models/iteration/iteration-details-response';
+import { Constant } from '../../shared/constant/constants';
 
 @Component({
     selector:'employee-iteration-goal',
@@ -12,6 +14,7 @@ import { EmployeeRatingRequestModel } from '../../shared/models/set-goals/employ
 export class EmployeeIterationGoalComponent implements OnInit {
 
     @Input() employeeIterationGoal: FormGroup;
+    @Input() iteration: IterationDetailsResponse;
     @Input() ratings: Array<Rating> = new Array<Rating>();
     @Output() saveRating = new EventEmitter<EmployeeRatingRequestModel>();
 
@@ -62,5 +65,58 @@ export class EmployeeIterationGoalComponent implements OnInit {
     private percentageOfNumber(number, percentage): number {
 
         return Math.round((number / 100) * percentage);
+    }
+
+    isEmployeeSectionDisable(goal: FormGroup) {
+        if (goal.value.isManagerRequested)
+            return true;
+
+        if (this.iteration.iterationStateId == Constant.ITERATION_STATE.MANAGER_EVALUATION
+            || this.iteration.iterationStateId == Constant.ITERATION_STATE.COMPLETED
+        ) {
+            return true;
+        }
+
+        return null;
+    }
+
+    isManagerSectionDisable(goal: FormGroup) {
+        if (!goal.value.isManagerRequested)
+            return true;
+
+        if (   this.iteration.iterationStateId == Constant.ITERATION_STATE.SELF_EVALUATION
+            || this.iteration.iterationStateId == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+            || this.iteration.iterationStateId == Constant.ITERATION_STATE.COMPLETED
+        ) {
+            return true;
+        }
+
+        return null;
+    }
+
+    showSaveRatingButton(goal: FormGroup) {
+
+        if (!goal.value.isManagerRequested) {
+
+            if (   this.iteration.iterationStateId == Constant.ITERATION_STATE.MANAGER_EVALUATION
+                || this.iteration.iterationStateId == Constant.ITERATION_STATE.COMPLETED
+            ) {
+                return false;
+            }
+        }
+
+
+        if (goal.value.isManagerRequested) {
+
+            if (   this.iteration.iterationStateId == Constant.ITERATION_STATE.SELF_EVALUATION
+                || this.iteration.iterationStateId == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+                || this.iteration.iterationStateId == Constant.ITERATION_STATE.COMPLETED
+            ) {
+                return false;
+            }
+        }
+
+        return this.iteration.iterationStateId != Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+            && this.iteration.iterationStateId != Constant.ITERATION_STATE.COMPLETED;
     }
 }

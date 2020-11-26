@@ -119,13 +119,28 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 if (null == user)
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {updateEmployeeIterationStateRequestModel.EmployeeId} does not exists" });
 
-                if (user.ReportingManagerId != reportingManagerId)
-                    return new JsonResult(new ApiResponseFailure()
-                    {
-                        ErrorMessage = "Requested User has different reporting manager assigned",
-                        StatusCode = (int)StatusCodes.Status403Forbidden
-                    })
-                    { StatusCode = StatusCodes.Status403Forbidden };
+                if (updateEmployeeIterationStateRequestModel.IterationStateId == (int)Constants.Constants.ITERATION_STATE.SET_GOALS
+                   || updateEmployeeIterationStateRequestModel.IterationStateId == (int)Constants.Constants.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+                   )
+                {
+                    if (user.ReportingManagerId != reportingManagerId)
+                        return new JsonResult(new ApiResponseFailure()
+                        {
+                            ErrorMessage = "Requested User has different reporting manager assigned",
+                            StatusCode = (int)StatusCodes.Status403Forbidden
+                        })
+                        { StatusCode = StatusCodes.Status403Forbidden };
+                }
+                else
+                {
+                    if (user.UserId != reportingManagerId)
+                        return new JsonResult(new ApiResponseFailure()
+                        {
+                            ErrorMessage = "Not Allowed",
+                            StatusCode = (int)StatusCodes.Status403Forbidden
+                        })
+                        { StatusCode = StatusCodes.Status403Forbidden };
+                }
 
 
                 var iteration = await _iterationRepository.GetIteration(updateEmployeeIterationStateRequestModel.IterationId);

@@ -4035,6 +4035,7 @@ const Constant = {
     MANAGER_EVALUATION: 'MANAGER EVALUATION',
     REVIEW_METTING: 'REVIEW MEETING',
     COMPLETE: 'COMPLETED',
+    COMPLETE_ITERATION: 'COMPLETE ITERATION',
     ITERATION_STATE: {
         NOT_STARTED: 0,
         SET_GOALS: 1,
@@ -5544,6 +5545,24 @@ function IterationDetailsComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r0.getIterationStatus(ctx_r0.iteration.status), " ");
 } }
+function IterationDetailsComponent_div_1_div_16_Template(rf, ctx) { if (rf & 1) {
+    const _r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "label", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 12);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 13);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function IterationDetailsComponent_div_1_div_16_Template_button_click_4_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r4); const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r3.proceedIterationToNextStep(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, " Proceed ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r2.getIterationNextState(ctx_r2.iteration.iterationStateId));
+} }
 function IterationDetailsComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 2);
@@ -5569,6 +5588,7 @@ function IterationDetailsComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, IterationDetailsComponent_div_1_div_16_Template, 6, 1, "div", 11);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5581,9 +5601,12 @@ function IterationDetailsComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", ctx_r1.iterationStepCompleted)("striped", true)("animate", true);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r1.getStepsCompleted(ctx_r1.iteration.iterationStateId), " / 4 ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r1.showProceedButton());
 } }
 class IterationDetailsComponent {
     constructor() {
+        this.proceedNext = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.iterationStepCompleted = 0;
     }
     ngOnInit() { }
@@ -5616,6 +5639,16 @@ class IterationDetailsComponent {
         if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.COMPLETED)
             return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].COMPLETE;
     }
+    getIterationNextState(state) {
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.SET_GOALS)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].EMPLOYEE_EVALUATION;
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.SELF_EVALUATION)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].MANAGER_EVALUATION;
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.MANAGER_EVALUATION)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].REVIEW_METTING;
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].COMPLETE_ITERATION;
+    }
     getStepsCompleted(state) {
         if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.NOT_STARTED)
             return 0;
@@ -5644,16 +5677,35 @@ class IterationDetailsComponent {
         if (iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.COMPLETED)
             this.iterationStepCompleted = 100;
     }
+    proceedIterationToNextStep() {
+        this.proceedNext.emit(this.iteration.iterationStateId);
+    }
+    showProceedButton() {
+        if (!this.employeeIterationGoal.value.isManagerRequested) {
+            if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.MANAGER_EVALUATION
+                || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.COMPLETED) {
+                return false;
+            }
+        }
+        if (this.employeeIterationGoal.value.isManagerRequested) {
+            if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.SELF_EVALUATION
+                || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+                || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.COMPLETED) {
+                return false;
+            }
+        }
+        return this.iteration.iterationStateId < _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.COMPLETED;
+    }
 }
 IterationDetailsComponent.ɵfac = function IterationDetailsComponent_Factory(t) { return new (t || IterationDetailsComponent)(); };
-IterationDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: IterationDetailsComponent, selectors: [["iteration-details"]], inputs: { iteration: "iteration" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 2, vars: 2, consts: [["class", "row", 4, "ngIf"], [1, "row"], [1, "col-md-12", "iteration_details_div"], [1, "iteration_details_container"], [1, "row", "iteration_details_container_row"], [1, "col-sm-12"], [1, "label_controls", "label_controls_bold", "col-form-label", "col-sm-4"], [1, "label_controls", "col-form-label", "col-sm-8"], [1, "label_controls", "label_controls_bold", "col-form-label", "col-sm-5"], [1, "label_controls", "col-form-label", "col-sm-7"], ["max", "100", "type", "danger", 3, "value", "striped", "animate"]], template: function IterationDetailsComponent_Template(rf, ctx) { if (rf & 1) {
+IterationDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: IterationDetailsComponent, selectors: [["iteration-details"]], inputs: { iteration: "iteration", employeeIterationGoal: "employeeIterationGoal" }, outputs: { proceedNext: "proceedNext" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 2, vars: 2, consts: [["class", "row", 4, "ngIf"], [1, "row"], [1, "col-md-12", "iteration_details_div"], [1, "iteration_details_container"], [1, "row", "iteration_details_container_row"], [1, "col-sm-12"], [1, "label_controls", "label_controls_bold", "col-form-label", "col-sm-4"], [1, "label_controls", "col-form-label", "col-sm-8"], [1, "label_controls", "label_controls_bold", "col-form-label", "col-sm-5"], [1, "label_controls", "col-form-label", "col-sm-7"], ["max", "100", "type", "danger", 3, "value", "striped", "animate"], ["class", "col-sm-12", 4, "ngIf"], [1, "col-sm-7", "iteration_details_button"], ["type", "button", 1, "btn", "btn-dark", 3, "click"]], template: function IterationDetailsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, IterationDetailsComponent_div_0_Template, 35, 6, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, IterationDetailsComponent_div_1_Template, 16, 5, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, IterationDetailsComponent_div_1_Template, 17, 6, "div", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.iteration != null);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.iteration != null);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], ngx_bootstrap_progressbar__WEBPACK_IMPORTED_MODULE_4__["ProgressbarComponent"]], styles: [".iteration_details_container[_ngcontent-%COMP%] {\r\n    background: #ffff;\r\n    height: 150px;\r\n    display: flex;\r\n    justify-content: left;\r\n    align-items: center;\r\n    margin-top: 2em;\r\n    width: 100%;\r\n    box-shadow: 10px 10px 5px #aaaaaa;\r\n    margin-bottom: 20px;\r\n    margin-top: 0px;\r\n}\r\n\r\n.iteration_details_container_row[_ngcontent-%COMP%] {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n\r\n.iteration_details_div[_ngcontent-%COMP%] {\r\n    padding: 0px;\r\n}\r\n\r\n.label_controls_bold[_ngcontent-%COMP%] {\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2l0ZXJhdGlvbi1kZXRhaWxzL2l0ZXJhdGlvbi1kZXRhaWxzLWNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxpQkFBaUI7SUFDakIsYUFBYTtJQUNiLGFBQWE7SUFDYixxQkFBcUI7SUFDckIsbUJBQW1CO0lBQ25CLGVBQWU7SUFDZixXQUFXO0lBQ1gsaUNBQWlDO0lBQ2pDLG1CQUFtQjtJQUNuQixlQUFlO0FBQ25COztBQUVBO0lBQ0ksV0FBVztJQUNYLGNBQWM7QUFDbEI7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLHlCQUF5QjtBQUM3QiIsImZpbGUiOiJzcmMvYXBwL2VtcGxveWVlLWl0ZXJhdGlvbi9pdGVyYXRpb24tZGV0YWlscy9pdGVyYXRpb24tZGV0YWlscy1jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLml0ZXJhdGlvbl9kZXRhaWxzX2NvbnRhaW5lciB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjZmZmZjtcclxuICAgIGhlaWdodDogMTUwcHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBsZWZ0O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIG1hcmdpbi10b3A6IDJlbTtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgYm94LXNoYWRvdzogMTBweCAxMHB4IDVweCAjYWFhYWFhO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMjBweDtcclxuICAgIG1hcmdpbi10b3A6IDBweDtcclxufVxyXG5cclxuLml0ZXJhdGlvbl9kZXRhaWxzX2NvbnRhaW5lcl9yb3cge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxufVxyXG5cclxuLml0ZXJhdGlvbl9kZXRhaWxzX2RpdiB7XHJcbiAgICBwYWRkaW5nOiAwcHg7XHJcbn1cclxuXHJcbi5sYWJlbF9jb250cm9sc19ib2xkIHtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcclxufSJdfQ== */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], ngx_bootstrap_progressbar__WEBPACK_IMPORTED_MODULE_4__["ProgressbarComponent"]], styles: [".iteration_details_container[_ngcontent-%COMP%] {\r\n    background: #ffff;\r\n    height: 150px;\r\n    display: flex;\r\n    justify-content: left;\r\n    align-items: center;\r\n    margin-top: 2em;\r\n    width: 100%;\r\n    box-shadow: 10px 10px 5px #aaaaaa;\r\n    margin-bottom: 20px;\r\n    margin-top: 0px;\r\n}\r\n\r\n.iteration_details_container_row[_ngcontent-%COMP%] {\r\n    width: 100%;\r\n    display: block;\r\n}\r\n\r\n.iteration_details_div[_ngcontent-%COMP%] {\r\n    padding: 0px;\r\n}\r\n\r\n.label_controls_bold[_ngcontent-%COMP%] {\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.iteration_details_button[_ngcontent-%COMP%] {\r\n    display: inline-block;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2l0ZXJhdGlvbi1kZXRhaWxzL2l0ZXJhdGlvbi1kZXRhaWxzLWNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxpQkFBaUI7SUFDakIsYUFBYTtJQUNiLGFBQWE7SUFDYixxQkFBcUI7SUFDckIsbUJBQW1CO0lBQ25CLGVBQWU7SUFDZixXQUFXO0lBQ1gsaUNBQWlDO0lBQ2pDLG1CQUFtQjtJQUNuQixlQUFlO0FBQ25COztBQUVBO0lBQ0ksV0FBVztJQUNYLGNBQWM7QUFDbEI7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCOztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLHlCQUF5QjtBQUM3Qjs7QUFFQTtJQUNJLHFCQUFxQjtBQUN6QiIsImZpbGUiOiJzcmMvYXBwL2VtcGxveWVlLWl0ZXJhdGlvbi9pdGVyYXRpb24tZGV0YWlscy9pdGVyYXRpb24tZGV0YWlscy1jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLml0ZXJhdGlvbl9kZXRhaWxzX2NvbnRhaW5lciB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjZmZmZjtcclxuICAgIGhlaWdodDogMTUwcHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBsZWZ0O1xyXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcclxuICAgIG1hcmdpbi10b3A6IDJlbTtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgYm94LXNoYWRvdzogMTBweCAxMHB4IDVweCAjYWFhYWFhO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMjBweDtcclxuICAgIG1hcmdpbi10b3A6IDBweDtcclxufVxyXG5cclxuLml0ZXJhdGlvbl9kZXRhaWxzX2NvbnRhaW5lcl9yb3cge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxufVxyXG5cclxuLml0ZXJhdGlvbl9kZXRhaWxzX2RpdiB7XHJcbiAgICBwYWRkaW5nOiAwcHg7XHJcbn1cclxuXHJcbi5sYWJlbF9jb250cm9sc19ib2xkIHtcclxuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xyXG4gICAgdGV4dC10cmFuc2Zvcm06IHVwcGVyY2FzZTtcclxufVxyXG5cclxuLml0ZXJhdGlvbl9kZXRhaWxzX2J1dHRvbiB7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbn0iXX0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](IterationDetailsComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -5663,6 +5715,10 @@ IterationDetailsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵ
             }]
     }], function () { return []; }, { iteration: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], employeeIterationGoal: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], proceedNext: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
         }] }); })();
 
 
@@ -7486,9 +7542,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmployeeIterationGoalComponent", function() { return EmployeeIterationGoalComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _shared_models_set_goals_employee_rating_request_model__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../shared/models/set-goals/employee-rating-request-model */ "6FOq");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _shared_directives_half_donut_half_donut_directive__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/directives/half-donut/half-donut-directive */ "BmDw");
+/* harmony import */ var _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../shared/constant/constants */ "X5XA");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _shared_directives_half_donut_half_donut_directive__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../shared/directives/half-donut/half-donut-directive */ "BmDw");
+
 
 
 
@@ -7496,27 +7554,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function EmployeeIterationGoalComponent_div_0_div_2_option_18_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "option", 26);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-} if (rf & 2) {
-    const rating_r10 = ctx.$implicit;
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", rating_r10.ratingId);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](rating_r10.ratingName);
-} }
-function EmployeeIterationGoalComponent_div_0_div_2_p_19_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 27);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "* Please select Rating");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-} }
-function EmployeeIterationGoalComponent_div_0_div_2_p_26_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 27);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "* Please enter comments");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-} }
-function EmployeeIterationGoalComponent_div_0_div_2_option_33_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "option", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "option", 24);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
@@ -7525,14 +7563,43 @@ function EmployeeIterationGoalComponent_div_0_div_2_option_33_Template(rf, ctx) 
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](rating_r11.ratingName);
 } }
+function EmployeeIterationGoalComponent_div_0_div_2_p_19_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "* Please select Rating");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} }
+function EmployeeIterationGoalComponent_div_0_div_2_p_26_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 25);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "* Please enter comments");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} }
+function EmployeeIterationGoalComponent_div_0_div_2_option_33_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "option", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const rating_r12 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", rating_r12.ratingId);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](rating_r12.ratingName);
+} }
 function EmployeeIterationGoalComponent_div_0_div_2_p_34_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 25);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "* Please select Rating");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function EmployeeIterationGoalComponent_div_0_div_2_p_41_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p", 25);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "* Please enter comments");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} }
+function EmployeeIterationGoalComponent_div_0_div_2_div_43_Template(rf, ctx) { if (rf & 1) {
+    const _r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 27);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EmployeeIterationGoalComponent_div_0_div_2_div_43_Template_button_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r15); const existingGoal_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit; const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r13.saveIterationGoal(existingGoal_r2); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "span", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 const _c0 = function (a0) { return { value: a0, label: "Weightage" }; };
@@ -7540,7 +7607,7 @@ const _c1 = function (a0, a1) { return [a0, a1]; };
 const _c2 = function (a0) { return { value: a0, label: "Employee Weightage" }; };
 const _c3 = function (a0) { return { value: a0, label: "Manager Weightage" }; };
 function EmployeeIterationGoalComponent_div_0_div_2_Template(rf, ctx) { if (rf & 1) {
-    const _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r17 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 4);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 6);
@@ -7562,7 +7629,7 @@ function EmployeeIterationGoalComponent_div_0_div_2_Template(rf, ctx) { if (rf &
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "Rating");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "select", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function EmployeeIterationGoalComponent_div_0_div_2_Template_select_change_15_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const existingGoal_r2 = ctx.$implicit; const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r12.setEmployeeRatingWeightage(existingGoal_r2); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function EmployeeIterationGoalComponent_div_0_div_2_Template_select_change_15_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17); const existingGoal_r2 = ctx.$implicit; const ctx_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r16.setEmployeeRatingWeightage(existingGoal_r2); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "option", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](17, "Choose...");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -7585,7 +7652,7 @@ function EmployeeIterationGoalComponent_div_0_div_2_Template(rf, ctx) { if (rf &
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, "Manager Rating");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "select", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function EmployeeIterationGoalComponent_div_0_div_2_Template_select_change_30_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const existingGoal_r2 = ctx.$implicit; const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r14.setManagerRatingWeightage(existingGoal_r2); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function EmployeeIterationGoalComponent_div_0_div_2_Template_select_change_30_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r17); const existingGoal_r2 = ctx.$implicit; const ctx_r18 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r18.setManagerRatingWeightage(existingGoal_r2); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "option", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, "Choose...");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -7605,12 +7672,7 @@ function EmployeeIterationGoalComponent_div_0_div_2_Template(rf, ctx) { if (rf &
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](42, "div", 22);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](43, "div", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](44, "button", 24);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function EmployeeIterationGoalComponent_div_0_div_2_Template_button_click_44_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const existingGoal_r2 = ctx.$implicit; const ctx_r15 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r15.saveIterationGoal(existingGoal_r2); });
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](45, "span", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](43, EmployeeIterationGoalComponent_div_0_div_2_div_43_Template, 3, 0, "div", 23);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -7625,38 +7687,40 @@ function EmployeeIterationGoalComponent_div_0_div_2_Template(rf, ctx) { if (rf &
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](existingGoal_r2.value.description);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("width", 200)("height", 100)("pieData", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](27, _c1, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](23, _c0, existingGoal_r2.value.weightage), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](25, _c0, 100 - existingGoal_r2.value.weightage)));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("width", 200)("height", 100)("pieData", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](28, _c1, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](24, _c0, existingGoal_r2.value.weightage), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](26, _c0, 100 - existingGoal_r2.value.weightage)));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", existingGoal_r2.value.weightage, "%");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("disabled", existingGoal_r2.value.isManagerRequested == true ? true : null);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("disabled", ctx_r1.isEmployeeSectionDisable(existingGoal_r2));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r1.ratings);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", existingGoal_r2.get("employeeRatingId").hasError("required") && existingGoal_r2.get("employeeRatingId").touched);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("width", 200)("height", 100)("pieData", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](34, _c1, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](30, _c2, existingGoal_r2.value.employeeRatingWeightage), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](32, _c2, 100 - existingGoal_r2.value.employeeRatingWeightage)));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("width", 200)("height", 100)("pieData", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](35, _c1, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](31, _c2, existingGoal_r2.value.employeeRatingWeightage), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](33, _c2, 100 - existingGoal_r2.value.employeeRatingWeightage)));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("disabled", existingGoal_r2.value.isManagerRequested == true ? true : null);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("disabled", ctx_r1.isEmployeeSectionDisable(existingGoal_r2));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", existingGoal_r2.get("employeeComments").hasError("required") && existingGoal_r2.get("employeeComments").touched);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("disabled", existingGoal_r2.value.isManagerRequested == false ? true : null);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("disabled", ctx_r1.isManagerSectionDisable(existingGoal_r2));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx_r1.ratings);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", existingGoal_r2.get("managerRatingId").hasError("required") && existingGoal_r2.get("managerRatingId").touched);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("width", 200)("height", 100)("pieData", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](41, _c1, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](37, _c3, existingGoal_r2.value.managerRatingWeightage), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](39, _c3, 100 - existingGoal_r2.value.managerRatingWeightage)));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("width", 200)("height", 100)("pieData", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](42, _c1, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](38, _c3, existingGoal_r2.value.managerRatingWeightage), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](40, _c3, 100 - existingGoal_r2.value.managerRatingWeightage)));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("disabled", existingGoal_r2.value.isManagerRequested == false ? true : null);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("disabled", ctx_r1.isManagerSectionDisable(existingGoal_r2));
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", existingGoal_r2.get("managerComments").hasError("required") && existingGoal_r2.get("managerComments").touched);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx_r1.showSaveRatingButton(existingGoal_r2));
 } }
 function EmployeeIterationGoalComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 2);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, EmployeeIterationGoalComponent_div_0_div_2_Template, 46, 44, "div", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, EmployeeIterationGoalComponent_div_0_div_2_Template, 44, 45, "div", 3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
@@ -7706,13 +7770,49 @@ class EmployeeIterationGoalComponent {
     percentageOfNumber(number, percentage) {
         return Math.round((number / 100) * percentage);
     }
+    isEmployeeSectionDisable(goal) {
+        if (goal.value.isManagerRequested)
+            return true;
+        if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.MANAGER_EVALUATION
+            || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.COMPLETED) {
+            return true;
+        }
+        return null;
+    }
+    isManagerSectionDisable(goal) {
+        if (!goal.value.isManagerRequested)
+            return true;
+        if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.SELF_EVALUATION
+            || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+            || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.COMPLETED) {
+            return true;
+        }
+        return null;
+    }
+    showSaveRatingButton(goal) {
+        if (!goal.value.isManagerRequested) {
+            if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.MANAGER_EVALUATION
+                || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.COMPLETED) {
+                return false;
+            }
+        }
+        if (goal.value.isManagerRequested) {
+            if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.SELF_EVALUATION
+                || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+                || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.COMPLETED) {
+                return false;
+            }
+        }
+        return this.iteration.iterationStateId != _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
+            && this.iteration.iterationStateId != _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.COMPLETED;
+    }
 }
 EmployeeIterationGoalComponent.ɵfac = function EmployeeIterationGoalComponent_Factory(t) { return new (t || EmployeeIterationGoalComponent)(); };
-EmployeeIterationGoalComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EmployeeIterationGoalComponent, selectors: [["employee-iteration-goal"]], inputs: { employeeIterationGoal: "employeeIterationGoal", ratings: "ratings" }, outputs: { saveRating: "saveRating" }, decls: 1, vars: 1, consts: [["class", "row goal_main_row", 3, "formGroup", 4, "ngIf"], [1, "row", "goal_main_row", 3, "formGroup"], ["formArrayName", "goal_ratings", 1, "col-md-12"], ["class", "row card_goal_row", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "row", "card_goal_row", 3, "formGroupName"], [1, "col-md-12", "card_goal_column"], [1, "card", "existing_goal_card"], [1, "card-header", "bg-primary", "text-white", "text-center"], [1, "card-body"], [1, "donut_weightage"], [3, "width", "height", "pieData"], [1, "weightage"], [1, "form-group"], ["for", "rating"], ["id", "rating", "formControlName", "employeeRatingId", 1, "form-control", 3, "change"], ["value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["class", "help-block", 4, "ngIf"], ["for", "role"], ["name", "goalDescription", "placeholder", "Enter Description(Max 200 characters)", "formControlName", "employeeComments", "required", "", "maxlength", "200", "rows", "3", "spellcheck", "false", 1, "form-control"], ["id", "rating", "formControlName", "managerRatingId", 1, "form-control", 3, "change"], ["name", "goalDescription", "placeholder", "Enter Description(Max 200 characters)", "formControlName", "managerComments", "required", "", "maxlength", "200", "rows", "3", "spellcheck", "false", 1, "form-control"], [1, "card-footer"], [1, "footer_buttons"], ["type", "button", 1, "btn", "btn-default", 3, "click"], ["title", "Save", 1, "fa", "fa-save", "fa-lg"], [3, "value"], [1, "help-block"]], template: function EmployeeIterationGoalComponent_Template(rf, ctx) { if (rf & 1) {
+EmployeeIterationGoalComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EmployeeIterationGoalComponent, selectors: [["employee-iteration-goal"]], inputs: { employeeIterationGoal: "employeeIterationGoal", iteration: "iteration", ratings: "ratings" }, outputs: { saveRating: "saveRating" }, decls: 1, vars: 1, consts: [["class", "row goal_main_row", 3, "formGroup", 4, "ngIf"], [1, "row", "goal_main_row", 3, "formGroup"], ["formArrayName", "goal_ratings", 1, "col-md-12"], ["class", "row card_goal_row", 3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "row", "card_goal_row", 3, "formGroupName"], [1, "col-md-12", "card_goal_column"], [1, "card", "existing_goal_card"], [1, "card-header", "bg-primary", "text-white", "text-center"], [1, "card-body"], [1, "donut_weightage"], [3, "width", "height", "pieData"], [1, "weightage"], [1, "form-group"], ["for", "rating"], ["id", "rating", "formControlName", "employeeRatingId", 1, "form-control", 3, "change"], ["value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["class", "help-block", 4, "ngIf"], ["for", "role"], ["name", "goalDescription", "placeholder", "Enter Description(Max 200 characters)", "formControlName", "employeeComments", "required", "", "maxlength", "200", "rows", "3", "spellcheck", "false", 1, "form-control"], ["id", "rating", "formControlName", "managerRatingId", 1, "form-control", 3, "change"], ["name", "goalDescription", "placeholder", "Enter Description(Max 200 characters)", "formControlName", "managerComments", "required", "", "maxlength", "200", "rows", "3", "spellcheck", "false", 1, "form-control"], [1, "card-footer"], ["class", "footer_buttons", 4, "ngIf"], [3, "value"], [1, "help-block"], [1, "footer_buttons"], ["type", "button", 1, "btn", "btn-default", 3, "click"], ["title", "Save", 1, "fa", "fa-save", "fa-lg", 2, "cursor", "pointer"]], template: function EmployeeIterationGoalComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](0, EmployeeIterationGoalComponent_div_0_Template, 3, 2, "div", 0);
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.employeeIterationGoal != null);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormArrayName"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroupName"], _shared_directives_half_donut_half_donut_directive__WEBPACK_IMPORTED_MODULE_4__["HalfDonutDirectiveComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControlName"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵangular_packages_forms_forms_x"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["MaxLengthValidator"]], styles: [".weightage[_ngcontent-%COMP%] {\r\n    position: absolute;\r\n    top: 59px;\r\n    width: 100%;\r\n}\r\n\r\n.existing_goal_card[_ngcontent-%COMP%] {\r\n    height: 930px;\r\n}\r\n\r\n.footer_buttons[_ngcontent-%COMP%] {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.donut_weightage[_ngcontent-%COMP%] {\r\n    width: 300px;\r\n    height: 100px;\r\n    margin: 0 auto;\r\n    text-align: center;\r\n    position: relative;\r\n}\r\n\r\n.goal_main_row[_ngcontent-%COMP%]{\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.card_goal_row[_ngcontent-%COMP%] {\r\n    background: #ffff;\r\n    box-shadow: 10px 10px 5px #aaaaaa;\r\n}\r\n\r\n.card_goal_column[_ngcontent-%COMP%]{\r\n    padding: 20px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlX2l0ZXJhdGlvbl9nb2FsL2VtcGxveWVlX2l0ZXJhdGlvbl9nb2FsX2NvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsU0FBUztJQUNULFdBQVc7QUFDZjs7QUFFQTtJQUNJLGFBQWE7QUFDakI7O0FBRUE7SUFDSSxhQUFhO0lBQ2IsdUJBQXVCO0FBQzNCOztBQUVBO0lBQ0ksWUFBWTtJQUNaLGFBQWE7SUFDYixjQUFjO0lBQ2Qsa0JBQWtCO0lBQ2xCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixpQ0FBaUM7QUFDckM7O0FBRUE7SUFDSSxhQUFhO0FBQ2pCIiwiZmlsZSI6InNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlX2l0ZXJhdGlvbl9nb2FsL2VtcGxveWVlX2l0ZXJhdGlvbl9nb2FsX2NvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIud2VpZ2h0YWdlIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHRvcDogNTlweDtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcblxyXG4uZXhpc3RpbmdfZ29hbF9jYXJkIHtcclxuICAgIGhlaWdodDogOTMwcHg7XHJcbn1cclxuXHJcbi5mb290ZXJfYnV0dG9ucyB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbn1cclxuXHJcbi5kb251dF93ZWlnaHRhZ2Uge1xyXG4gICAgd2lkdGg6IDMwMHB4O1xyXG4gICAgaGVpZ2h0OiAxMDBweDtcclxuICAgIG1hcmdpbjogMCBhdXRvO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG59XHJcblxyXG4uZ29hbF9tYWluX3Jvd3tcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbn1cclxuXHJcbi5jYXJkX2dvYWxfcm93IHtcclxuICAgIGJhY2tncm91bmQ6ICNmZmZmO1xyXG4gICAgYm94LXNoYWRvdzogMTBweCAxMHB4IDVweCAjYWFhYWFhO1xyXG59XHJcblxyXG4uY2FyZF9nb2FsX2NvbHVtbntcclxuICAgIHBhZGRpbmc6IDIwcHg7XHJcbn0iXX0= */"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormArrayName"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroupName"], _shared_directives_half_donut_half_donut_directive__WEBPACK_IMPORTED_MODULE_5__["HalfDonutDirectiveComponent"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["SelectControlValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControlName"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["NgSelectOption"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵangular_packages_forms_forms_x"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["MaxLengthValidator"]], styles: [".weightage[_ngcontent-%COMP%] {\r\n    position: absolute;\r\n    top: 59px;\r\n    width: 100%;\r\n}\r\n\r\n.existing_goal_card[_ngcontent-%COMP%] {\r\n    height: 930px;\r\n}\r\n\r\n.footer_buttons[_ngcontent-%COMP%] {\r\n    display: flex;\r\n    justify-content: center;\r\n}\r\n\r\n.donut_weightage[_ngcontent-%COMP%] {\r\n    width: 300px;\r\n    height: 100px;\r\n    margin: 0 auto;\r\n    text-align: center;\r\n    position: relative;\r\n}\r\n\r\n.goal_main_row[_ngcontent-%COMP%]{\r\n    margin-bottom: 10px;\r\n}\r\n\r\n.card_goal_row[_ngcontent-%COMP%] {\r\n    background: #ffff;\r\n    box-shadow: 10px 10px 5px #aaaaaa;\r\n}\r\n\r\n.card_goal_column[_ngcontent-%COMP%]{\r\n    padding: 20px;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlX2l0ZXJhdGlvbl9nb2FsL2VtcGxveWVlX2l0ZXJhdGlvbl9nb2FsX2NvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsU0FBUztJQUNULFdBQVc7QUFDZjs7QUFFQTtJQUNJLGFBQWE7QUFDakI7O0FBRUE7SUFDSSxhQUFhO0lBQ2IsdUJBQXVCO0FBQzNCOztBQUVBO0lBQ0ksWUFBWTtJQUNaLGFBQWE7SUFDYixjQUFjO0lBQ2Qsa0JBQWtCO0lBQ2xCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixpQ0FBaUM7QUFDckM7O0FBRUE7SUFDSSxhQUFhO0FBQ2pCIiwiZmlsZSI6InNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlX2l0ZXJhdGlvbl9nb2FsL2VtcGxveWVlX2l0ZXJhdGlvbl9nb2FsX2NvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIud2VpZ2h0YWdlIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHRvcDogNTlweDtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcblxyXG4uZXhpc3RpbmdfZ29hbF9jYXJkIHtcclxuICAgIGhlaWdodDogOTMwcHg7XHJcbn1cclxuXHJcbi5mb290ZXJfYnV0dG9ucyB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbn1cclxuXHJcbi5kb251dF93ZWlnaHRhZ2Uge1xyXG4gICAgd2lkdGg6IDMwMHB4O1xyXG4gICAgaGVpZ2h0OiAxMDBweDtcclxuICAgIG1hcmdpbjogMCBhdXRvO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG59XHJcblxyXG4uZ29hbF9tYWluX3Jvd3tcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbn1cclxuXHJcbi5jYXJkX2dvYWxfcm93IHtcclxuICAgIGJhY2tncm91bmQ6ICNmZmZmO1xyXG4gICAgYm94LXNoYWRvdzogMTBweCAxMHB4IDVweCAjYWFhYWFhO1xyXG59XHJcblxyXG4uY2FyZF9nb2FsX2NvbHVtbntcclxuICAgIHBhZGRpbmc6IDIwcHg7XHJcbn0iXX0= */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](EmployeeIterationGoalComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -7721,6 +7821,8 @@ EmployeeIterationGoalComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0_
                 styleUrls: ['./employee_iteration_goal_component.css']
             }]
     }], function () { return []; }, { employeeIterationGoal: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], iteration: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }], ratings: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
@@ -7934,19 +8036,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EmployeeIterationComponent", function() { return EmployeeIterationComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _confirm_modal_component_confirm_modal_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../confirm-modal-component/confirm-modal-component */ "Gs7e");
-/* harmony import */ var _shared_models_user_user_response_model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/models/user/user-response-model */ "S8qu");
-/* harmony import */ var _shared_models_iteration_iteration_details_response__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/models/iteration/iteration-details-response */ "wkPD");
-/* harmony import */ var _shared_models_ratings_rating__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/models/ratings/rating */ "4cN6");
-/* harmony import */ var _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/models/set-goals/employee_iteration_model */ "0vcu");
-/* harmony import */ var _shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/services/iteration/iteration-service */ "OqMo");
-/* harmony import */ var _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/services/spinner/spinner-service */ "3PAx");
-/* harmony import */ var _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../shared/services/toastr/toastr-service */ "jonD");
-/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _employee_details_employee_details_display_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./employee-details/employee-details-display-component */ "eOZ7");
-/* harmony import */ var _iteration_details_iteration_details_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./iteration-details/iteration-details-component */ "mcrR");
-/* harmony import */ var _employee_iteration_goal_employee_iteration_goal_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./employee_iteration_goal/employee_iteration_goal_component */ "wk5X");
+/* harmony import */ var _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/constant/constants */ "X5XA");
+/* harmony import */ var _shared_models_user_user_response_model__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/models/user/user-response-model */ "S8qu");
+/* harmony import */ var _shared_models_iteration_iteration_details_response__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/models/iteration/iteration-details-response */ "wkPD");
+/* harmony import */ var _shared_models_ratings_rating__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/models/ratings/rating */ "4cN6");
+/* harmony import */ var _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/models/set-goals/employee_iteration_model */ "0vcu");
+/* harmony import */ var _shared_models_set_goals_update_iteration_request_model__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/models/set-goals/update-iteration-request-model */ "0bel");
+/* harmony import */ var _shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../shared/services/iteration/iteration-service */ "OqMo");
+/* harmony import */ var _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../shared/services/spinner/spinner-service */ "3PAx");
+/* harmony import */ var _shared_services_set_goals_set_goals_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../shared/services/set-goals/set-goals-service */ "OY/I");
+/* harmony import */ var _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../shared/services/toastr/toastr-service */ "jonD");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ngx-bootstrap/modal */ "K3ix");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _employee_details_employee_details_display_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./employee-details/employee-details-display-component */ "eOZ7");
+/* harmony import */ var _iteration_details_iteration_details_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./iteration-details/iteration-details-component */ "mcrR");
+/* harmony import */ var _employee_iteration_goal_employee_iteration_goal_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./employee_iteration_goal/employee_iteration_goal_component */ "wk5X");
+
+
+
 
 
 
@@ -7964,9 +8072,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class EmployeeIterationComponent {
-    constructor(iterationService, spinnerService, toastrNotificationService, modalService, router, employee_iteration_formbuilder, route) {
+    constructor(iterationService, spinnerService, setGoalService, toastrNotificationService, modalService, router, employee_iteration_formbuilder, route) {
         this.iterationService = iterationService;
         this.spinnerService = spinnerService;
+        this.setGoalService = setGoalService;
         this.toastrNotificationService = toastrNotificationService;
         this.modalService = modalService;
         this.router = router;
@@ -8003,18 +8112,18 @@ class EmployeeIterationComponent {
             .subscribe((responses) => {
             let iteration_detail = null;
             if (responses[0].data != null) {
-                iteration_detail = _shared_models_iteration_iteration_details_response__WEBPACK_IMPORTED_MODULE_3__["IterationDetailsResponse"].FormIterationDetailsModel(responses[0]);
+                iteration_detail = _shared_models_iteration_iteration_details_response__WEBPACK_IMPORTED_MODULE_4__["IterationDetailsResponse"].FormIterationDetailsModel(responses[0]);
             }
             let employee_detail = null;
             if (responses[1].data != null) {
-                employee_detail = _shared_models_user_user_response_model__WEBPACK_IMPORTED_MODULE_2__["UserResponseModel"].formUserResponseModel(responses[1]);
+                employee_detail = _shared_models_user_user_response_model__WEBPACK_IMPORTED_MODULE_3__["UserResponseModel"].formUserResponseModel(responses[1]);
             }
             if (responses[2].data != null) {
-                this.ratings = _shared_models_ratings_rating__WEBPACK_IMPORTED_MODULE_4__["Rating"].FormRatingModelArray(responses[2]);
+                this.ratings = _shared_models_ratings_rating__WEBPACK_IMPORTED_MODULE_5__["Rating"].FormRatingModelArray(responses[2]);
             }
             let iterationRatingModel = null;
             if (responses[3].data != null) {
-                iterationRatingModel = _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_5__["EmployeeIterationRatingModel"].FormEmployeeIterationRatingModel(responses[3], this.ratings);
+                iterationRatingModel = _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_6__["EmployeeIterationRatingModel"].FormEmployeeIterationRatingModel(responses[3], this.ratings);
                 let iteration_rating_formgroup = this.employee_iteration_formgroup.controls['iteration_rating'];
                 iteration_rating_formgroup.controls['goal_ratings'] = this.employee_iteration_formbuilder.array(iterationRatingModel.goals_ratings
                     .slice()
@@ -8063,7 +8172,7 @@ class EmployeeIterationComponent {
             .subscribe((response) => {
             let iterationRatingModel = null;
             if (response.data != null) {
-                iterationRatingModel = _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_5__["EmployeeIterationRatingModel"].FormEmployeeIterationRatingModel(response, this.ratings);
+                iterationRatingModel = _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_6__["EmployeeIterationRatingModel"].FormEmployeeIterationRatingModel(response, this.ratings);
                 let iteration_rating_formgroup = this.employee_iteration_formgroup.controls['iteration_rating'];
                 iteration_rating_formgroup.controls['goal_ratings'] = this.employee_iteration_formbuilder.array(iterationRatingModel.goals_ratings
                     .slice()
@@ -8079,9 +8188,105 @@ class EmployeeIterationComponent {
             console.log('Exception occured while fecthing ratings after saved');
         });
     }
+    proceedIteration(iterationStateId) {
+        if (iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.SELF_EVALUATION) {
+            let result = this.validateEmployeeGoals();
+            if (!result) {
+                this.toastrNotificationService.warning('Please complete all the goals set first');
+                return;
+            }
+        }
+        let message = this.getIterationNextStateMessage(iterationStateId);
+        this.modalRef = this.modalService.show(_confirm_modal_component_confirm_modal_component__WEBPACK_IMPORTED_MODULE_1__["ConfirmModalComponent"], {
+            initialState: {
+                promptMessage: `Proceed Iteration stage for ${message}?`,
+                callback: (result) => {
+                    if (result) {
+                        this.spinnerService.updateMessage(`Proceeding ${message} state. Please wait.....`);
+                        this.spinnerService.busy();
+                        let updateIterationStateRequestModel = new _shared_models_set_goals_update_iteration_request_model__WEBPACK_IMPORTED_MODULE_7__["UpdateEmployeeIterationState"]();
+                        updateIterationStateRequestModel.employeeId = this.employeeId * 1;
+                        updateIterationStateRequestModel.iterationId = this.iterationId * 1;
+                        updateIterationStateRequestModel.iterationStateId = this.getIterationNextState(iterationStateId);
+                        this.setGoalService.updateEmployeeIterationState(updateIterationStateRequestModel)
+                            .subscribe((response) => {
+                            this.fetchEmployeeIterationAfterProceedingToNextState('Iteration state saved successfully');
+                        }, error => {
+                            this.spinnerService.idle();
+                            console.log('Exception occured while updating iteration state');
+                        });
+                    }
+                }
+            }
+        });
+    }
+    fetchEmployeeIterationAfterProceedingToNextState(message) {
+        this.iterationService.getEmployeeIterationScreenData(this.employeeId, this.iterationId)
+            .subscribe((responses) => {
+            let iteration_detail = null;
+            if (responses[0].data != null) {
+                iteration_detail = _shared_models_iteration_iteration_details_response__WEBPACK_IMPORTED_MODULE_4__["IterationDetailsResponse"].FormIterationDetailsModel(responses[0]);
+            }
+            let employee_detail = null;
+            if (responses[1].data != null) {
+                employee_detail = _shared_models_user_user_response_model__WEBPACK_IMPORTED_MODULE_3__["UserResponseModel"].formUserResponseModel(responses[1]);
+            }
+            if (responses[2].data != null) {
+                this.ratings = _shared_models_ratings_rating__WEBPACK_IMPORTED_MODULE_5__["Rating"].FormRatingModelArray(responses[2]);
+            }
+            let iterationRatingModel = null;
+            if (responses[3].data != null) {
+                iterationRatingModel = _shared_models_set_goals_employee_iteration_model__WEBPACK_IMPORTED_MODULE_6__["EmployeeIterationRatingModel"].FormEmployeeIterationRatingModel(responses[3], this.ratings);
+                let iteration_rating_formgroup = this.employee_iteration_formgroup.controls['iteration_rating'];
+                iteration_rating_formgroup.controls['goal_ratings'] = this.employee_iteration_formbuilder.array(iterationRatingModel.goals_ratings
+                    .slice()
+                    .map(i => this.employee_iteration_formbuilder.group(i)));
+                iteration_rating_formgroup.patchValue({
+                    manager_requested: iterationRatingModel.isManagerRequested
+                });
+            }
+            this.employee_iteration_formgroup.patchValue({
+                iteration_detail: iteration_detail,
+                employee_detail: employee_detail
+            });
+            this.spinnerService.idle();
+            this.toastrNotificationService.success(message);
+        }, error => {
+            this.spinnerService.idle();
+            console.log('Exception occured while fetching employee iteration details from Database');
+        });
+    }
+    getIterationNextStateMessage(state) {
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.SELF_EVALUATION)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].MANAGER_EVALUATION;
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.MANAGER_EVALUATION)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].REVIEW_METTING;
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].COMPLETE_ITERATION;
+    }
+    getIterationNextState(state) {
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.SELF_EVALUATION)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.MANAGER_EVALUATION;
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.MANAGER_EVALUATION)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING;
+        if (state == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.COMPLETED;
+    }
+    validateEmployeeGoals() {
+        let result = true;
+        let iteration_rating_formgroup = this.employee_iteration_formgroup.controls['iteration_rating'];
+        for (let rating of iteration_rating_formgroup.value.goal_ratings) {
+            if ((rating.employeeRatingId == '' || rating.employeeRatingId == null)
+                || (rating.employeeComments == '' || rating.employeeComments == null)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
 }
-EmployeeIterationComponent.ɵfac = function EmployeeIterationComponent_Factory(t) { return new (t || EmployeeIterationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_6__["IterationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_7__["SpinnerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_8__["ToastrNotificationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["BsModalService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_10__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_10__["ActivatedRoute"])); };
-EmployeeIterationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EmployeeIterationComponent, selectors: [["ng-component"]], decls: 12, vars: 5, consts: [[1, "container_row"], [1, "row"], [1, "col-md-12", "title_Col"], [1, "title_performance_document"], [1, "col-md-12"], ["novalidate", "", 3, "formGroup"], [3, "employee"], [3, "iteration"], [3, "employeeIterationGoal", "ratings", "saveRating"]], template: function EmployeeIterationComponent_Template(rf, ctx) { if (rf & 1) {
+EmployeeIterationComponent.ɵfac = function EmployeeIterationComponent_Factory(t) { return new (t || EmployeeIterationComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_8__["IterationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_9__["SpinnerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_set_goals_set_goals_service__WEBPACK_IMPORTED_MODULE_10__["SetGoalsService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_11__["ToastrNotificationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_12__["BsModalService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_13__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_14__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_13__["ActivatedRoute"])); };
+EmployeeIterationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EmployeeIterationComponent, selectors: [["ng-component"]], decls: 12, vars: 7, consts: [[1, "container_row"], [1, "row"], [1, "col-md-12", "title_Col"], [1, "title_performance_document"], [1, "col-md-12"], ["novalidate", "", 3, "formGroup"], [3, "employee"], [3, "iteration", "employeeIterationGoal", "proceedNext"], [3, "employeeIterationGoal", "iteration", "ratings", "saveRating"]], template: function EmployeeIterationComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -8096,7 +8301,9 @@ EmployeeIterationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["�
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "form", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "employee-details", 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](10, "iteration-details", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "iteration-details", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("proceedNext", function EmployeeIterationComponent_Template_iteration_details_proceedNext_10_listener($event) { return ctx.proceedIteration($event); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "employee-iteration-goal", 8);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("saveRating", function EmployeeIterationComponent_Template_employee_iteration_goal_saveRating_11_listener($event) { return ctx.saveEmployeeRating($event); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -8110,17 +8317,17 @@ EmployeeIterationComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["�
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("employee", ctx.employee_iteration_formgroup.value.employee_detail);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("iteration", ctx.employee_iteration_formgroup.value.iteration_detail);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("iteration", ctx.employee_iteration_formgroup.value.iteration_detail)("employeeIterationGoal", ctx.employee_iteration_formgroup.controls["iteration_rating"]);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("employeeIterationGoal", ctx.employee_iteration_formgroup.controls["iteration_rating"])("ratings", ctx.ratings);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_11__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormGroupDirective"], _employee_details_employee_details_display_component__WEBPACK_IMPORTED_MODULE_12__["EmployeeDetailsComponent"], _iteration_details_iteration_details_component__WEBPACK_IMPORTED_MODULE_13__["IterationDetailsComponent"], _employee_iteration_goal_employee_iteration_goal_component__WEBPACK_IMPORTED_MODULE_14__["EmployeeIterationGoalComponent"]], styles: [".container_row[_ngcontent-%COMP%] {\r\n    background: #F1F1F1;\r\n    box-sizing: border-box;\r\n}\r\n\r\n.title_Col[_ngcontent-%COMP%] {\r\n    margin-top: 1em;\r\n}\r\n\r\n.label_controls_bold[_ngcontent-%COMP%] {\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.title_performance_document[_ngcontent-%COMP%] {\r\n    background: #ffff;\r\n    height: 80px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    box-shadow: 10px 10px 5px #aaaaaa;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlLWl0ZXJhdGlvbi1jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtJQUNJLG1CQUFtQjtJQUNuQixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLHlCQUF5QjtBQUM3Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixZQUFZO0lBQ1osYUFBYTtJQUNiLHVCQUF1QjtJQUN2QixtQkFBbUI7SUFDbkIsaUNBQWlDO0FBQ3JDIiwiZmlsZSI6InNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlLWl0ZXJhdGlvbi1jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5jb250YWluZXJfcm93IHtcclxuICAgIGJhY2tncm91bmQ6ICNGMUYxRjE7XHJcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG59XHJcblxyXG4udGl0bGVfQ29sIHtcclxuICAgIG1hcmdpbi10b3A6IDFlbTtcclxufVxyXG5cclxuLmxhYmVsX2NvbnRyb2xzX2JvbGQge1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG59XHJcblxyXG4udGl0bGVfcGVyZm9ybWFuY2VfZG9jdW1lbnQge1xyXG4gICAgYmFja2dyb3VuZDogI2ZmZmY7XHJcbiAgICBoZWlnaHQ6IDgwcHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgYm94LXNoYWRvdzogMTBweCAxMHB4IDVweCAjYWFhYWFhO1xyXG59Il19 */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("employeeIterationGoal", ctx.employee_iteration_formgroup.controls["iteration_rating"])("iteration", ctx.employee_iteration_formgroup.value.iteration_detail)("ratings", ctx.ratings);
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_14__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_14__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_14__["FormGroupDirective"], _employee_details_employee_details_display_component__WEBPACK_IMPORTED_MODULE_15__["EmployeeDetailsComponent"], _iteration_details_iteration_details_component__WEBPACK_IMPORTED_MODULE_16__["IterationDetailsComponent"], _employee_iteration_goal_employee_iteration_goal_component__WEBPACK_IMPORTED_MODULE_17__["EmployeeIterationGoalComponent"]], styles: [".container_row[_ngcontent-%COMP%] {\r\n    background: #F1F1F1;\r\n    box-sizing: border-box;\r\n}\r\n\r\n.title_Col[_ngcontent-%COMP%] {\r\n    margin-top: 1em;\r\n}\r\n\r\n.label_controls_bold[_ngcontent-%COMP%] {\r\n    font-weight: bold;\r\n    text-transform: uppercase;\r\n}\r\n\r\n.title_performance_document[_ngcontent-%COMP%] {\r\n    background: #ffff;\r\n    height: 80px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    box-shadow: 10px 10px 5px #aaaaaa;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlLWl0ZXJhdGlvbi1jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtJQUNJLG1CQUFtQjtJQUNuQixzQkFBc0I7QUFDMUI7O0FBRUE7SUFDSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksaUJBQWlCO0lBQ2pCLHlCQUF5QjtBQUM3Qjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixZQUFZO0lBQ1osYUFBYTtJQUNiLHVCQUF1QjtJQUN2QixtQkFBbUI7SUFDbkIsaUNBQWlDO0FBQ3JDIiwiZmlsZSI6InNyYy9hcHAvZW1wbG95ZWUtaXRlcmF0aW9uL2VtcGxveWVlLWl0ZXJhdGlvbi1jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi5jb250YWluZXJfcm93IHtcclxuICAgIGJhY2tncm91bmQ6ICNGMUYxRjE7XHJcbiAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG59XHJcblxyXG4udGl0bGVfQ29sIHtcclxuICAgIG1hcmdpbi10b3A6IDFlbTtcclxufVxyXG5cclxuLmxhYmVsX2NvbnRyb2xzX2JvbGQge1xyXG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgICB0ZXh0LXRyYW5zZm9ybTogdXBwZXJjYXNlO1xyXG59XHJcblxyXG4udGl0bGVfcGVyZm9ybWFuY2VfZG9jdW1lbnQge1xyXG4gICAgYmFja2dyb3VuZDogI2ZmZmY7XHJcbiAgICBoZWlnaHQ6IDgwcHg7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgYm94LXNoYWRvdzogMTBweCAxMHB4IDVweCAjYWFhYWFhO1xyXG59Il19 */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](EmployeeIterationComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
                 templateUrl: './employee-iteration-component.html',
                 styleUrls: ['./employee-iteration-component.css']
             }]
-    }], function () { return [{ type: _shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_6__["IterationService"] }, { type: _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_7__["SpinnerService"] }, { type: _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_8__["ToastrNotificationService"] }, { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["BsModalService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__["Router"] }, { type: _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormBuilder"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_10__["ActivatedRoute"] }]; }, null); })();
+    }], function () { return [{ type: _shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_8__["IterationService"] }, { type: _shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_9__["SpinnerService"] }, { type: _shared_services_set_goals_set_goals_service__WEBPACK_IMPORTED_MODULE_10__["SetGoalsService"] }, { type: _shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_11__["ToastrNotificationService"] }, { type: ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_12__["BsModalService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_13__["Router"] }, { type: _angular_forms__WEBPACK_IMPORTED_MODULE_14__["FormBuilder"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_13__["ActivatedRoute"] }]; }, null); })();
 
 
 /***/ })

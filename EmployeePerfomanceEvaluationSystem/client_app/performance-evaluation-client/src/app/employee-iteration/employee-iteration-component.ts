@@ -14,6 +14,8 @@ import { IterationDetailsResponse } from '../shared/models/iteration/iteration-d
 import { Rating } from '../shared/models/ratings/rating';
 import { EmployeeIterationRatingModel } from '../shared/models/set-goals/employee_iteration_model';
 import { EmployeeRatingRequestModel } from '../shared/models/set-goals/employee-rating-request-model';
+import { UpdateEmployeeIterationState } from '../shared/models/set-goals/update-iteration-request-model';
+import { SetGoalsService } from '../shared/services/set-goals/set-goals-service';
 
 @Component({
 
@@ -31,7 +33,8 @@ export class EmployeeIterationComponent implements OnInit {
     ratings: Array<Rating> = new Array<Rating>();
 
     constructor(private iterationService: IterationService,
-                private spinnerService: SpinnerService,
+        private spinnerService: SpinnerService,
+                private setGoalService: SetGoalsService,
                 private toastrNotificationService: ToastrNotificationService,
                 private modalService: BsModalService,
                 private router: Router,
@@ -184,5 +187,141 @@ export class EmployeeIterationComponent implements OnInit {
                 this.spinnerService.idle();
                 console.log('Exception occured while fecthing ratings after saved');
             });
+    }
+
+    proceedIteration(iterationStateId: number) {
+
+        if (iterationStateId == Constant.ITERATION_STATE.SELF_EVALUATION) {
+
+            let result: boolean = this.validateEmployeeGoals();
+            if (!result) {
+                this.toastrNotificationService.warning('Please complete all the goals set first');
+                return;
+            }
+        }
+
+        let message = this.getIterationNextStateMessage(iterationStateId);
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: `Proceed Iteration stage for ${message}?`,
+                callback: (result) => {
+                    if (result) {
+
+                        this.spinnerService.updateMessage(`Proceeding ${message} state. Please wait.....`);
+                        this.spinnerService.busy();
+                        let updateIterationStateRequestModel: UpdateEmployeeIterationState = new UpdateEmployeeIterationState();
+                        updateIterationStateRequestModel.employeeId = this.employeeId * 1;
+                        updateIterationStateRequestModel.iterationId = this.iterationId * 1;
+                        updateIterationStateRequestModel.iterationStateId = this.getIterationNextState(iterationStateId);
+
+                        this.setGoalService.updateEmployeeIterationState(updateIterationStateRequestModel)
+                            .subscribe((response: ApiResponse) => {
+
+                                this.fetchEmployeeIterationAfterProceedingToNextState('Iteration state saved successfully');
+                            },
+                            error => {
+                                 this.spinnerService.idle();
+                                 console.log('Exception occured while updating iteration state');
+                            });
+                    }
+                }
+            }
+        });   
+    }
+
+    private fetchEmployeeIterationAfterProceedingToNextState(message: string) {
+
+        this.iterationService.getEmployeeIterationScreenData(this.employeeId, this.iterationId)
+            .subscribe((responses: Array<ApiResponse>) => {
+
+                let iteration_detail: IterationDetailsResponse = null;
+                if (responses[0].data != null) {
+                    iteration_detail = IterationDetailsResponse.FormIterationDetailsModel(responses[0]);
+                }
+
+                let employee_detail: UserResponseModel = null;
+                if (responses[1].data != null) {
+                    employee_detail = UserResponseModel.formUserResponseModel(responses[1]);
+                }
+
+                if (responses[2].data != null) {
+                    this.ratings = Rating.FormRatingModelArray(responses[2]);
+                }
+
+                let iterationRatingModel: EmployeeIterationRatingModel = null;
+                if (responses[3].data != null) {
+                    iterationRatingModel = EmployeeIterationRatingModel.FormEmployeeIterationRatingModel(responses[3], this.ratings);
+
+                    let iteration_rating_formgroup: FormGroup = <FormGroup>this.employee_iteration_formgroup.controls['iteration_rating'];
+                    iteration_rating_formgroup.controls['goal_ratings'] = this.employee_iteration_formbuilder.array(
+                        iterationRatingModel.goals_ratings
+                            .slice()
+                            .map(i =>
+                                this.employee_iteration_formbuilder.group(i)
+                            ));
+
+                    iteration_rating_formgroup.patchValue({
+                        manager_requested: iterationRatingModel.isManagerRequested
+                    });
+                }
+
+                this.employee_iteration_formgroup.patchValue({
+                    iteration_detail: iteration_detail,
+                    employee_detail: employee_detail
+                });
+
+                this.spinnerService.idle();
+                this.toastrNotificationService.success(message);
+            },
+            error => {
+
+                 this.spinnerService.idle();
+                 console.log('Exception occured while fetching employee iteration details from Database');
+            });
+    }
+
+    getIterationNextStateMessage(state: number) {
+
+
+        if (state == Constant.ITERATION_STATE.SELF_EVALUATION)
+            return Constant.MANAGER_EVALUATION;
+
+        if (state == Constant.ITERATION_STATE.MANAGER_EVALUATION)
+            return Constant.REVIEW_METTING;
+
+        if (state == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING)
+            return Constant.COMPLETE_ITERATION;
+
+    }
+
+    getIterationNextState(state: number) {
+
+
+        if (state == Constant.ITERATION_STATE.SELF_EVALUATION)
+            return Constant.ITERATION_STATE.MANAGER_EVALUATION;
+
+        if (state == Constant.ITERATION_STATE.MANAGER_EVALUATION)
+            return Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING;
+
+        if (state == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING)
+            return Constant.ITERATION_STATE.COMPLETED;
+
+    }
+
+    private validateEmployeeGoals(): boolean {
+
+        let result: boolean = true;
+
+        let iteration_rating_formgroup: FormGroup = <FormGroup>this.employee_iteration_formgroup.controls['iteration_rating'];
+        for (let rating of iteration_rating_formgroup.value.goal_ratings) {
+
+            if ((rating.employeeRatingId == '' || rating.employeeRatingId == null)
+                || (rating.employeeComments == '' || rating.employeeComments == null)) {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
     }
 }

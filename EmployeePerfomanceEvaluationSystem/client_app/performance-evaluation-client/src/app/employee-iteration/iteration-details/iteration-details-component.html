@@ -107,7 +107,23 @@
                     </label>
                 </div>
 
-           
+                <div class="col-sm-12" *ngIf="showProceedButton()">
+
+                    <label class="label_controls label_controls_bold col-form-label col-sm-5">{{ getIterationNextState(iteration.iterationStateId) }}</label>
+
+                    <div class="col-sm-7 iteration_details_button">
+
+                        <button class="btn btn-dark"
+                                type="button"
+                                (click)="proceedIterationToNextStep()">
+                           
+                            Proceed
+                        </button>
+
+                    </div>
+
+                </div>
+
 
             </div>
 
