@@ -3193,7 +3193,7 @@ class IterationService {
         const httpOptions = {
             headers: headers
         };
-        return this.http.post('/api/employee-iteration/employee-iteration-details', { iterationId: iterationId }, httpOptions);
+        return this.http.post('/api/employee-iteration/employee-iteration-details', { employeeId: 0, iterationId: iterationId }, httpOptions);
     }
     getEmployeeIterationScreenData(employeeId, iterationId) {
         let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
@@ -3202,8 +3202,8 @@ class IterationService {
         const httpOptions = {
             headers: headers
         };
-        var employeeIterationDetailCall = this.http.post('/api/employee-iteration/employee-iteration-details', { iterationId: iterationId }, httpOptions);
-        var userDetailCall = this.http.post('/api/user/get_user', {}, httpOptions);
+        var employeeIterationDetailCall = this.http.post('/api/employee-iteration/employee-iteration-details', { employeeId: employeeId, iterationId: iterationId }, httpOptions);
+        var userDetailCall = this.http.post('/api/user/get_user_by_id', { userId: employeeId }, httpOptions);
         var ratingCall = this.http.post('/api/ratings/get_ratings', {}, httpOptions);
         var goal_rating_Call = this.http.post('/api/employee-iteration/employee-iteration-ratings', { employeeId: employeeId, iterationId: iterationId }, httpOptions);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["forkJoin"])(employeeIterationDetailCall, userDetailCall, ratingCall, goal_rating_Call);
@@ -5025,7 +5025,7 @@ function ViewIterationsComponent_div_21_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx_r2.getIterationStatus(ctx_r2.selectedReviewPeriodDetail.status));
 } }
-function ViewIterationsComponent_table_37_tr_15_Template(rf, ctx) { if (rf & 1) {
+function ViewIterationsComponent_table_37_tr_16_Template(rf, ctx) { if (rf & 1) {
     const _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "tr", 37);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "th", 38);
@@ -5045,8 +5045,14 @@ function ViewIterationsComponent_table_37_tr_15_Template(rf, ctx) { if (rf & 1) 
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "td", 39);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "button", 40);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ViewIterationsComponent_table_37_tr_15_Template_button_click_12_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const user_r8 = ctx.$implicit; const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r9.setGoal(user_r8); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ViewIterationsComponent_table_37_tr_16_Template_button_click_12_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const user_r8 = ctx.$implicit; const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r9.setGoal(user_r8); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](13, "span", 41);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "td", 39);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "button", 40);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ViewIterationsComponent_table_37_tr_16_Template_button_click_15_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10); const user_r8 = ctx.$implicit; const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r11.reviewIteration(user_r8); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "span", 42);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5083,20 +5089,21 @@ function ViewIterationsComponent_table_37_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "Department");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](13, "th", 35);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](14, "th", 35);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "tbody");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, ViewIterationsComponent_table_37_tr_15_Template, 14, 5, "tr", 36);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](16, "paginationPipe");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "tbody");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, ViewIterationsComponent_table_37_tr_16_Template, 17, 5, "tr", 36);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](17, "paginationPipe");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](15);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](16, 1, ctx_r3.usersToDisplay, ctx_r3.currentPage, ctx_r3.itemsPerPage));
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind3"](17, 1, ctx_r3.usersToDisplay, ctx_r3.currentPage, ctx_r3.itemsPerPage));
 } }
 function ViewIterationsComponent_table_38_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "table", 42);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "table", 43);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "thead", 34);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "tr");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "th", 35);
@@ -5119,7 +5126,7 @@ function ViewIterationsComponent_table_38_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "tbody");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "tr", 37);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "td", 43);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "td", 44);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](17, " No Users to display ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5127,11 +5134,11 @@ function ViewIterationsComponent_table_38_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 function ViewIterationsComponent_div_39_Template(rf, ctx) { if (rf & 1) {
-    const _r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    const _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 44);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "pagination", 45);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("pageChanged", function ViewIterationsComponent_div_39_Template_pagination_pageChanged_2_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r11.pageChanged($event); })("ngModelChange", function ViewIterationsComponent_div_39_Template_pagination_ngModelChange_2_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r12); const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r13.currentPage = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 45);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "pagination", 46);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("pageChanged", function ViewIterationsComponent_div_39_Template_pagination_pageChanged_2_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r12.pageChanged($event); })("ngModelChange", function ViewIterationsComponent_div_39_Template_pagination_ngModelChange_2_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r13); const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r14.currentPage = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5236,9 +5243,25 @@ class ViewIterationsComponent {
             }
         });
     }
+    reviewIteration(user) {
+        if (this.selectedReviewPeriod == '') {
+            this.toastrNotificationService.warning("Please select the active iteration");
+            return;
+        }
+        this.modalRef = this.modalService.show(_confirm_modal_component_confirm_modal_component__WEBPACK_IMPORTED_MODULE_2__["ConfirmModalComponent"], {
+            initialState: {
+                promptMessage: `Continue to review iteration for ${user.email}`,
+                callback: (result) => {
+                    if (result) {
+                        this.router.navigate(['/view-iteration/user', user.id, 'iteration', this.selectedReviewPeriod * 1]);
+                    }
+                }
+            }
+        });
+    }
 }
 ViewIterationsComponent.ɵfac = function ViewIterationsComponent_Factory(t) { return new (t || ViewIterationsComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_iteration_iteration_service__WEBPACK_IMPORTED_MODULE_5__["IterationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_spinner_spinner_service__WEBPACK_IMPORTED_MODULE_6__["SpinnerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_shared_services_toastr_toastr_service__WEBPACK_IMPORTED_MODULE_7__["ToastrNotificationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__["BsModalService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"])); };
-ViewIterationsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ViewIterationsComponent, selectors: [["ng-component"]], decls: 40, vars: 7, consts: [[1, "container_row"], [1, "row"], [1, "col-md-10", "offset-xl-1", "title_Col"], [1, "title_iteration_management"], [1, "col-md-10", "offset-xl-1"], ["novalidate", ""], ["activeIterationForm", "ngForm"], [1, "col-md-12", "review_period_col"], [1, "review_period_container"], [1, "form-group", "row", "control-row", "review_period_dropdown"], ["for", "reviewPeriod", 1, "label_controls", "col-form-label", "col-sm-4"], [1, "input_controls", "col-sm-8"], ["id", "reviewPeriod", "name", "reviewPeriod", 1, "form-control", 3, "ngModel", "ngModelChange", "change"], ["value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["class", "row", 4, "ngIf"], [1, "row", "user_table_container"], [1, "col-md-12", "user_table_row"], [1, "title_employee_management"], [1, "input-group", "col-md-4", "offset-xl-8", "user_search_control"], ["placeholder", "search by email", "value", "search", "name", "search-input", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "input-group-append"], ["type", "button", 1, "btn", "btn-outline-secondary", 3, "click"], [1, "fa", "fa-search"], [1, "row", "table_container_row"], [1, "col-md-12", "table_container_column"], ["name", "userTable", "class", "table table-bordered table-hover user_table", 4, "ngIf"], ["name", "nouserssTable", "class", "table table-bordered table-hover mt-5 user_table", 4, "ngIf"], [3, "value"], [1, "review_period_details_container"], [1, "row", "review_period_details_container_row"], [1, "col-sm-6"], [1, "label_controls", "col-form-label", "col-sm-6"], ["name", "userTable", 1, "table", "table-bordered", "table-hover", "user_table"], [1, "thead-dark"], ["scope", "col"], ["class", "table-style", 4, "ngFor", "ngForOf"], [1, "table-style"], ["scope", "row"], [1, "user_table_controls"], ["type", "button", 1, "btn", "btn-default", 3, "click"], ["title", "Set Goals", 1, "fa", "fa-share-square-o", "fa-lg"], ["name", "nouserssTable", 1, "table", "table-bordered", "table-hover", "mt-5", "user_table"], ["colspan", "6", 1, "user_table_controls"], [1, "col-xs-12", "col-12", "pager-div"], ["name", "paginationControl", 3, "totalItems", "itemsPerPage", "maxSize", "ngModel", "pageChanged", "ngModelChange"]], template: function ViewIterationsComponent_Template(rf, ctx) { if (rf & 1) {
+ViewIterationsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: ViewIterationsComponent, selectors: [["ng-component"]], decls: 40, vars: 7, consts: [[1, "container_row"], [1, "row"], [1, "col-md-10", "offset-xl-1", "title_Col"], [1, "title_iteration_management"], [1, "col-md-10", "offset-xl-1"], ["novalidate", ""], ["activeIterationForm", "ngForm"], [1, "col-md-12", "review_period_col"], [1, "review_period_container"], [1, "form-group", "row", "control-row", "review_period_dropdown"], ["for", "reviewPeriod", 1, "label_controls", "col-form-label", "col-sm-4"], [1, "input_controls", "col-sm-8"], ["id", "reviewPeriod", "name", "reviewPeriod", 1, "form-control", 3, "ngModel", "ngModelChange", "change"], ["value", "", "disabled", ""], [3, "value", 4, "ngFor", "ngForOf"], ["class", "row", 4, "ngIf"], [1, "row", "user_table_container"], [1, "col-md-12", "user_table_row"], [1, "title_employee_management"], [1, "input-group", "col-md-4", "offset-xl-8", "user_search_control"], ["placeholder", "search by email", "value", "search", "name", "search-input", 1, "form-control", 3, "ngModel", "ngModelChange"], [1, "input-group-append"], ["type", "button", 1, "btn", "btn-outline-secondary", 3, "click"], [1, "fa", "fa-search"], [1, "row", "table_container_row"], [1, "col-md-12", "table_container_column"], ["name", "userTable", "class", "table table-bordered table-hover user_table", 4, "ngIf"], ["name", "nouserssTable", "class", "table table-bordered table-hover mt-5 user_table", 4, "ngIf"], [3, "value"], [1, "review_period_details_container"], [1, "row", "review_period_details_container_row"], [1, "col-sm-6"], [1, "label_controls", "col-form-label", "col-sm-6"], ["name", "userTable", 1, "table", "table-bordered", "table-hover", "user_table"], [1, "thead-dark"], ["scope", "col"], ["class", "table-style", 4, "ngFor", "ngForOf"], [1, "table-style"], ["scope", "row"], [1, "user_table_controls"], ["type", "button", 1, "btn", "btn-default", 3, "click"], ["title", "Set Goals", 1, "fa", "fa-share-square-o", "fa-lg"], ["title", "Review Iteration", 1, "fa", "fa-comment-o", "fa-lg"], ["name", "nouserssTable", 1, "table", "table-bordered", "table-hover", "mt-5", "user_table"], ["colspan", "6", 1, "user_table_controls"], [1, "col-xs-12", "col-12", "pager-div"], ["name", "paginationControl", 3, "totalItems", "itemsPerPage", "maxSize", "ngModel", "pageChanged", "ngModelChange"]], template: function ViewIterationsComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
@@ -5299,7 +5322,7 @@ ViewIterationsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵ
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](35, "div", 24);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "div", 25);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](37, ViewIterationsComponent_table_37_Template, 17, 5, "table", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](37, ViewIterationsComponent_table_37_Template, 18, 5, "table", 26);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](38, ViewIterationsComponent_table_38_Template, 18, 0, "table", 27);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -5681,13 +5704,13 @@ class IterationDetailsComponent {
         this.proceedNext.emit(this.iteration.iterationStateId);
     }
     showProceedButton() {
-        if (!this.employeeIterationGoal.value.isManagerRequested) {
+        if (!this.employeeIterationGoal.value.manager_requested) {
             if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.MANAGER_EVALUATION
                 || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.COMPLETED) {
                 return false;
             }
         }
-        if (this.employeeIterationGoal.value.isManagerRequested) {
+        if (this.employeeIterationGoal.value.manager_requested) {
             if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.SELF_EVALUATION
                 || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
                 || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_1__["Constant"].ITERATION_STATE.COMPLETED) {
@@ -7194,6 +7217,12 @@ class SetGoalsComponent {
             return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].SET_GOALS;
         if (this.employeeIterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].ITERATION_STATE.SELF_EVALUATION)
             return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].EMPLOYEE_EVALUATION;
+        if (this.employeeIterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].ITERATION_STATE.MANAGER_EVALUATION)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].MANAGER_EVALUATION;
+        if (this.employeeIterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].REVIEW_METTING;
+        if (this.employeeIterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].ITERATION_STATE.COMPLETED)
+            return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].COMPLETE;
         return _shared_constant_constants__WEBPACK_IMPORTED_MODULE_5__["Constant"].NOT_STARTED;
     }
 }
@@ -7746,9 +7775,9 @@ class EmployeeIterationGoalComponent {
         let employeeRequestModel = new _shared_models_set_goals_employee_rating_request_model__WEBPACK_IMPORTED_MODULE_1__["EmployeeRatingRequestModel"]();
         employeeRequestModel.employeeRatingId = goal.value.employeeRatingId * 1;
         employeeRequestModel.employeeComments = goal.value.employeeComments;
-        employeeRequestModel.managerComments = (goal.value.managerComments = '') ? null : goal.value.managerComments;
+        employeeRequestModel.managerComments = (goal.value.managerComments == '') ? null : goal.value.managerComments;
         employeeRequestModel.iterationGoalId = goal.value.iterationGoalId * 1;
-        employeeRequestModel.managerRatingId = (goal.value.managerRatingId = '') ? null : goal.value.managerRatingId * 1;
+        employeeRequestModel.managerRatingId = (goal.value.managerRatingId == '') ? null : goal.value.managerRatingId * 1;
         employeeRequestModel.iterationRatingId = goal.value.iterationRatingId * 1;
         return employeeRequestModel;
     }
@@ -7774,6 +7803,7 @@ class EmployeeIterationGoalComponent {
         if (goal.value.isManagerRequested)
             return true;
         if (this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.MANAGER_EVALUATION
+            || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
             || this.iteration.iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.COMPLETED) {
             return true;
         }
@@ -8192,7 +8222,14 @@ class EmployeeIterationComponent {
         if (iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.SELF_EVALUATION) {
             let result = this.validateEmployeeGoals();
             if (!result) {
-                this.toastrNotificationService.warning('Please complete all the goals set first');
+                this.toastrNotificationService.warning('Please complete all the goals first');
+                return;
+            }
+        }
+        if (iterationStateId == _shared_constant_constants__WEBPACK_IMPORTED_MODULE_2__["Constant"].ITERATION_STATE.MANAGER_EVALUATION) {
+            let result = this.validateManagerRatings();
+            if (!result) {
+                this.toastrNotificationService.warning('Please complete all the goals first');
                 return;
             }
         }
@@ -8278,6 +8315,18 @@ class EmployeeIterationComponent {
         for (let rating of iteration_rating_formgroup.value.goal_ratings) {
             if ((rating.employeeRatingId == '' || rating.employeeRatingId == null)
                 || (rating.employeeComments == '' || rating.employeeComments == null)) {
+                result = false;
+                break;
+            }
+        }
+        return result;
+    }
+    validateManagerRatings() {
+        let result = true;
+        let iteration_rating_formgroup = this.employee_iteration_formgroup.controls['iteration_rating'];
+        for (let rating of iteration_rating_formgroup.value.goal_ratings) {
+            if ((rating.managerRatingId == '' || rating.managerRatingId == null)
+                || (rating.managerComments == '' || rating.managerComments == null)) {
                 result = false;
                 break;
             }

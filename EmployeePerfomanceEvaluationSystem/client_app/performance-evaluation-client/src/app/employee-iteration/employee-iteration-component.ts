@@ -195,7 +195,17 @@ export class EmployeeIterationComponent implements OnInit {
 
             let result: boolean = this.validateEmployeeGoals();
             if (!result) {
-                this.toastrNotificationService.warning('Please complete all the goals set first');
+                this.toastrNotificationService.warning('Please complete all the goals first');
+                return;
+            }
+        }
+
+
+        if (iterationStateId == Constant.ITERATION_STATE.MANAGER_EVALUATION) {
+
+            let result: boolean = this.validateManagerRatings();
+            if (!result) {
+                this.toastrNotificationService.warning('Please complete all the goals first');
                 return;
             }
         }
@@ -317,6 +327,23 @@ export class EmployeeIterationComponent implements OnInit {
 
             if ((rating.employeeRatingId == '' || rating.employeeRatingId == null)
                 || (rating.employeeComments == '' || rating.employeeComments == null)) {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    private validateManagerRatings(): boolean {
+
+        let result: boolean = true;
+
+        let iteration_rating_formgroup: FormGroup = <FormGroup>this.employee_iteration_formgroup.controls['iteration_rating'];
+        for (let rating of iteration_rating_formgroup.value.goal_ratings) {
+
+            if ((rating.managerRatingId == '' || rating.managerRatingId == null)
+                || (rating.managerComments == '' || rating.managerComments == null)) {
                 result = false;
                 break;
             }

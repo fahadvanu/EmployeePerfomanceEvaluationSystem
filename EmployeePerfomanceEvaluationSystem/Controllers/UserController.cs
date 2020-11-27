@@ -61,6 +61,27 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
             }
         }
 
+        [HttpPost("get_user_by_id")]
+        [Authorize]
+        public async Task<IActionResult> GetUserById([FromBody] UserDetailRequestModel userDetailRequestModel)
+        {
+            try
+            {
+                var userId = userDetailRequestModel.UserId;
+                var user = await _userService.GetUserById(userId);
+
+                if (null == user)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"User with Id {userId} does not exists" });
+
+                return Ok(new ApiResponseOKResult() { StatusCode = StatusCodes.Status200OK, Data = user });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch user");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch user" });
+            }
+        }
+
         [HttpPost("update_user")]
         [Authorize]
         public async Task<IActionResult> UpdateUser([FromBody] UserUpdateRequestModel userUpdateRequestModel)

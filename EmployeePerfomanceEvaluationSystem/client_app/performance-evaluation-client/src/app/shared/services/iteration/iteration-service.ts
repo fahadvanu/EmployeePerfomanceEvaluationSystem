@@ -124,7 +124,7 @@ export class IterationService {
         }
 
         return this.http.post<ApiResponse>('/api/employee-iteration/employee-iteration-details',
-                                            { iterationId: iterationId }, httpOptions);
+                                            { employeeId: 0, iterationId: iterationId }, httpOptions);
     }
 
     getEmployeeIterationScreenData(employeeId: number, iterationId: number)
@@ -139,8 +139,9 @@ export class IterationService {
         }
 
         var employeeIterationDetailCall = this.http.post<ApiResponse>('/api/employee-iteration/employee-iteration-details',
-                                                                      { iterationId: iterationId }, httpOptions);
-        var userDetailCall = this.http.post<ApiResponse>('/api/user/get_user', {}, httpOptions);
+                                                             { employeeId: employeeId, iterationId: iterationId }, httpOptions);
+
+        var userDetailCall = this.http.post<ApiResponse>('/api/user/get_user_by_id', { userId: employeeId }, httpOptions);
 
         var ratingCall = this.http.post<ApiResponse>('/api/ratings/get_ratings', {}, httpOptions);
 

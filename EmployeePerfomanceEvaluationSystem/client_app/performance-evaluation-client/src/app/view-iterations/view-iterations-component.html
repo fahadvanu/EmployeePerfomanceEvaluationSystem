@@ -145,6 +145,7 @@
                                             <th scope="col">Role</th>
                                             <th scope="col">Department</th>
                                             <th scope="col"></th>
+                                            <th scope="col"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -162,6 +163,14 @@
                                                     <span class="fa fa-share-square-o fa-lg" title="Set Goals"></span>
                                                 </button>
                                             </td>
+
+                                            <td class="user_table_controls">
+                                                <button type="button" class="btn btn-default"
+                                                        (click)="reviewIteration(user)">
+                                                    <span class="fa fa-comment-o fa-lg" title="Review Iteration"></span>
+                                                </button>
+                                            </td>
+
                                         </tr>
                                     </tbody>
                                 </table>

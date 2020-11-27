@@ -260,7 +260,8 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
         {
             try
             {
-                var userId = HttpContext.User.GetUserIdClaim();
+                var userId = (iterationDetailsRequestModel.EmployeeId == 0) ? HttpContext.User.GetUserIdClaim()
+                                                                            : iterationDetailsRequestModel.EmployeeId;
 
                 var iteration = await _iterationRepository.GetIteration(iterationDetailsRequestModel.IterationId);
                 if (iteration == null)

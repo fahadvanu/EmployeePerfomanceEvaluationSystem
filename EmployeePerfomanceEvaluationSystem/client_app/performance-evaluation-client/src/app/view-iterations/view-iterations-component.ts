@@ -138,4 +138,24 @@ export class ViewIterationsComponent implements  OnInit  {
             }
         });
     }
+
+    reviewIteration(user: UserResponseModel) {
+
+        if (this.selectedReviewPeriod == '') {
+            this.toastrNotificationService.warning("Please select the active iteration")
+            return;
+        }
+
+        this.modalRef = this.modalService.show(ConfirmModalComponent, {
+            initialState: {
+                promptMessage: `Continue to review iteration for ${user.email}`,
+                callback: (result) => {
+                    if (result) {
+
+                        this.router.navigate(['/view-iteration/user', user.id, 'iteration', this.selectedReviewPeriod * 1 ]);
+                    }
+                }
+            }
+        });
+    }
 }

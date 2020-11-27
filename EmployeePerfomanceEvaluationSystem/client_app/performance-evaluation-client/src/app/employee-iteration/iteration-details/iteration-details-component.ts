@@ -132,7 +132,7 @@ export class IterationDetailsComponent implements OnInit, OnChanges {
 
     showProceedButton() {
 
-        if (!this.employeeIterationGoal.value.isManagerRequested) {
+        if (!this.employeeIterationGoal.value.manager_requested) {
 
             if (   this.iteration.iterationStateId == Constant.ITERATION_STATE.MANAGER_EVALUATION
                 || this.iteration.iterationStateId == Constant.ITERATION_STATE.COMPLETED
@@ -142,7 +142,7 @@ export class IterationDetailsComponent implements OnInit, OnChanges {
         }
 
 
-        if (this.employeeIterationGoal.value.isManagerRequested) {
+        if (this.employeeIterationGoal.value.manager_requested) {
 
             if (   this.iteration.iterationStateId == Constant.ITERATION_STATE.SELF_EVALUATION
                 || this.iteration.iterationStateId == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING

@@ -35,9 +35,9 @@ export class EmployeeIterationGoalComponent implements OnInit {
         let employeeRequestModel: EmployeeRatingRequestModel = new EmployeeRatingRequestModel();
         employeeRequestModel.employeeRatingId = goal.value.employeeRatingId * 1;
         employeeRequestModel.employeeComments = goal.value.employeeComments;
-        employeeRequestModel.managerComments = (goal.value.managerComments = '') ? null : goal.value.managerComments ;
+        employeeRequestModel.managerComments = (goal.value.managerComments == '') ? null : goal.value.managerComments ;
         employeeRequestModel.iterationGoalId = goal.value.iterationGoalId * 1;
-        employeeRequestModel.managerRatingId = (goal.value.managerRatingId = '') ? null : goal.value.managerRatingId * 1;
+        employeeRequestModel.managerRatingId = (goal.value.managerRatingId == '') ? null : goal.value.managerRatingId * 1;
         employeeRequestModel.iterationRatingId = goal.value.iterationRatingId * 1;
 
         return employeeRequestModel;
@@ -71,7 +71,8 @@ export class EmployeeIterationGoalComponent implements OnInit {
         if (goal.value.isManagerRequested)
             return true;
 
-        if (this.iteration.iterationStateId == Constant.ITERATION_STATE.MANAGER_EVALUATION
+        if (   this.iteration.iterationStateId == Constant.ITERATION_STATE.MANAGER_EVALUATION
+            || this.iteration.iterationStateId == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING
             || this.iteration.iterationStateId == Constant.ITERATION_STATE.COMPLETED
         ) {
             return true;

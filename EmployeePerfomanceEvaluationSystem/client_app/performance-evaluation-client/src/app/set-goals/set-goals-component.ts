@@ -459,6 +459,15 @@ export class SetGoalsComponent implements OnInit {
         if (this.employeeIterationStateId == Constant.ITERATION_STATE.SELF_EVALUATION)
             return Constant.EMPLOYEE_EVALUATION;
 
+        if (this.employeeIterationStateId == Constant.ITERATION_STATE.MANAGER_EVALUATION)
+            return Constant.MANAGER_EVALUATION;
+
+        if (this.employeeIterationStateId == Constant.ITERATION_STATE.ACKNOWLEGDE_REVIEW_MEETING)
+            return Constant.REVIEW_METTING;
+
+        if (this.employeeIterationStateId == Constant.ITERATION_STATE.COMPLETED)
+            return Constant.COMPLETE;
+
         return Constant.NOT_STARTED;
     }
 }
