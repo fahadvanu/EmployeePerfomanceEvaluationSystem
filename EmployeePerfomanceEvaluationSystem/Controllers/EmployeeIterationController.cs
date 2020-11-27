@@ -148,6 +148,14 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                     return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Iteration." });
 
 
+                var employeeIterationState = await _employeeIterationRepository.GetEmployeeIterationState(updateEmployeeIterationStateRequestModel.EmployeeId,
+                                                                                                          updateEmployeeIterationStateRequestModel.IterationId);
+                if (employeeIterationState != null)
+                {
+                    if(employeeIterationState.IterationStateId > updateEmployeeIterationStateRequestModel.IterationStateId)
+                        return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Invalid Iteration state" });
+                }
+
                 await _employeeIterationRepository.UpdateEmployeeIterationState(updateEmployeeIterationStateRequestModel.EmployeeId,
                                                                                 updateEmployeeIterationStateRequestModel.IterationId,
                                                                                 updateEmployeeIterationStateRequestModel.IterationStateId,
