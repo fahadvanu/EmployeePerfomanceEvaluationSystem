@@ -68,13 +68,28 @@
                     </a>
 
                     <a class="dropdown-item" [routerLink]="['/iteration-details']"
-                                             routerLinkActive="active">
+                       routerLinkActive="active">
                         <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Iterations Details
                     </a>
 
                 </div>
             </li>
 
+
+            <li class="nav-item dropdown active" *ngIf="accountService.isAuthenticated() &&
+                                                        accountService.isAdminUser()">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                   role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Reports
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                   
+                    <a class="dropdown-item" [routerLink]="['/reports/iteration-state']" routerLinkActive="active">
+                        <span class="fa fa-arrow-circle-right fa-lg mr-2"></span> Iteration State
+                    </a>
+
+                </div>
+            </li>
 
         </ul>
 

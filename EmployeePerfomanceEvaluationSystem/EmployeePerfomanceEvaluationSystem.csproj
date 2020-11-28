@@ -41,6 +41,9 @@
     <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-routing-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\reporting-manager\view-reporting-manger-requests\reporting-manager-requests-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\reports\iteration-state-count\iteration-state-count-report-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\reports\reports-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\reports\reports-routing-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\set-goals\set-goals-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\set-goals\set-goals-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\set-goals\set-goals-routing-module.ts" />
@@ -146,6 +149,9 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\reporting-request-routing-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reporting-manager\view-reporting-manger-requests\reporting-manager-requests-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reports\iteration-state-count\iteration-state-count-report-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reports\reports-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\reports\reports-routing-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\set-goals\set-goals-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\set-goals\set-goals-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\set-goals\set-goals-routing-module.ts" />
