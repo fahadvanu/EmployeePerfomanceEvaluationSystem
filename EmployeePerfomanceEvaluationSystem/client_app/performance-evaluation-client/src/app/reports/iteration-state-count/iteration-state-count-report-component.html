@@ -14,9 +14,11 @@
 
         <div class="col-md-12">
 
-            <form novalidate>
+            <form [formGroup]="iteration_state_report_formgroup" novalidate>
 
-                
+                <active-iterations [active_iteration_group]="iteration_state_report_formgroup.controls['active_iteration_group']"
+                                   (iteration_selected)="getIterationStateCountReport($event)"></active-iterations>
+
             </form>
 
         </div>
