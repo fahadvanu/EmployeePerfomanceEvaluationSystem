@@ -19,6 +19,11 @@
                 <active-iterations [active_iteration_group]="iteration_state_report_formgroup.controls['active_iteration_group']"
                                    (iteration_selected)="getIterationStateCountReport($event)"></active-iterations>
 
+                <state-count-summary 
+                      [iteration_state_count]="IterationStateCountControl.value">
+
+                </state-count-summary>
+
             </form>
 
         </div>

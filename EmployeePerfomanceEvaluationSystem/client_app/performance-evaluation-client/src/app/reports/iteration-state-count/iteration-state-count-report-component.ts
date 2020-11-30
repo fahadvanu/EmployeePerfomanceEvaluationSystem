@@ -24,6 +24,10 @@ export class IterationStateCountReportComponent implements OnInit {
     iteration_state_report_formgroup: FormGroup;
     iterationId: number = 0;
 
+    get IterationStateCountControl()  {
+        return(<FormGroup> this.iteration_state_report_formgroup.controls['iteration_state_count_form_group']).controls['iteration_state_count'];
+    }
+
     constructor(private iterationService: IterationService,
                 private reportService: ReportService,
                 private spinnerService: SpinnerService,

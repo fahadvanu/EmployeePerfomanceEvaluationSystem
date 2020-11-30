@@ -1,0 +1,65 @@
+﻿.state_count_summary_container {
+   
+    background: #ffff;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+    width: 100%;
+    box-shadow: 10px 10px 5px #aaaaaa;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+.state_count_summary{
+    padding: 0px;
+}
+
+.title_count_summary {
+    display: flex;
+    justify-content: center;
+}
+
+.state_count_donut {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.legends_container {
+    display: inline-block;
+    width: 350px;
+    top: 90px;
+    position: absolute;
+    left: 0px;
+    margin-left: 70px;
+}
+
+.legends_item_container {
+    width: 100%;
+    position: relative;
+}
+
+.legends_item_color_div {
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    display: inline-block;
+}
+
+.legends_item_label {
+    position: absolute;
+    top: 8px;
+    margin-left: 10px;
+}
+
+.state_count_donut_container {
+    display: flex;
+    justify-content: center;
+}
+
+.legends_container_data {
+    position: relative;
+    height: 400px;
+}

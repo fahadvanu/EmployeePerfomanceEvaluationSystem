@@ -1,0 +1,39 @@
+﻿<div class="row state_count_summary_container" *ngIf="stateCountDonutData != null && stateCountDonutData.length > 0">
+
+
+    <div class="col-md-12 state_count_summary">
+
+
+            <div class="title_count_summary">
+
+                <h2> STATE COUNT SUMMARY </h2>
+
+            </div>
+
+            <div class="state_count_donut">
+
+                <div class="state_count_donut_container">
+
+                    <full-donut [pieData]="stateCountDonutData" [width]="380" height="400"></full-donut>
+
+                    <div class="legends_container_data">
+                        <div class="legends_container">
+
+                            <div *ngFor="let state_count of iteration_state_count; let i = index" class="legends_item_container">
+                                <div class="legends_item_color_div" [ngStyle]="{'background': getStateCountLegendsColor(i) }"></div>
+                                <span class="legends_item_label">{{ state_count.state }}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                   
+
+                </div>
+                
+
+            </div>
+         
+
+    </div>
+
+</div>
