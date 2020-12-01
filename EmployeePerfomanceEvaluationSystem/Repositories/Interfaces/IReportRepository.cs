@@ -9,5 +9,6 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
     public interface IReportRepository
     {
         Task<List<IterationWithStateCount>> GetIterationInDifferentStateCount(int iterationId);
+        Task<List<IterationStateCountExcel>> GetIterationStateCountExcelData(int iterationId);
     }
 }

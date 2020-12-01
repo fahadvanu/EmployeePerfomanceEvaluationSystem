@@ -41,5 +41,24 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
             return iterationStates;
         }
+
+        public async Task<List<IterationStateCountExcel>> GetIterationStateCountExcelData(int iterationId)
+        {
+            List<IterationStateCountExcel> iterationStates = new List<IterationStateCountExcel>();
+            using (MySqlConnection conn = new MySqlConnection(_configuration["Database:ConnectionString"]))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("iteration_with_state_count_excel_data", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("iteration_id", iterationId);
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    iterationStates = ReportMappers.ToIterationWithStateCountsExcel(reader);
+                }
+            }
+
+            return iterationStates;
+        }
     }
 }
