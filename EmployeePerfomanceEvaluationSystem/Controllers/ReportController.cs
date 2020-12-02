@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
 using EmployeePerfomanceEvaluationSystem.CustomAttributes;
+using EmployeePerfomanceEvaluationSystem.ExcelGenerators;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
 using EmployeePerfomanceEvaluationSystem.Request_Models.Reports;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
+using EmployeePerfomanceEvaluationSystem.ViewModels.Responses.Reports;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -53,6 +57,31 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 _logger.LogError(ex, "Failed to fetch iteration in different state count");
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch iteration in different state count" });
             }
+        }
+
+        [HttpGet("export-iteration-state-count/{iterationId}")]
+       // [AdminAuthorize]
+        public async Task<IActionResult> ExportRegisterUsers(int iterationId)
+        {
+            try
+            {
+                List<IterationStateCountExcel> iterationStates = await _reportRepository.GetIterationStateCountExcelData(iterationId);
+                var stream = GenerateIterationStateCountExcelStream(iterationStates);
+      
+                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "IterationStateCount.xlsx");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch iteration in different state count");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch iteration in different state count" });
+            }
+        }
+
+        private MemoryStream GenerateIterationStateCountExcelStream(List<IterationStateCountExcel> iterationStates)
+        {
+            IterationStateCountExcelGenerator iterationStateCountExcelGenerator = new ExcelGenerators.IterationStateCountExcelGenerator(iterationStates);
+            var stream = iterationStateCountExcelGenerator.GenerateIterationStateCountExcelStream() as MemoryStream;
+            return stream;
         }
     }
 }

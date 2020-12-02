@@ -51,7 +51,7 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Mappers
                 iterationStates.Add(iterationWithStateCount);
             };
 
-            iterationStates = iterationStates.OrderBy(x => x.FirstName).ToList();
+            iterationStates = iterationStates.OrderBy(x => x.IterationState).ToList();
             return iterationStates;
         }
     }
