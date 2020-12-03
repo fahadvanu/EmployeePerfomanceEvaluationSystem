@@ -93,6 +93,7 @@ export class IterationStateCountReportComponent implements OnInit {
 
         this.spinnerService.updateMessage('Fetching iteration state count details.....');
         this.spinnerService.busy();
+        this.iterationId = iterationId;
         this.reportService.iterationStateCount(iterationId)
             .subscribe((response: ApiResponse) => {
 

@@ -1,7 +1,7 @@
 ﻿.state_count_summary_container {
    
     background: #ffff;
-    height: 500px;
+    height: 560px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,4 +62,10 @@
 .legends_container_data {
     position: relative;
     height: 400px;
+}
+
+.state_count_export_container_row {
+    display: flex;
+    justify-content: center;
+    
 }

@@ -3,6 +3,8 @@ import { Constant } from '../../../shared/constant/constants';
 import { FullDonutData } from '../../../shared/models/full-donut/full-donut-data';
 import { FormGroup } from '@angular/forms';
 import { IterationStateCount } from '../../../shared/models/reports/iteration-state-count';
+import { ReportService } from '../../../shared/services/reports/reports-service';
+import { ApiResponse } from '../../../shared/models/api-responses/api-response';
 
 @Component({
 
@@ -13,10 +15,11 @@ import { IterationStateCount } from '../../../shared/models/reports/iteration-st
 export class IterationStateCountSummaryComponent implements OnInit, OnChanges {
 
     @Input() iteration_state_count: Array<IterationStateCount>;
+    @Input() iteration_id: number;
     @Output() iteration_selected = new EventEmitter<number>();
     stateCountDonutData: FullDonutData[] = null;
 
-    constructor() { }
+    constructor(private reportService: ReportService) { }
 
     ngOnInit() {
 
@@ -46,5 +49,20 @@ export class IterationStateCountSummaryComponent implements OnInit, OnChanges {
         let color = ["#003F5C", "#FFA600", "#BC5090", "#FF6361", "#47B39C"];
 
         return color[index];
+    }
+
+    exportIterationStateCountExcel(){
+
+        window.open(`/api/report/export-iteration-state-count/${this.iteration_id}`);
+        //this.reportService.exportIterationStateCount(7)
+        //    .subscribe((response: ApiResponse) => {
+
+
+                
+        //    },
+        //    error => {
+
+        //       console.log('Exception occured exporting iteration state count data');
+        //    });
     }
 }

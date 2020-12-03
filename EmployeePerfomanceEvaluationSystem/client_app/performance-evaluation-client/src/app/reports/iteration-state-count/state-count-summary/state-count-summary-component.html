@@ -4,35 +4,55 @@
     <div class="col-md-12 state_count_summary">
 
 
-            <div class="title_count_summary">
+        <div class="title_count_summary">
 
-                <h2> STATE COUNT SUMMARY </h2>
+            <h2> STATE COUNT SUMMARY </h2>
 
-            </div>
+        </div>
 
-            <div class="state_count_donut">
+        <div class="state_count_donut">
 
-                <div class="state_count_donut_container">
+            <div class="state_count_donut_container">
 
-                    <full-donut [pieData]="stateCountDonutData" [width]="380" height="400"></full-donut>
+                <full-donut [pieData]="stateCountDonutData" [width]="380" height="400"></full-donut>
 
-                    <div class="legends_container_data">
-                        <div class="legends_container">
+                <div class="legends_container_data">
+                    <div class="legends_container">
 
-                            <div *ngFor="let state_count of iteration_state_count; let i = index" class="legends_item_container">
-                                <div class="legends_item_color_div" [ngStyle]="{'background': getStateCountLegendsColor(i) }"></div>
-                                <span class="legends_item_label">{{ state_count.state }}</span>
-                            </div>
-
+                        <div *ngFor="let state_count of iteration_state_count; let i = index" class="legends_item_container">
+                            <div class="legends_item_color_div" [ngStyle]="{'background': getStateCountLegendsColor(i) }"></div>
+                            <span class="legends_item_label">{{ state_count.state }}</span>
                         </div>
-                    </div>
-                   
 
+                    </div>
                 </div>
-                
+
 
             </div>
+
+
+        </div>
+
          
+        <div class="state_count_export_container_row">
+
+            <div class="col-sm-6 offset-sm-4">
+
+                <label class="label_controls label_controls_bold col-form-label col-sm-2">Export To</label>
+
+         
+
+                <button class="btn btn-dark"
+                        type="button"
+                        (click)="exportIterationStateCountExcel()">
+
+                   <i class="fa fa-file-excel-o"></i>
+                </button>
+
+            </div>
+
+         </div>
+
 
     </div>
 

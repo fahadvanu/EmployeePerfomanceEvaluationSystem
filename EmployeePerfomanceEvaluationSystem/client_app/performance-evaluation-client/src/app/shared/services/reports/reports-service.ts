@@ -24,6 +24,17 @@ export class ReportService {
         return this.http.post<ApiResponse>(`/api/report/iteration-in-state-count`, { iterationId: iterationId }, httpOptions);
     }
 
+    exportIterationStateCount(iterationId: number): Observable<ApiResponse> {
 
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        return this.http.get<ApiResponse>(`/api/report/export-iteration-state-count/${iterationId}`);
+    }
    
 }
