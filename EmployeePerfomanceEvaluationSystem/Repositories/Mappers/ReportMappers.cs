@@ -45,7 +45,8 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Mappers
                     IterationTitle = dataReader["title"].ToString(),
                     IterationStartDate = DateTime.Parse(dataReader["iteration_start_date"].ToString()),
                     IterationEndDate = DateTime.Parse(dataReader["iteration_end_date"].ToString()),
-                    IterationState = dataReader["iteration_state"].ToString()
+                    IterationState = dataReader["iteration_state"].ToString(),
+                    Rating = dataReader["rating"].ToString()
                 };
 
                 iterationStates.Add(iterationWithStateCount);

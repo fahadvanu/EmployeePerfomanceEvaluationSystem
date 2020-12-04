@@ -85,6 +85,7 @@ namespace EmployeePerfomanceEvaluationSystem.ExcelGenerators
             ws.Column(7).Width = 40; //role
             ws.Column(8).Width = 40; //department
             ws.Column(9).Width = 45; //iteration state
+            ws.Column(10).Width = 45; //rating
         }
 
         private void InitializeHeaders(ExcelWorksheet ws)
@@ -96,7 +97,7 @@ namespace EmployeePerfomanceEvaluationSystem.ExcelGenerators
 
         private void SetHeaderCellSettings(ExcelWorksheet ws)
         {
-            using (var range = ws.Cells[7, 3, 7, 9])
+            using (var range = ws.Cells[7, 3, 7, 10])
             {
                 //set formatting for headers
                 range.Style.Font.Bold = true;
@@ -121,6 +122,7 @@ namespace EmployeePerfomanceEvaluationSystem.ExcelGenerators
             ws.Cells[7, 7].Value = IterationStateCountExcelConstant.HEADER_ROLE;
             ws.Cells[7, 8].Value = IterationStateCountExcelConstant.HEADER_DEPARTMENT;
             ws.Cells[7, 9].Value = IterationStateCountExcelConstant.HEADER_ITERATIONSTATE;
+            ws.Cells[7, 10].Value = IterationStateCountExcelConstant.HEADER_RATING;
         }
 
         private void AddRows(ExcelWorksheet ws)
@@ -143,12 +145,13 @@ namespace EmployeePerfomanceEvaluationSystem.ExcelGenerators
             ws.Cells[rowNumber, 7].Value = iterationStateCountExcelModel.Role;
             ws.Cells[rowNumber, 8].Value = iterationStateCountExcelModel.Department;
             ws.Cells[rowNumber, 9].Value = iterationStateCountExcelModel.IterationState;
+            ws.Cells[rowNumber, 10].Value = iterationStateCountExcelModel.Rating;
         }
 
         private void SetRowFormatting(int rowNumber, ExcelWorksheet ws)
         {
             //set rows formatting
-            using (var range = ws.Cells[rowNumber, 3, rowNumber, 9])
+            using (var range = ws.Cells[rowNumber, 3, rowNumber, 10])
             {
                 range.Style.Font.Bold = false;
                 range.Style.ShrinkToFit = false;

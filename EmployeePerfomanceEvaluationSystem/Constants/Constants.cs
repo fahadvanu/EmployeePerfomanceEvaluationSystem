@@ -26,5 +26,17 @@ namespace EmployeePerfomanceEvaluationSystem.Constants
             ACKNOWLEGDE_REVIEW_MEETING = 4,
             COMPLETED = 5
         }
+
+        public static int OUTSTANDING_RATING_WEIGHTAGE = 100;
+        public static int EXCEEDSEXPECTAION_RATING_WEIGHTAGE = 90;
+        public static int MEETSREQUIREMENT_RATING_WEIGHTAGE = 75;
+        public static int NEEDSIMPROVEMENT_RATING_WEIGHTAGE = 50;
+        public static int POOR_RATING_WEIGHTAGE = 10;
+
+        public static int OUTSTANDING_RATING = 1;
+        public static int EXCEEDSEXPECTAION_RATING = 2;
+        public static int MEETSREQUIREMENT_RATING = 3;
+        public static int NEEDSIMPROVEMENT_RATING = 4;
+        public static int POOR_RATING = 5;
     }
 }

@@ -17,5 +17,6 @@ namespace EmployeePerfomanceEvaluationSystem.ViewModels.Responses.Reports
         public DateTime IterationStartDate { get; set; }
         public DateTime IterationEndDate { get; set; }
         public string IterationState { get; set; }
+        public string Rating { get; set; }
     }
 }

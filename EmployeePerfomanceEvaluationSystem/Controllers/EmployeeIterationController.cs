@@ -7,6 +7,7 @@ using AutoMapper;
 using EmployeePerfomanceEvaluationSystem.Extensions;
 using EmployeePerfomanceEvaluationSystem.Models;
 using EmployeePerfomanceEvaluationSystem.Repositories.Interfaces;
+using EmployeePerfomanceEvaluationSystem.Repositories.Services;
 using EmployeePerfomanceEvaluationSystem.Request_Models.EmployeeIteration;
 using EmployeePerfomanceEvaluationSystem.ViewModels;
 using EmployeePerfomanceEvaluationSystem.ViewModels.Responses;
@@ -160,6 +161,17 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                                                                                 updateEmployeeIterationStateRequestModel.IterationId,
                                                                                 updateEmployeeIterationStateRequestModel.IterationStateId,
                                                                                 reportingManagerId);
+
+                if (updateEmployeeIterationStateRequestModel.IterationStateId == (int)Constants.Constants.ITERATION_STATE.COMPLETED)
+                {
+                    var employeeRatings = await _employeeIterationRepository.GetEmployeeIterationGoalRatings(updateEmployeeIterationStateRequestModel.EmployeeId,
+                                                                                                             updateEmployeeIterationStateRequestModel.IterationId);
+
+                    var finalRating = EmployeeIterationHelperService.CalculateFinalRating(employeeRatings);
+                    await _employeeIterationRepository.UpdateEmployeeIterationResult(updateEmployeeIterationStateRequestModel.EmployeeId,
+                                                                                     updateEmployeeIterationStateRequestModel.IterationId,
+                                                                                     finalRating);
+                }
 
                 return Ok(new ApiResponseOKResult() { Data = true});
             }

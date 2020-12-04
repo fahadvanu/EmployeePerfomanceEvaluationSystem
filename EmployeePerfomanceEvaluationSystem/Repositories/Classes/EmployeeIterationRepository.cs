@@ -181,5 +181,30 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateEmployeeIterationResult(int employeeId, int iterationId, int ratingId)
+        {
+            var iterationResult = await _context.EmployeeIterationResults.Where(x => x.EmployeeId == employeeId
+                                                                              && x.IterationId == iterationId)
+                                                                         .SingleOrDefaultAsync();
+
+            if (null != iterationResult)
+            {
+                iterationResult.RatingId = ratingId;
+            }
+            else
+            {
+                iterationResult = new EmployeeIterationResult()
+                {
+                    EmployeeId = employeeId,
+                    IterationId = iterationId,
+                    RatingId = ratingId
+                };
+
+                _context.EmployeeIterationResults.Add(iterationResult);
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }

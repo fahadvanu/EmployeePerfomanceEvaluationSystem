@@ -19,5 +19,6 @@ namespace EmployeePerfomanceEvaluationSystem.Constants
         public static string HEADER_ROLE = "ROLE";
         public static string HEADER_DEPARTMENT = "DEPARTMENT";
         public static string HEADER_ITERATIONSTATE = "STATE";
+        public static string HEADER_RATING = "FINAL RATING";
     }
 }
