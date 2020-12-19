@@ -18,6 +18,7 @@ const routes: Routes = [
     { path: 'need-help', loadChildren: () => import('./accounts/need-help/need-help-module').then(m => m.NeedHelpModule) },
     { path: 'iterations', loadChildren: () => import('./iteration/iteration-module').then(m => m.IterationModule) },
     { path: 'iteration-details', loadChildren: () => import('./employee-iteration-details/employee-iteration-details-module').then(m => m.EmployeeIterationDetailsModule) },
+    { path: 'iteration-result', loadChildren: () => import('./employee-iteration-result/employee-iteration-result-module').then(m => m.EmployeeIterationResultModule) },
     { path: 'unauthorized', component: UnAuthorizedComponent },
     { path: 'forbidden', component: ForbiddenComponent  },
     { path: '', redirectTo: 'login', pathMatch:'full' },

@@ -1,0 +1,108 @@
+﻿<div class="row goal_main_row" [formGroup]="employeeIterationGoal" *ngIf="employeeIterationGoal != null">
+
+    <div class="col-md-12 final_rating_container" *ngIf="employeeIterationGoal.value.final_rating != null">
+        <div class="row final_rating_container_row">
+            <div class="col-md-3">
+                <label style="font-weight:bold; margin-left: 10px;">Your Final Rating</label>
+            </div>
+            <div class="col-md-9">
+                {{employeeIterationGoal.value.final_rating}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 result_container" formArrayName="goal_ratings">
+
+        <div class="row card_goal_row" *ngFor="let existingGoal of employeeIterationGoal.controls['goal_ratings'].controls; let n=index" [formGroupName]="n">
+
+            <div class="col-md-12 card_goal_column">
+
+                <div class="card existing_goal_card">
+                    <div class="card-header bg-primary text-white text-center">
+                        {{existingGoal.value.goalTitle}}
+                    </div>
+
+                    <div class="card-body">
+
+                        <p>{{existingGoal.value.description}}</p>
+
+                        <hr />
+
+                        <div class="donut_weightage">
+                            <half-donut [width]="200"
+                                        [height]="100"
+                                        [pieData]="[{value: existingGoal.value.weightage, label: 'Weightage'},
+                                                                     {value: (100 - existingGoal.value.weightage), label: 'Weightage'}]"></half-donut>
+                            <p class="weightage"> {{existingGoal.value.weightage}}%</p>
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group">
+                            <label for="rating" style="font-weight:bold">Employee Rating</label>
+                            <p class="description">{{getRatingDescription(existingGoal.value.employeeRatingId)}}</p>
+
+                        </div>
+
+                        <hr />
+
+                        <div class="donut_weightage">
+
+                            <half-donut [width]="200"
+                                        [height]="100"
+                                        [pieData]="[{value: existingGoal.value.employeeRatingWeightage, label: 'Employee Weightage'},
+                                                    {value: (100 - existingGoal.value.employeeRatingWeightage), label: 'Employee Weightage'}]"></half-donut>
+
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group">
+                            <label for="role" style="font-weight:bold">Employee Comments</label>
+                            <p class="description">{{existingGoal.value.employeeComments}}</p>
+
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group">
+                            <label for="rating" style="font-weight:bold">Manager Rating</label>
+                            <p class="description">{{getRatingDescription(existingGoal.value.managerRatingId)}}</p>
+                        </div>
+
+                        <hr />
+
+                        <div class="donut_weightage">
+
+                            <half-donut [width]="200"
+                                        [height]="100"
+                                        [pieData]="[{value: existingGoal.value.managerRatingWeightage, label: 'Manager Weightage'},
+                                                    {value: (100 - existingGoal.value.managerRatingWeightage), label: 'Manager Weightage'}]"></half-donut>
+
+                        </div>
+
+                        <hr />
+
+                        <div class="form-group">
+                            <label for="role" style="font-weight:bold">Manager Comments</label>
+                            <p class="description">{{existingGoal.value.managerComments}}</p>
+                        </div>
+
+
+                    </div>
+
+                    <div class="card-footer">
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>

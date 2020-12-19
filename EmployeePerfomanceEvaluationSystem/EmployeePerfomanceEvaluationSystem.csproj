@@ -27,6 +27,11 @@
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-result\employee-iteration-goal\employee-iteration-goal-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-result\employee-iteration-result-component.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-result\employee-iteration-result-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-result\employee-iteration-result-routing-module.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration-result\locked_iterations\locked-iterations-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-component.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-module.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-routing-module.ts" />
@@ -61,6 +66,7 @@
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\reports\iteration-state-count.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal.ts" />
+    <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-result.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-rating-request-model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee_iteration_model.ts" />
     <None Remove="client_app\performance-evaluation-client\src\app\shared\models\set-goals\update-iteration-request-model.ts" />
@@ -142,6 +148,11 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-details\employee-iteration-details-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-result\employee-iteration-goal\employee-iteration-goal-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-result\employee-iteration-result-component.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-result\employee-iteration-result-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-result\employee-iteration-result-routing-module.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration-result\locked_iterations\locked-iterations-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-component.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-module.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\employee-iteration\employee-iteration-routing-module.ts" />
@@ -176,6 +187,7 @@
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\reports\iteration-state-count.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-goal.ts" />
+    <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-iteration-result.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee-rating-request-model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\employee_iteration_model.ts" />
     <TypeScriptCompile Include="client_app\performance-evaluation-client\src\app\shared\models\set-goals\update-iteration-request-model.ts" />

@@ -152,5 +152,22 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to get iteration" });
             }
         }
+
+        [HttpPost("locked_iterations")]
+        [Authorize]
+        public async Task<IActionResult> GetLockedIterations()
+        {
+            try
+            {
+                var iterations = await _iterationRepository.GetLockedIterations();
+                var response = _mapper.Map<List<IterationReposnseModel>>(iterations);
+                return Ok(new ApiResponseOKResult() { Data = response });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch LOCKED iterations");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch LOCKED iterations" });
+            }
+        }
     }
 }

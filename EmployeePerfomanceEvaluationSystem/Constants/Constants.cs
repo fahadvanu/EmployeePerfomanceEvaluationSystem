@@ -38,5 +38,7 @@ namespace EmployeePerfomanceEvaluationSystem.Constants
         public static int MEETSREQUIREMENT_RATING = 3;
         public static int NEEDSIMPROVEMENT_RATING = 4;
         public static int POOR_RATING = 5;
+
+        public static string NO_RATING = "UNKNOWN";
     }
 }

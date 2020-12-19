@@ -206,5 +206,15 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<EmployeeIterationResult> GetEmployeeIterationResult(int employeeId, int iterationId)
+        {
+            var iterationResult = await _context.EmployeeIterationResults
+                                                .Where(x => x.EmployeeId == employeeId && x.IterationId == iterationId)
+                                                .Include(y => y.Rating)
+                                                .SingleOrDefaultAsync();
+
+            return iterationResult;
+        }
     }
 }

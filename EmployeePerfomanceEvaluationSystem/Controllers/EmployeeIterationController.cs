@@ -375,5 +375,41 @@ namespace EmployeePerfomanceEvaluationSystem.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to save iteration ratings" });
             }
         }
+
+        [HttpPost("employee-iteration-result")]
+        [Authorize]
+        public async Task<IActionResult> EmployeeIterationResult([FromBody] EmployeeIterationResultRequestModel resultRequestModel)
+        {
+            try
+            {
+                var userId = HttpContext.User.GetUserIdClaim();
+                var iteration = await _iterationRepository.GetIteration(resultRequestModel.IterationId);
+                if (iteration == null)
+                    return BadRequest(new ApiResponseBadRequestResult() { ErrorMessage = $"Requested Iteration not found" });
+
+
+                var response = await _employeeIterationRepository.GetEmployeeIterationGoalRatings(userId, resultRequestModel.IterationId);
+                var iterationResult = await _employeeIterationRepository.GetEmployeeIterationResult(userId, resultRequestModel.IterationId);
+                string finalRating = Constants.Constants.NO_RATING;
+                if (null != iterationResult) {
+
+                    finalRating = iterationResult.Rating.RatingName;
+                }
+
+                return Ok(new ApiResponseOKResult()
+                {
+                    Data = new
+                    {
+                        GoalRatings = response,
+                        FinalRating = finalRating
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to fetch iteration result");
+                return StatusCode((int)HttpStatusCode.InternalServerError, new ApiResponseFailure() { ErrorMessage = "Failed to fetch iteration result" });
+            }
+        }
     }
 }

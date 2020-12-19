@@ -1,0 +1,122 @@
+﻿<div [formGroup]="locked_iteration_group">
+
+    <div class="row" *ngIf="locked_iteration_group != null">
+
+
+        <div class="col-md-12 review_period_col">
+
+            <div class="review_period_container">
+
+                <div class="form-group row control-row review_period_dropdown">
+
+                    <label class="label_controls col-form-label col-sm-4" for="reviewPeriod">Review Period</label>
+
+                    <div class="input_controls col-sm-8">
+
+                        <select id="reviewPeriod" name="reviewPeriod" formControlName="selected_iteration"
+                                class="form-control" (change)='displayIterationDetails()'>
+
+                            <option value="" disabled>Choose...</option>
+                            <option *ngFor="let iteration of locked_iteration_group.controls['locked_iterations'].controls"
+                                    [value]="iteration.value.iterationId">
+                                {{ iteration.value.title }}
+                            </option>
+
+                        </select>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row" *ngIf="selectedReviewPeriodDetail != null">
+
+        <div class="col-md-12 iteration_details_div">
+
+            <div class="iteration_details_container">
+
+                <div class="row iteration_details_container_row">
+
+                    <div class="col-sm-12">
+
+                        <label class="label_controls label_controls_bold col-form-label col-sm-4">Title</label>
+
+                        <label class="label_controls col-form-label col-sm-8">
+                            {{selectedReviewPeriodDetail.title}}
+                        </label>
+                    </div>
+
+                    <div class="col-sm-12">
+
+                        <label class="label_controls label_controls_bold col-form-label col-sm-4">Start Date</label>
+
+                        <label class="label_controls col-form-label col-sm-8">
+                            {{selectedReviewPeriodDetail.startDate}}
+                        </label>
+                    </div>
+
+                    <div class="col-sm-12">
+
+                        <label class="label_controls label_controls_bold col-form-label col-sm-4">End Date</label>
+
+                        <label class="label_controls col-form-label col-sm-8">
+                            {{selectedReviewPeriodDetail.endDate}}
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="row iteration_details_container_row">
+
+
+                    <div class="col-sm-12">
+
+                        <label class="label_controls label_controls_bold col-form-label col-sm-4">Created Date</label>
+
+                        <label class="label_controls col-form-label col-sm-8">
+                            {{ selectedReviewPeriodDetail.createdDate}}
+                        </label>
+                    </div>
+
+
+                    <div class="col-sm-12">
+
+                        <label class="label_controls label_controls_bold col-form-label col-sm-4">Locked Date</label>
+
+                        <label class="label_controls col-form-label col-sm-8">
+                            {{ selectedReviewPeriodDetail.lockedDate }}
+                        </label>
+                    </div>
+
+                    <div class="col-sm-12">
+
+                        <label class="label_controls label_controls_bold col-form-label col-sm-4">Status</label>
+
+                        <label class="label_controls col-form-label col-sm-8">
+                            {{ getIterationStatus(selectedReviewPeriodDetail.status) }}
+                        </label>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+

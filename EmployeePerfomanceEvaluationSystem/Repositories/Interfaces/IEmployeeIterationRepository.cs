@@ -21,5 +21,6 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
         Task<List<EmployeeIterationGoalRatings>> GetEmployeeIterationGoalRatings(int employeeId, int iterationId);
         Task UpsertEmployeeIterationRating(bool isManagerRequested, EmployeeRatingRequestModel employeeRatingRequestModel);
         Task UpdateEmployeeIterationResult(int employeeId, int iterationId, int ratingId);
+        Task<EmployeeIterationResult> GetEmployeeIterationResult(int employeeId, int iterationId);
     }
 }

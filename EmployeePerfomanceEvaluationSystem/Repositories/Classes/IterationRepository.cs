@@ -102,5 +102,13 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Classes
 
             return existingIteration;
         }
+
+        public async Task<List<Iteration>> GetLockedIterations()
+        {
+            return await _context.Iteration
+                                .Where(x => x.Status == (int)Constants.Constants.ITERATION_STATUS.LOCKED)
+                                .OrderByDescending(x => x.StartDate)
+                                .ToListAsync();
+        }
     }
 }

@@ -1,0 +1,23 @@
+﻿
+.container_row {
+    background: #F1F1F1;
+    box-sizing: border-box;
+}
+
+.title_Col {
+    margin-top: 1em;
+}
+
+.label_controls_bold {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.title_iteration_result {
+    background: #ffff;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}

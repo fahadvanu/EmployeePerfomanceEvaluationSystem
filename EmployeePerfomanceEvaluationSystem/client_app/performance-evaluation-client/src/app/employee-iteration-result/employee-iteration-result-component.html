@@ -1,0 +1,30 @@
+﻿<div class="container_row">
+
+    <div class="row">
+        <div class="col-md-12 title_Col">
+
+            <div class="title_iteration_result">
+                <h3> Iteration Result </h3>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <form [formGroup]="iteration_state_result_formgroup" novalidate>
+
+                <locked-iterations [locked_iteration_group]="iteration_state_result_formgroup.controls['locked_iteration_group']"
+                                   (iteration_selected)="getEmployeeIterationResult($event)"></locked-iterations>
+
+
+                <employee-iteration-goal-result [employeeIterationGoal]="iteration_state_result_formgroup.controls['iteration_rating']"
+                                                [ratings]="ratings"></employee-iteration-goal-result>
+
+            </form>
+
+        </div>
+    </div>
+</div>

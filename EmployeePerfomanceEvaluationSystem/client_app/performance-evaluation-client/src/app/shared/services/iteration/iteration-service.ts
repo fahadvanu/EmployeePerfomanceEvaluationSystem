@@ -179,4 +179,28 @@ export class IterationService {
                                            { employeeId: employeeId, iterationId: iterationId },
                                              httpOptions);
     }
+
+    getLockedIterations(): Observable<ApiResponse> {
+        return this.http.post<ApiResponse>('/api/iteration/locked_iterations', {});
+    }
+
+    getEmployeeIterationResult(iterationId: number): Observable<[ApiResponse, ApiResponse]> {
+
+        let headers: HttpHeaders = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+
+        const httpOptions = {
+            headers: headers
+        }
+
+        var ratingCall = this.http.post<ApiResponse>('/api/ratings/get_ratings', {}, httpOptions);
+
+        var iteration_result_Call = this.http.post<ApiResponse>('/api/employee-iteration/employee-iteration-result',
+                                                                { iterationId: iterationId },
+                                                               httpOptions);
+
+        return forkJoin(ratingCall, iteration_result_Call);
+
+    }
 }

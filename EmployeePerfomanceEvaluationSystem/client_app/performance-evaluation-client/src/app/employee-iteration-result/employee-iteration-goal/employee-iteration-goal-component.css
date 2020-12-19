@@ -1,0 +1,56 @@
+﻿.result_container{
+    padding:0px;
+}
+
+.final_rating_container {
+    padding: 0px;
+    margin-top: 10px;
+    background: #ffff;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.final_rating_container_row {
+
+    margin-top: 15px;
+}
+
+.weightage {
+    position: absolute;
+    top: 59px;
+    width: 100%;
+}
+
+.existing_goal_card {
+    height: 850px;
+}
+
+.footer_buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.donut_weightage {
+    width: 300px;
+    height: 100px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.goal_main_row {
+    margin-bottom: 10px;
+}
+
+.card_goal_row {
+    background: #ffff;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.card_goal_column {
+    padding: 20px;
+}
+
+.description {
+    display: inline-block;
+    margin-left: 20px;
+}

@@ -16,5 +16,6 @@ namespace EmployeePerfomanceEvaluationSystem.Repositories.Interfaces
         Task<List<Iteration>> GetExistingIterations();
         Task<List<Iteration>> GetActiveIterations();
         Task<Iteration> GetIteration(int iterationId);
+        Task<List<Iteration>> GetLockedIterations();
     }
 }
